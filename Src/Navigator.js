@@ -10,6 +10,9 @@ import GradientText from "./Constant/GradientText";
 import TermAndCodition from "./Screens/TermAndCodition";
 import Login from "./Screens/Login";
 import ForgetPassword from "./Screens/ForgetPassword";
+import OtpVarification from "./Screens/OtpVarification";
+import CustomDropDown from "./Component/CustomDropDown";
+import CodeInputComponent from "./Component/CodeInputComponent";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -17,9 +20,10 @@ const Navigators = ({ Screenames }) => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName={"SpleshScreen"}>
+        initialRouteName={"CodeInputComponent"}>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="OtpVarification" component={OtpVarification}/>
         <Stack.Screen name="ForgetPassword" component={ForgetPassword}/>
         <Stack.Screen name="SpleshScreen" component={SpleshScreen}/>
         <Stack.Screen name="TermAndCodition" component={TermAndCodition}/>
@@ -27,6 +31,9 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="CustomInput" component={CustomInput} />
         <Stack.Screen name="CustomButton" component={CustomButton} />
         <Stack.Screen name="GradientText" component={GradientText} />
+        <Stack.Screen name="CustomDropDown" component={CustomDropDown} />
+        <Stack.Screen name="CodeInputComponent" component={CodeInputComponent} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

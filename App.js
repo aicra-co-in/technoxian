@@ -1,13 +1,18 @@
 import React from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { SafeAreaView, StatusBar ,View} from "react-native";
 import Navigators from "./Src/Navigator";
+import Colors from "./Src/Assets/Theme/Theme";
+
 
 
 const App = () => {
   return (
     <>
-      <StatusBar  backgroundColor={"black"} />
+      <StatusBar  backgroundColor={Colors.Primary} />
+      
+
       < Navigators/>
+     
     </>
   );
 };

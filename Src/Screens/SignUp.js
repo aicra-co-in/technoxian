@@ -6,6 +6,7 @@ import CustomInput from '../Component/CustomInput';
 import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
+import Colors from '../Assets/Theme/Theme';
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, 'Too Short!')
@@ -32,7 +33,7 @@ const SignUp = () => {
     };
 
     return (
-        <ScrollView style={{flex:1,backgroundColor:'black'}}>
+        <ScrollView style={{flex:1,backgroundColor:Colors.Primary}}>
         <KeyboardAvoidingView>
         <Formik
             initialValues={initialValues}
@@ -40,15 +41,16 @@ const SignUp = () => {
             validationSchema={SignupSchema}
         >
             {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched }) => (
-                <View style={{flex:1,  backgroundColor: 'black' }}>
+                <View style={{flex:1,  backgroundColor: Colors.Primary }}>
                     <View style={styles.form}>
                         {/* UserName CustomInput */}
                         <View style={styles.headerContent}>
 
                            <GradientText/>
                             <CustomButton title={'Login'} 
-                            backgroundColor={'#705FAA'}
+                            backgroundColor={Colors.Primary}
                              paddingVertical={8}
+                             borderColor={Colors.white}
                              onPress={()=>navigation.navigate('Login')} />
                         </View>
                         <Text style={styles.heading}>Create your account</Text>
@@ -91,7 +93,7 @@ const SignUp = () => {
                         {/* Submit button */}
                         <View style={{marginTop:15 }}>
 
-                            <CustomButton title={'SignUp'} backgroundColor={'#705FAA'} paddingVertical={15} onPress={handleSubmit} />
+                            <CustomButton title={'SignUp'} backgroundColor={Colors.secondry} paddingVertical={15} onPress={handleSubmit} />
                         </View>
                         <View style={styles.linecontainer}>
                             <View style={styles.line}></View>
@@ -103,10 +105,10 @@ const SignUp = () => {
                         <View style={{ marginTop: 30 }}>
 
                             <CustomButton title={'Continue with Google'} 
-                            backgroundColor={'black'} 
+                            backgroundColor={Colors.black} 
                             paddingVertical={15} 
                             image={require('../Assets/Images/Google.png')} 
-                            borderColor={'white'}/>
+                            borderColor={Colors.white}/>
                         </View>
 
                     </View>
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
         padding: 8,
     },
     error: {
-        color: 'red',
+        color: Colors.red,
         fontSize: 12,
     },
     form: {
@@ -145,24 +147,24 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 46,
         fontWeight: '400',
-        color: '#FF3D00'
+        color: Colors.redsecondry,
     },
     heading: {
-        color: '#fff',
+        color: Colors.white,
         fontSize: 17,
         fontWeight: '600',
         marginTop: 20,
 
     },
     text1: {
-        color: '#fff',
+        color: Colors.white,
         fontWeight: '400',
         fontSize: 12,
     },
     line: {
         height: 3,
         width: '42%',
-        backgroundColor: 'white',
+        backgroundColor: Colors.white,
 
     },
     linecontainer: {

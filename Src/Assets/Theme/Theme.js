@@ -1,6 +1,8 @@
-const Theme = {
+const Colors = {
+  red:"#ff0000",
     amethyst: '#9966cc',
     aqua: '#00ffff',
+    black:'#000000',
     azure: '#007fff',
     beige: '#f5f5dc',
     bisque: '#ffe4c4',
@@ -84,6 +86,9 @@ const Theme = {
     xanadu: '#738678',
     yellow: '#ffff00',
     zest: '#e5841b',
-    white:'#ffffff'
+    white:'#ffffff',
+    secondry:'#705FAA',
+    redsecondry:'#FF3D00',
+    Primary:'#08233D',
   };
-  export default Theme;  
+  export default Colors;  

@@ -13,6 +13,11 @@ import ForgetPassword from "./Screens/ForgetPassword";
 import OtpVarification from "./Screens/OtpVarification";
 import CustomDropDown from "./Component/CustomDropDown";
 import CodeInputComponent from "./Component/CodeInputComponent";
+import ForgetOtp from "./Screens/ForgetOtp";
+import ResetPassword from "./Screens/ResetPassword";
+import HomeScreen from "./Screens/HomeScreen";
+import Calender from "./Constant/Calender";
+import DrawerComponent from "./Screens/DrawerComponent";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -20,10 +25,12 @@ const Navigators = ({ Screenames }) => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName={"CodeInputComponent"}>
+        initialRouteName={"DrawerComponent"}>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Calender" component={Calender}/>
         <Stack.Screen name="OtpVarification" component={OtpVarification}/>
+        <Stack.Screen name="HomeScreen" component={HomeScreen}/>
         <Stack.Screen name="ForgetPassword" component={ForgetPassword}/>
         <Stack.Screen name="SpleshScreen" component={SpleshScreen}/>
         <Stack.Screen name="TermAndCodition" component={TermAndCodition}/>
@@ -33,6 +40,10 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="GradientText" component={GradientText} />
         <Stack.Screen name="CustomDropDown" component={CustomDropDown} />
         <Stack.Screen name="CodeInputComponent" component={CodeInputComponent} />
+        <Stack.Screen name="ForgetOtp" component={ForgetOtp} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
+        <Stack.Screen name="DrawerComponent" component={DrawerComponent} />
+
 
       </Stack.Navigator>
     </NavigationContainer>

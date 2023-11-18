@@ -7,8 +7,9 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field'; 
+import Colors from '../Assets/Theme/Theme';
 
-const CELL_COUNT = 4;
+const CELL_COUNT = 6;
 const CodeInputComponent = () => {
 
     const [value, setValue] = useState('');
@@ -19,8 +20,6 @@ const CodeInputComponent = () => {
     });
     return (
         <SafeAreaView style={styles.root}>
-          <Text style={styles.title}>Verification</Text>
-          <Text style={styles.text}>Please Enter The 4 digit Varification code that was sent to +91 xxxxxxxxxx the code is valid for 3 minutes </Text>
           <CodeField
             ref={ref}
             {...props}
@@ -46,8 +45,8 @@ const CodeInputComponent = () => {
 
 
     const styles = StyleSheet.create({
-        root: {flex: 1, padding: 20},
-        title: {textAlign: 'center', fontSize: 30,color:'white'},
+        root: {flex: 1, },
+        title: {textAlign: 'center', fontSize: 30,color:Colors.white},
         codeFieldRoot: {marginTop: 20},
         cell: {
           width: 50,
@@ -55,20 +54,22 @@ const CodeInputComponent = () => {
           lineHeight: 38,
           fontSize: 24,
           borderWidth: 2,
-          borderColor: '#00000030',
+          borderColor: Colors.white,
           textAlign: 'center',
+          backgroundColor:Colors.white
         },
         focusCell: {
-          borderColor: '#000',
+          borderColor: Colors.white,
         },
         container:{
              flex:1,
-            backgroundColor:'black',
+            backgroundColor:Colors.white,
+            
              padding:20
                 },
                 text:{
                 fontSize:16,
-                color:'white',
+                color:Colors.white,
                 textAlign:'center',
                 padding:10
             }

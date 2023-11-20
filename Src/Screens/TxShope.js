@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const DrawerComponent = () => {
+const TxShope = () => {
   return (
     <View>
-      <Text>DrawerComponent</Text>
+      <Text>TxShope</Text>
     </View>
   )
 }
 
-export default DrawerComponent
+export default TxShope
 
 const styles = StyleSheet.create({})

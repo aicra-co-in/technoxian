@@ -16,9 +16,9 @@ const SpleshScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.containt}>
-      <Image source={require('../Assets/Images/Logo.png')} resizeMode='contain' style={{height:186,width:189}}/>
-      <Image source={require('../Assets/Images/TX-Logo.png')} resizeMode='contain' style={{height:65,width:323}}/>
-      {/* <Image source={require('../Assets/Images/splashscreen.png')} resizeMode='cover' style={{height:'100%',width:"100%",alignSelf:'center'}}/> */}
+      {/* <Image source={require('../Assets/Images/Logo.png')} resizeMode='contain' style={{height:186,width:189}}/>
+      <Image source={require('../Assets/Images/TX-Logo.png')} resizeMode='contain' style={{height:65,width:323}}/> */}
+      <Image source={require('../Assets/Images/SplashScreen.png')} resizeMode='cover' style={{height:'100%',width:"100%",alignSelf:'center'}}/>
     </View>
      </View>
   )

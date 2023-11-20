@@ -16,7 +16,7 @@ const data = [
     { label: "Item 8", value: "8" },
   ]
 
-const CustomDropDown = () => {
+const CustomDropDown1 = ({placeholder}) => {
     const [value, setValue] = useState(null);
    
     return (
@@ -31,7 +31,7 @@ const CustomDropDown = () => {
       maxHeight={300}
       labelField="label"
       valueField="value"
-      placeholder="Please select language"
+      placeholder={placeholder}
       activeColor="rgba(0, 0, 0, 0.25)"
       searchPlaceholder="Search..."
       value={value}
@@ -52,10 +52,10 @@ const CustomDropDown = () => {
         // margin: 16,
         marginTop: 8,
         height: 50,
-        borderColor: "rgba(0, 0, 0, 0.25)",
-        borderWidth: 1,
-        borderRadius: 10,
-        backgroundColor:'#013262'
+        borderBottomColor: Colors.white,
+        borderBottomWidth: 1,
+        // borderRadius: 10,
+        // backgroundColor:'#013262'
       },
       icon: {
         marginRight: 5,
@@ -63,7 +63,7 @@ const CustomDropDown = () => {
       },
       placeholderStyle: {
         fontSize: 16,
-        paddingHorizontal: 18,
+        // paddingHorizontal: 18,
         color:Colors.white
       },
       selectedTextStyle: {
@@ -74,7 +74,7 @@ const CustomDropDown = () => {
       iconStyle: {
         width: 20,
         height: 20,
-        right: 15,
+        // right: 15,
         tintColor:Colors.white,
       },
       inputSearchStyle: {
@@ -85,5 +85,5 @@ const CustomDropDown = () => {
 
       },
     });
-export default CustomDropDown
+export default CustomDropDown1
 

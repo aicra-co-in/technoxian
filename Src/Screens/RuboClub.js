@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const DrawerComponent = () => {
+const RuboClub = () => {
   return (
     <View>
-      <Text>DrawerComponent</Text>
+      <Text>RuboClub</Text>
     </View>
   )
 }
 
-export default DrawerComponent
+export default RuboClub
 
 const styles = StyleSheet.create({})

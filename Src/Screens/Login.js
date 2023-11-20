@@ -27,6 +27,7 @@ const Login = () => {
     const handleSubmit = (values) => {
         // Handle form submission here
         console.log(values);
+        navigation.navigate('HomeScreen');
     };
 
     return (
@@ -80,7 +81,12 @@ const Login = () => {
                         {/* Submit button */}
                         <View style={{marginTop:15 }}>
 
-                            <CustomButton title={'Login'} backgroundColor={Colors.secondry} paddingVertical={15} onPress={handleSubmit} />
+                            <CustomButton title={'Login'}
+                             backgroundColor={Colors.red} 
+                             paddingVertical={15} 
+                             onPress={handleSubmit}
+                              
+                             />
                         </View>
                         <View style={styles.linecontainer}>
                             <View style={styles.line}></View>

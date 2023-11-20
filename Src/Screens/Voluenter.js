@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const DrawerComponent = () => {
+const Voluenter = () => {
   return (
     <View>
-      <Text>DrawerComponent</Text>
+      <Text>Voluenter</Text>
     </View>
   )
 }
 
-export default DrawerComponent
+export default Voluenter
 
 const styles = StyleSheet.create({})

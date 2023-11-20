@@ -1,4 +1,5 @@
 const Colors = {
+  tersery:"#013262",
   red:"#ff0000",
     amethyst: '#9966cc',
     aqua: '#00ffff',
@@ -90,5 +91,6 @@ const Colors = {
     secondry:'#705FAA',
     redsecondry:'#FF3D00',
     Primary:'#08233D',
+
   };
   export default Colors;  

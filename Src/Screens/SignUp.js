@@ -93,7 +93,10 @@ const SignUp = () => {
                         {/* Submit button */}
                         <View style={{marginTop:15 }}>
 
-                            <CustomButton title={'SignUp'} backgroundColor={Colors.secondry} paddingVertical={15} onPress={handleSubmit} />
+                            <CustomButton title={'SignUp'} 
+                            backgroundColor={Colors.red} 
+                            paddingVertical={15} 
+                            onPress={handleSubmit} />
                         </View>
                         <View style={styles.linecontainer}>
                             <View style={styles.line}></View>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image ,Dimensions} from 'react-native';
 import Colors from '../Assets/Theme/Theme';
-
+const {width, height} = Dimensions.get('window');
 const data = [
   {
     img: require('../Assets/Images/india.png'),
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     //  padding:20
   },
   cardImage: {
-    width: 120, 
-    height: 110, 
+    width: width*0.27, 
+    height: height*0.12, 
 borderRadius:10,
     // paddingHorizontal:10
     

@@ -5,22 +5,30 @@ import CustomHeader from '../Component/CustomHeader'
 import Card from '../Constant/Card'
 import SliderImage from '../Constant/Slider_Image'
 import Card1 from '../Constant/Card1'
+import { useNavigation } from '@react-navigation/native'
 
 
 const Me = () => {
+  const navigation=useNavigation();
   return (
   
     <View style={styles.container}>
 
       
-      <CustomHeader back={true} notification={true} filter={true} scan={true}  source={require('../Assets/Images/Menu.png')}/>
+      <CustomHeader back={true} 
+      notification={true} 
+      filter={true} 
+      scan={true}  
+      source={require('../Assets/Images/Menu.png')}
+      // title={'Home'}
+      onPress={()=>navigation.navigate('Menu')}/>
     <ScrollView showsVerticalScrollIndicator={false}>
       <SliderImage />
       <Text style={styles.Text_heading}>WRC Challenges</Text>
       <Card />
       <Text style={styles.Text_heading}>Trending Team</Text>
       <Card1 />
-      <Text style={styles.Text_heading}>WRC Challenges</Text>
+      <Text style={styles.Text_heading}>Technoxian News</Text>
       <Card />
       </ScrollView>
     </View>

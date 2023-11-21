@@ -9,7 +9,7 @@ import {
 } from 'react-native-confirmation-code-field'; 
 import Colors from '../Assets/Theme/Theme';
 
-const CELL_COUNT = 6;
+const CELL_COUNT = 4;
 const CodeInputComponent = () => {
 
     const [value, setValue] = useState('');

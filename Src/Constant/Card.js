@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Image,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image,TouchableOpacity,Dimensions } from 'react-native';
 import Colors from '../Assets/Theme/Theme';
+const {width, height} = Dimensions.get('window');
 
 const data = [
   {
@@ -78,10 +79,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden',
     backgroundColor: Colors.tersery,
-    padding: 20,
+    padding: 15,
   },
   cardImage: {
-    width: 78,
-    height: 90,
+    width: height*0.1,
+    height: width*0.19,
   },
 });

@@ -22,8 +22,9 @@ import Slider_Image from "./Constant/Slider_Image";
 import Card from "./Constant/Card";
 import Menu from "./Screens/Menu";
 import WrcChalanges from "./Screens/WrcChalanges";
-import WrcRegistrationForm from "./Screens/WrcRegistrationForm";
+
 import EventCalender from "./Screens/EventCalender";
+import RegistrationComponent from "./Screens/RegistrationComponent";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -34,7 +35,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"SpleshScreen"}>
+        initialRouteName={"SignUp"}>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Calender" component={Calender}/>
@@ -56,8 +57,9 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="Card" component={Card} />
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="WrcChalanges" component={WrcChalanges} />
-        <Stack.Screen name="WrcRegistrationForm" component={WrcRegistrationForm} />
+       
         <Stack.Screen name="EventCalender" component={EventCalender} />
+        <Stack.Screen name="RegistrationComponent"component={RegistrationComponent} />
 
 
       </Stack.Navigator>

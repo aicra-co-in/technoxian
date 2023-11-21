@@ -6,19 +6,27 @@ import SliderImage from '../Constant/Slider_Image'
 import Card from '../Constant/Card'
 import Card1 from '../Constant/Card1'
 import CustomDropDown from '../Component/CustomDropDown'
+import { useNavigation } from '@react-navigation/native'
 
 const WrcChalanges = () => {
+  const navigation=useNavigation();
   return (
     <View style={styles.container}>
-         <CustomHeader back={true} notification={true} filter={true} scan={true} source={require('../Assets/Images/Menu.png')}/>
+         <CustomHeader back={true} 
+         notification={true} 
+        //  filter={true} 
+         scan={true} 
+         source={require('../Assets/Images/Back.png')}
+         title={'Wrc Chalanges    '}
+         onPress={()=>navigation.navigate('HomeScreen')}/>
          <ScrollView showsVerticalScrollIndicator={false}>
       <SliderImage />
       <Text style={styles.Text_heading}>WRC Challenges</Text>
       <Card numColumns={3} />
-      <Text style={styles.Text_heading}>WRC Challenges</Text>
+      <Text style={styles.Text_heading}>WRC Rule Book</Text>
       <View style={{marginBottom:20}}>
 
-     <CustomDropDown/> 
+     <CustomDropDown colors={'White'}/> 
       </View>
       </ScrollView>
       

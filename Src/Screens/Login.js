@@ -10,8 +10,15 @@ import Colors from '../Assets/Theme/Theme';
 const SignupSchema = Yup.object().shape({
     
 
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
+    email: Yup.string().email('Invalid email').trim()
+    .min(10)
+    .max(25)
+     .required('Required')
+     .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,'Please Enter Valid Email'),
+    password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
+    ),
 });
 const Login = () => {
     const navigation = useNavigation()

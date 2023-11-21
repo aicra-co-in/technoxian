@@ -7,6 +7,8 @@ import ContectUs from './ContectUs';
 import Servicess from './Servicess';
 import Colors from '../Assets/Theme/Theme';
 import Me from './Me';
+import TxStore from './TxStore';
+import Services from './Services';
 
 const HomeScreen = () => {
   const Tab = createBottomTabNavigator();
@@ -14,9 +16,10 @@ const HomeScreen = () => {
     <Tab.Navigator
       initialRouteName="Feed"
       screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
-        tabBarStyle: { backgroundColor: Colors.tersery ,height:70}, 
-        tabBarLabelStyle: { fontSize: 18 },
+        tabBarActiveTintColor: Colors.white,
+        tabBarInactiveTintColor:Colors.white,
+        tabBarStyle: { backgroundColor: Colors.tersery ,height:60}, 
+        tabBarLabelStyle: { fontSize: 16,bottom:5 },
         tabBarIconStyle: { },
         headerShown:false
      
@@ -29,9 +32,9 @@ const HomeScreen = () => {
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Image
-              source={require('../Assets/Images/me.png')}
+              source={require('../Assets/Images/Home.png')}
               resizeMode='contain'
-              style={{ width: size, height: size, tintColor: color }}
+              style={{ width: 30, height: 30, tintColor: Colors.white }}
             />
             //  <MaterialCommunityIcons name="home" color={color} size={size} 
             // />
@@ -42,29 +45,68 @@ const HomeScreen = () => {
         name="Servicess"
         component={Servicess}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'RoboClub',
           tabBarIcon: ({ color, size }) => (
             <Image
-              source={require('../Assets/Images/me.png')}
+              source={require('../Assets/Images/8.png')}
               resizeMode='contain'
-              style={{ width: size, height: size, tintColor: color }}
+              style={{ width: 30, height: 30, tintColor: Colors.white }}
             />
             //  <MaterialCommunityIcons name="home" color={color} size={size} 
             // />
           ),
         }}
       />
+
+<Tab.Screen
+        name="Services"
+        component={Services}
+        options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('../Assets/Images/Search.png')}
+              resizeMode='contain'
+              style={{ width: 30, height: 30, tintColor: Colors.white }}
+            />
+            //  <MaterialCommunityIcons name="home" color={color} size={size} 
+            // />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="TxStore"
+        component={TxStore}
+        options={{
+          tabBarLabel: 'Shop',
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('../Assets/Images/Hand.png')}
+              resizeMode='contain'
+              style={{ width: 30, height: 30, tintColor: Colors.white }}
+            />
+            //  <MaterialCommunityIcons name="home" color={color} size={size} 
+            // />
+          ),
+        }}
+      />
+      
+
+      
       <Tab.Screen
-        name="ContectUs"
+        name="User"
         component={ContectUs}
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: 'Account',
           tabBarIcon: ({ color, size }) => (
-             <MaterialCommunityIcons name="bell" color={color} size={size} 
-            
+            <Image
+              source={require('../Assets/Images/me.png')}
+              resizeMode='contain'
+              style={{ width: 30, height: 30, tintColor: Colors.white }}
             />
+            //  <MaterialCommunityIcons name="home" color={color} size={size} 
+            // />
           ),
-          tabBarBadge: 3,
         }}
       />
      

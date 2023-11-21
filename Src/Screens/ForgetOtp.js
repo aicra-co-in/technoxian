@@ -11,7 +11,7 @@ const ForgetOtp = () => {
     const navigation=useNavigation();
   return (
     <ScrollView style={styles.container}>
-      <Text style={[styles.heading, { marginTop: 30 }]}>Reset Password </Text>
+      <Text style={[styles.heading, { marginTop: 20 }]}>Reset Password </Text>
       <Text style={styles.heading1}>Varification</Text>
       <Image source={require('../Assets/Images/Verification.png')} style={styles.img} />
       <Text style={styles.text
@@ -19,10 +19,10 @@ const ForgetOtp = () => {
       <CodeInputComponent/>
 
       <Text style={styles.text1}>Didn’t receive and code?<Text> Resend</Text> </Text>
-      <View style={{marginTop:25}}>
+      <View style={{marginTop:20}}>
 
       <CustomButton title={'Reset Password'}
-        backgroundColor={Colors.black}
+        backgroundColor={Colors.red}
         paddingVertical={15}
         
         borderColor={Colors.white} 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: Colors.Primary,
-      padding: 30,
+      padding: 20,
   
     },
     heading: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       fontFamily: 'Poppins-Regular',
     },
     img: {
-      height: 220, width: 220, alignSelf: "center", marginTop: 25
+      height: 220, width: 220, alignSelf: "center", marginTop: 20
     },
     text: {
       color: Colors.white,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
       fontWeight: '500',
       fontFamily: 'Poppins-Regular',
       textAlign: 'center',
-      marginTop: 25
+      marginTop: 15
     },
     text1: {
       color: Colors.white,
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
       fontFamily: 'Poppins-Regular',
       textAlign: 'center',
       // marginTop:30,
-      padding: 20
+      padding: 15
     }
   })

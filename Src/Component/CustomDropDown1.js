@@ -3,6 +3,7 @@ import React ,{useState} from 'react'
 import { Dropdown } from 'react-native-element-dropdown'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Colors from '../Assets/Theme/Theme'
+import { useFormikContext } from 'formik';
 
 
 const data = [
@@ -16,45 +17,48 @@ const data = [
     { label: "Item 8", value: "8" },
   ]
 
-const CustomDropDown1 = ({placeholder}) => {
-    const [value, setValue] = useState(null);
-   
+  const CustomDropDown1 = ({ bgcolor, placeholder, validation, field }) => {
+    const formik = useFormikContext();
+
     return (
-      <Dropdown
-      style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
-      iconStyle={styles.iconStyle}
-      data={data}
-      search
-      maxHeight={300}
-      labelField="label"
-      valueField="value"
-      placeholder={placeholder}
-      activeColor="rgba(0, 0, 0, 0.25)"
-      searchPlaceholder="Search..."
-      value={value}
-      onChange={(item) => {
-        setValue(item.value);
-      }}
-      //   renderLeftIcon={() => (
-      //     <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-      //   )}
-    />
-  );
-  };
-  
+        <View>
+            <Dropdown
+                style={[styles.dropdown, { backgroundColor: bgcolor }]}
+                placeholderStyle={[styles.placeholderStyle, { color: 'gray' }]}
+                selectedTextStyle={[styles.selectedTextStyle, { color: 'gray' }]}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={[styles.iconStyle, { tintColor: 'black' }]}
+                data={data}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={placeholder}
+                activeColor="rgba(0, 0, 0, 0.25)"
+                searchPlaceholder="Search..."
+                value={formik.values[field]}
+                onChange={(item) => {
+                    formik.setFieldValue(field, item.value);
+                    formik.setFieldTouched(field, true, false);
+                }}
+            />
+            {formik.touched[field] && formik.errors[field] && (
+                <Text style={styles.errorText}>{formik.errors[field]}</Text>
+            )}
+        </View>
+    );
+};
+
 
   
   const styles = StyleSheet.create({
       dropdown: {
         // margin: 16,
-        marginTop: 8,
-        height: 50,
+        marginTop: 17,
+        height: 47,
         borderBottomColor: Colors.white,
         borderBottomWidth: 1,
-        // borderRadius: 10,
+         borderRadius: 10,
         // backgroundColor:'#013262'
       },
       icon: {
@@ -63,7 +67,7 @@ const CustomDropDown1 = ({placeholder}) => {
       },
       placeholderStyle: {
         fontSize: 16,
-        // paddingHorizontal: 18,
+        paddingHorizontal: 18,
         color:Colors.white
       },
       selectedTextStyle: {
@@ -74,7 +78,7 @@ const CustomDropDown1 = ({placeholder}) => {
       iconStyle: {
         width: 20,
         height: 20,
-        // right: 15,
+         right: 15,
         tintColor:Colors.white,
       },
       inputSearchStyle: {
@@ -84,6 +88,10 @@ const CustomDropDown1 = ({placeholder}) => {
         color:Colors.white
 
       },
+      errorText:{
+        color:Colors.red,
+        fontSize:12
+      }
     });
 export default CustomDropDown1
 

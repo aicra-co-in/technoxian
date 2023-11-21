@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import Calender from '../Constant/Calender';
 import Colors from '../Assets/Theme/Theme';
+import { useNavigation } from '@react-navigation/native'
+import CustomHeader from '../Component/CustomHeader';
 
 const data = [
   {
@@ -25,6 +27,7 @@ const data = [
 ];
 
 const EventCalender = () => {
+  const navigation=useNavigation();
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={item.img} style={styles.image} />
@@ -37,6 +40,14 @@ const EventCalender = () => {
 
   return (
     <View style={{flex:1,backgroundColor:Colors.Primary,padding:15}}>
+        <CustomHeader
+        back={true} 
+        notification={true}
+        //  filter={true} 
+         scan={true}  
+         source={require('../Assets/Images/Back.png')}
+         onPress={()=>navigation.navigate('HomeScreen')}
+         />
      
       <FlatList
         data={data}

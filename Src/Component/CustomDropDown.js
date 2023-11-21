@@ -16,22 +16,22 @@ const data = [
     { label: "Item 8", value: "8" },
   ]
 
-const CustomDropDown = () => {
+const CustomDropDown = ({bgcolor,colors,placeholder}) => {
     const [value, setValue] = useState(null);
    
     return (
       <Dropdown
-      style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
+      style={[styles.dropdown,{backgroundColor:bgcolor}]}
+      placeholderStyle={[styles.placeholderStyle,{color:colors}]}
+      selectedTextStyle={[styles.selectedTextStyle,{color:colors}]}
       inputSearchStyle={styles.inputSearchStyle}
-      iconStyle={styles.iconStyle}
+      iconStyle={[styles.iconStyle,{tintColor:colors}]}
       data={data}
       search
       maxHeight={300}
       labelField="label"
       valueField="value"
-      placeholder="Please select language"
+      placeholder={placeholder}
       activeColor="rgba(0, 0, 0, 0.25)"
       searchPlaceholder="Search..."
       value={value}
@@ -50,32 +50,32 @@ const CustomDropDown = () => {
   const styles = StyleSheet.create({
       dropdown: {
         // margin: 16,
-        marginTop: 8,
-        height: 50,
+        marginTop: 15,
+        height: 48,
         borderColor: "rgba(0, 0, 0, 0.25)",
         borderWidth: 1,
         borderRadius: 10,
-        backgroundColor:'#013262'
+        // backgroundColor:bgcolor,
       },
       icon: {
         marginRight: 5,
-        color:Colors.white
+        // color:Colors.white
       },
       placeholderStyle: {
         fontSize: 16,
         paddingHorizontal: 18,
-        color:Colors.white
+        // color:color,
       },
       selectedTextStyle: {
         fontSize: 16,
         paddingHorizontal: 20,
-        color:Colors.white
+        // color:color,
       },
       iconStyle: {
         width: 20,
         height: 20,
         right: 15,
-        tintColor:Colors.white,
+        // tintColor:colors,
       },
       inputSearchStyle: {
         height: 40,

@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import CustomDropDown from './CustomDropDown';
 
 const CustomInput = ({ label, placeholder, name, value, onChange, onBlur, error, secureTextEntry,mxlength }) => {
   return (
     <View style={styles.container}>
+      
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.input}
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    marginBottom: 8,
+    // marginBottom: 8,
   },
   input: {
     height: 48,

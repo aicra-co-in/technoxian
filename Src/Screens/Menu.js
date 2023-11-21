@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const data = [
     { id: '1', text: "WRC Challenges",screen:'WrcChalanges' },
-    { id: '2', text: "Event Calendar" ,screen:'Eventcalender'},
-    { id: '3', text: "WRC Registration form" ,screen:'WrcRegistrationForm'},
+    { id: '2', text: "Event Calendar" ,screen:'EventCalender'},
+    { id: '3', text: "WRC Registration form" ,screen:'RegistrationComponent'},
     { id: '4', text: "Robo Club",screen:'Ruboclub' },
     { id: '5', text: "TX Membership" ,screen:'TxMembership'},
     { id: '6', text: "Workshop" ,screen:'Workshop'},
@@ -46,7 +46,13 @@ const Menu = () => {
 
   return (
     <View style={styles.container}>
-      <CustomHeader back={true} notification={true} filter={true} scan={true}  source={require('../Assets/Images/Menu.png')}/>
+      <CustomHeader back={true} 
+      notification={true} 
+      // filter={true} 
+      scan={true}  
+      source={require('../Assets/Images/Back.png')}
+      title={'Menu'}
+      onPress={()=>navigation.navigate('HomeScreen')}/>
       <View style={styles.imageContainer}>
         <TouchableOpacity onPress={handleImagePicker} style={styles.img}>
           {selectedImage && <Image source={{ uri: selectedImage }} style={styles.selectedImage} />}

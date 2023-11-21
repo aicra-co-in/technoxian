@@ -21,19 +21,20 @@ export default function CustomHeader({
   back,
   profile,
   source,
+  onPress,
 }) {
   const pointsTo = useNavigation();
   return (
     <View style={[styles.headerContainer, {backgroundColor: bgColor}]}>
       <View style={{flex: 2}}>
         {back && (
-          <TouchableOpacity onPress={()=>pointsTo.navigate('Menu')}>
+          <TouchableOpacity onPress={onPress}>
 
           
           <Image
           source={source}
           resizeMode="contain"
-          style={{width: 25, height: 25}}
+          style={{width: 20, height: 20}}
         />
         </TouchableOpacity>
         )}
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   },
   headText: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     color: '#ffffff',
     fontFamily: 'Poppins-SemiBold',
   },

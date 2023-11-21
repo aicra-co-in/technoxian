@@ -10,11 +10,25 @@ import Colors from '../Assets/Theme/Theme';
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
+        .max(30, 'Too Long!')
+        .trim()
+        .required('Required')
+          .matches(
+      /^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/,
+      'Please Enter Valid Full Name',
+    ),
 
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
+    email: Yup.string().email('Invalid email')
+    .trim()
+   .min(10)
+   .max(25)
+    .required('Required')
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,'Please Enter Valid Email'),
+    // .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,'Plaese Enter Valid Email'),,
+    password: Yup.string().required('Required').matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
+    ),
 });
 const SignUp = () => {
     const navigation = useNavigation()

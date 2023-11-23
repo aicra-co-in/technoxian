@@ -3,12 +3,13 @@ import React from 'react'
 import CustomHeader from '../Component/CustomHeader'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import ContectUs from './ContectUs';
+// import ContectUs from './User';
 import Servicess from './Servicess';
 import Colors from '../Assets/Theme/Theme';
 import Me from './Me';
 import TxStore from './TxStore';
 import Services from './Services';
+import User from './User';
 
 const HomeScreen = () => {
   const Tab = createBottomTabNavigator();
@@ -19,7 +20,7 @@ const HomeScreen = () => {
         tabBarActiveTintColor: Colors.white,
         tabBarInactiveTintColor:Colors.white,
         tabBarStyle: { backgroundColor: Colors.tersery ,height:60}, 
-        tabBarLabelStyle: { fontSize: 16,bottom:5 },
+        tabBarLabelStyle: { fontSize: 13,bottom:5 },
         tabBarIconStyle: { },
         headerShown:false
      
@@ -34,7 +35,7 @@ const HomeScreen = () => {
             <Image
               source={require('../Assets/Images/Home.png')}
               resizeMode='contain'
-              style={{ width: 30, height: 30, tintColor: Colors.white }}
+              style={{ width: 20, height: 20, tintColor: Colors.white }}
             />
             //  <MaterialCommunityIcons name="home" color={color} size={size} 
             // />
@@ -50,7 +51,7 @@ const HomeScreen = () => {
             <Image
               source={require('../Assets/Images/8.png')}
               resizeMode='contain'
-              style={{ width: 30, height: 30, tintColor: Colors.white }}
+              style={{ width: 20, height: 20, tintColor: Colors.white }}
             />
             //  <MaterialCommunityIcons name="home" color={color} size={size} 
             // />
@@ -65,9 +66,9 @@ const HomeScreen = () => {
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (
             <Image
-              source={require('../Assets/Images/Search.png')}
+              source={require('../Assets/Images/search1.png')}
               resizeMode='contain'
-              style={{ width: 30, height: 30, tintColor: Colors.white }}
+              style={{ width: 25, height: 25, tintColor: Colors.white }}
             />
             //  <MaterialCommunityIcons name="home" color={color} size={size} 
             // />
@@ -83,7 +84,7 @@ const HomeScreen = () => {
             <Image
               source={require('../Assets/Images/Hand.png')}
               resizeMode='contain'
-              style={{ width: 30, height: 30, tintColor: Colors.white }}
+              style={{ width: 20, height: 20, tintColor: Colors.white }}
             />
             //  <MaterialCommunityIcons name="home" color={color} size={size} 
             // />
@@ -95,14 +96,14 @@ const HomeScreen = () => {
       
       <Tab.Screen
         name="User"
-        component={ContectUs}
+        component={User}
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require('../Assets/Images/me.png')}
               resizeMode='contain'
-              style={{ width: 30, height: 30, tintColor: Colors.white }}
+              style={{ width: 20, height: 20, tintColor: Colors.white }}
             />
             //  <MaterialCommunityIcons name="home" color={color} size={size} 
             // />

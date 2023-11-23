@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList,TouchableOpacity } from 'react-native';
 import Calender from '../Constant/Calender';
 import Colors from '../Assets/Theme/Theme';
 import { useNavigation } from '@react-navigation/native'
@@ -24,18 +24,48 @@ const data = [
     heading: 'FASTEST LINE FOLLOWER',
     date: 'Agust 3, 2024 - August 6, 2024',
   },
+  {
+    id: 4,
+    img: require('../Assets/Images/india.png'),
+    heading: 'FASTEST LINE FOLLOWER',
+    date: 'Agust 3, 2024 - August 6, 2024',
+  },
+  {
+    id: 5,
+    img: require('../Assets/Images/bangladesh.png'),
+    heading: 'FASTEST LINE FOLLOWER',
+    date: 'Agust 3, 2024 - August 6, 2024',
+  },
+  {
+    id: 6,
+    img: require('../Assets/Images/ghana.png'),
+    heading: 'FASTEST LINE FOLLOWER',
+    date: 'Agust 3, 2024 - August 6, 2024',
+  },
+  {
+    id: 7,
+    img: require('../Assets/Images/india.png'),
+    heading: 'FASTEST LINE FOLLOWER',
+    date: 'Agust 3, 2024 - August 6, 2024',
+  },
+  {
+    id: 8,
+    img: require('../Assets/Images/bangladesh.png'),
+    heading: 'FASTEST LINE FOLLOWER',
+    date: 'Agust 3, 2024 - August 6, 2024',
+  },
 ];
 
 const EventCalender = () => {
   const navigation=useNavigation();
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={[styles.itemContainer,]}>
       <Image source={item.img} style={styles.image} />
       <View style={styles.textContainer}>
         <Text style={styles.heading}>{item.heading}</Text>
         <Text style={styles.date}>{item.date}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -67,7 +97,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: Colors.white,
-    gap:15
+    gap:15,
+    // borderRadius:10
   },
   image: {
     width: 50,

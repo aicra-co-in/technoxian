@@ -5,6 +5,7 @@ const Colors = {
     aqua: '#00ffff',
     black:'#000000',
     azure: '#007fff',
+    blue:'#1976D2',
     beige: '#f5f5dc',
     bisque: '#ffe4c4',
     bittersweet: '#ff6666',

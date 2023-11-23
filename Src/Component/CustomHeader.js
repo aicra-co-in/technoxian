@@ -34,7 +34,7 @@ export default function CustomHeader({
           <Image
           source={source}
           resizeMode="contain"
-          style={{width: 20, height: 20}}
+          style={{width: 20, height: 17,tintColor:'white'}}
         />
         </TouchableOpacity>
         )}
@@ -82,7 +82,7 @@ export default function CustomHeader({
           </TouchableOpacity>
         )}
         {scan && (
-          <TouchableOpacity onPress={() => pointsTo.navigate('Scanner')}>
+          <TouchableOpacity onPress={() => pointsTo.navigate('User')}>
             <Image
               source={require('../Assets/Images/Profile.png')}
               resizeMode="contain"

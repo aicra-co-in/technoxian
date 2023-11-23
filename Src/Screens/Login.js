@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View ,ScrollView,KeyboardAvoidingView} from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Image } from 'react-native'
 import React from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -8,14 +8,14 @@ import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
 const SignupSchema = Yup.object().shape({
-    
+
 
     email: Yup.string().email('Invalid email').trim()
-    .min(10)
-    .max(25)
-     .required('Required')
-     .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,'Please Enter Valid Email'),
-    password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').matches(
+        .min(10)
+        .max(25)
+        .required('Required')
+        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+    password: Yup.string().min(5, 'Too Short').required('Required').max(8, 'Too Long!').matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
         'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
     ),
@@ -23,7 +23,7 @@ const SignupSchema = Yup.object().shape({
 const Login = () => {
     const navigation = useNavigation()
     const initialValues = {
-       
+
         email: '',
         password: ''
         // Define your initial form values here
@@ -38,85 +38,99 @@ const Login = () => {
     };
 
     return (
-        <ScrollView style={{flex:1,backgroundColor:Colors.Primary}}>
-        <KeyboardAvoidingView>
-        <Formik
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
-            validationSchema={SignupSchema}
+        <KeyboardAvoidingView
+            style={{ flex: 1, backgroundColor: 'red' }}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-            {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched }) => (
-                <View style={{flex:1,  backgroundColor: Colors.Primary }}>
-                    <View style={styles.form}>
-                        {/* UserName CustomInput */}
-                        <View style={styles.headerContent}>
 
-                           <GradientText/>
-                            <CustomButton title={'Sign Up'}
-                             backgroundColor={Colors.Primary} 
-                             paddingVertical={8}
-                             borderColor={Colors.white}
-                             onPress={()=>navigation.navigate('SignUp')} />
-                        </View>
-                       
+            <Formik
+                initialValues={initialValues}
+                onSubmit={handleSubmit}
+                validationSchema={SignupSchema}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
 
-                        {/* Enter user Email */}
-                        <CustomInput
-                            placeholder="Email address"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange('email')}
-                            onBlur={handleBlur}
-                            error={errors.email}
-                        />
-                        {/* For Password */}
-                        <CustomInput
-
-                            
-                            placeholder="Minimum 8 characters"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            onBlur={handleBlur}
-                            error={errors.password}
-                            secureTextEntry={true}
-                        />
-
-                        <View style={{marginVertical:10,alignItems:'flex-end'}}>
-                            <Text style={styles.text1} onPress={()=>navigation.navigate('ForgetPassword')}>Forget Password</Text>
-                        </View>
-                        {/* Submit button */}
-                        <View style={{marginTop:15 }}>
-
-                            <CustomButton title={'Login'}
-                             backgroundColor={Colors.red} 
-                             paddingVertical={15} 
-                             onPress={handleSubmit}
-                              
-                             />
-                        </View>
-                        <View style={styles.linecontainer}>
-                            <View style={styles.line}></View>
-                            <Text style={styles.text1}>OR</Text>
-                            <View style={styles.line}></View>
-                            <View></View>
+                    <View style={{ flex: 1, }}>
+                        <View style={{ height: '50%' }}>
+                            <Image
+                                source={require('../Assets/Images/Signup.png')}
+                                style={{ height: "102%", width: "110%", alignSelf: 'center' }}
+                                resizeMode='cover'
+                            />
                         </View>
 
-                        <View style={{ marginTop: 30 }}>
 
-                            <CustomButton title={'Continue with Google'} 
-                            backgroundColor={Colors.black} 
-                            paddingVertical={15} 
-                            image={require('../Assets/Images/Google.png')} 
-                            borderColor={Colors.white}/>
-                        </View>
+                        <ScrollView style={styles.signupcontainer}>
 
+
+
+                            <View style={styles.form}>
+
+
+                                <Text style={styles.heading}>Well Come</Text>
+
+
+
+
+
+                                <CustomInput
+                                    placeholder="Email address"
+                                    name="email"
+                                    value={values.email}
+                                    onChange={handleChange('email')}
+                                    onBlur={handleBlur}
+                                    error={errors.email}
+                                />
+
+
+
+                                <CustomInput
+                                    placeholder="Password"
+                                    name="password"
+                                    value={values.password}
+                                    onChange={handleChange('password')}
+                                    onBlur={handleBlur}
+                                    error={errors.password}
+                                    secureTextEntry={true}
+                                />
+
+
+                                <View style={{ marginVertical: 10, alignItems: 'flex-end' }}>
+                                    <Text style={styles.text1} onPress={() => navigation.navigate('ForgetPassword')}>Forget Password</Text>
+                                </View>
+                                {/* Submit button */}
+                                <View style={{ marginTop: 15 }}>
+
+                                    <CustomButton title={'Login'}
+                                        backgroundColor={Colors.blue}
+                                        paddingVertical={15}
+                                        onPress={handleSubmit}
+
+                                    />
+                                </View>
+                                <View style={styles.linecontainer}>
+                                    <View style={styles.line}></View>
+                                    <Text style={styles.text1}>OR</Text>
+                                    <View style={styles.line}></View>
+                                    <View></View>
+                                </View>
+
+                                <View style={{ marginTop: 25 }}>
+
+                                    <CustomButton title={'Continue with Google'}
+                                        backgroundColor={Colors.black}
+                                        paddingVertical={15}
+                                        image={require('../Assets/Images/Google.png')}
+                                        borderColor={Colors.white} />
+                                </View>
+                                <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.blue}} onPress={()=>navigation.navigate('SignUp')}>Sign Up</Text></Text>
+                            </View>
+                        </ScrollView>
                     </View>
-                </View>
-            )}
-        </Formik>
+
+                )}
+            </Formik>
         </KeyboardAvoidingView>
-    </ScrollView>
     );
 };
 
@@ -140,8 +154,8 @@ const styles = StyleSheet.create({
     },
     form: {
         // margin: 16,
-        paddingHorizontal: 35,
-        marginTop: "30%",
+        paddingHorizontal: 20,
+        // marginTop: "30%",
 
     },
     text: {
@@ -150,11 +164,10 @@ const styles = StyleSheet.create({
         color: '#FF3D00'
     },
     heading: {
-        color: '#fff',
-        fontSize: 17,
-        fontWeight: '600',
+        color: Colors.white,
+        fontSize: 29,
+        fontWeight: '800',
         marginTop: 20,
-
     },
     text1: {
         color: '#fff',
@@ -175,16 +188,32 @@ const styles = StyleSheet.create({
     },
     scrollViewContainer: {
         flexGrow: 1,
-      },
-      keyboardAvoidingView: {
+    },
+    keyboardAvoidingView: {
         // flex: 1,
-       
-        
-      },
-      headerContent:{
-        flexDirection: 'row', 
-        alignItems: 'center', 
+
+
+    },
+    headerContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'space-between'
+    },
+    signupcontainer: {
+        flex: 1,
+        backgroundColor: Colors.Primary,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
+        height: '100%',
+        marginTop: -90
+    },
+    text2:{
+        color:Colors.white,
+        fontSize:14,
+        alignSelf:'center',
+        paddingVertical:10,
+        paddingBottom:20
+    
       }
 });
 

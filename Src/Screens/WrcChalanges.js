@@ -26,7 +26,9 @@ const WrcChalanges = () => {
       <Text style={styles.Text_heading}>WRC Rule Book</Text>
       <View style={{marginBottom:20}}>
 
-     <CustomDropDown colors={'White'}/> 
+     <CustomDropDown 
+     bgcolor={Colors.tersery} 
+     colors={Colors.white}/> 
       </View>
       </ScrollView>
       
@@ -47,6 +49,6 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:20,
         fontWeight:'500',
-        marginTop:5,
+        marginTop:15,
     }
 })

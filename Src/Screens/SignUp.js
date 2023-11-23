@@ -1,5 +1,5 @@
-import { Button, StyleSheet, Text, View ,ScrollView,KeyboardAvoidingView} from 'react-native'
-import React from 'react'
+import { ScrollView, StyleSheet, Text, View, ImageBackground ,Image,KeyboardAvoidingView} from 'react-native';
+import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import CustomInput from '../Component/CustomInput';
@@ -7,201 +7,192 @@ import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
+
 const SignupSchema = Yup.object().shape({
-    name: Yup.string()
-        .min(2, 'Too Short!')
-        .max(30, 'Too Long!')
-        .trim()
-        .required('Required')
-          .matches(
+  name: Yup.string()
+    .min(2, 'Too Short!')
+    .max(30, 'Too Long!')
+    .trim()
+    .required('Required')
+    .matches(
       /^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/,
       'Please Enter Valid Full Name',
     ),
-
-    email: Yup.string().email('Invalid email')
+  email: Yup.string().email('Invalid email')
     .trim()
-   .min(10)
-   .max(25)
+    .min(10)
+    .max(25)
     .required('Required')
-    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,'Please Enter Valid Email'),
-    // .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,'Plaese Enter Valid Email'),,
-    password: Yup.string().required('Required').matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
-    ),
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+  password: Yup.string().required('Required').matches(
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
+  ),
+  phone: Yup.string().email('Invalid email')
+    .trim()
+    .min(10)
+    .max(10).required('required'),
 });
+
 const SignUp = () => {
-    const navigation = useNavigation()
-    const initialValues = {
-        name: '',
-        email: '',
-        password: ''
-        // Define your initial form values here
-        // For example:
-        // fieldName: '',
-    };
+  const navigation = useNavigation();
+  const initialValues = {
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+  };
 
-    const handleSubmit = (values) => {
-        // Handle form submission here
-        console.log(values);
-    };
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
 
-    return (
-        <ScrollView style={{flex:1,backgroundColor:Colors.Primary}}>
-        <KeyboardAvoidingView>
+  return (
+ 
+
+    <KeyboardAvoidingView
+    style={{ flex: 1, backgroundColor: 'red' }}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+  >
+ 
         <Formik
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
-            validationSchema={SignupSchema}
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={SignupSchema}
         >
-            {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched }) => (
-                <View style={{flex:1,  backgroundColor: Colors.Primary }}>
-                    <View style={styles.form}>
-                        {/* UserName CustomInput */}
-                        <View style={styles.headerContent}>
+          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+           
+           <View style={{flex:1 ,}}>
+           <View style={{height:'50%'}}>
+             <Image
+               source={require('../Assets/Images/Signup.png')}
+               style={{ height: "102%", width:"110%",alignSelf:'center'}}
+               resizeMode='cover'
+             />
+           </View>
 
-                           <GradientText/>
-                            <CustomButton title={'Login'} 
-                            backgroundColor={Colors.Primary}
-                             paddingVertical={8}
-                             borderColor={Colors.white}
-                             onPress={()=>navigation.navigate('Login')} />
-                        </View>
-                        <Text style={styles.heading}>Create your account</Text>
+    
+<ScrollView style={styles.signupcontainer}>
 
-                        <CustomInput
 
-                            placeholder="Full Name"
-                            name="name"
-                            value={values.name}
-                            onChange={handleChange('name')}
-                            onBlur={handleBlur}
-                            error={errors.name}
-                        />
+              
+              <View style={styles.form}>
+               
 
-                        {/* Enter user Email */}
-                        <CustomInput
-                            placeholder="Email address"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange('email')}
-                            onBlur={handleBlur}
-                            error={errors.email}
-                        />
-                        {/* For Password */}
-                        <CustomInput
+              <Text style={styles.heading}>SignUp</Text>
 
-                            
-                            placeholder="Minimum 8 characters"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            onBlur={handleBlur}
-                            error={errors.password}
-                            secureTextEntry={true}
-                        />
+             
+                <CustomInput
+                placeholder="Full Name"
+                name="name"
+                value={values.name}
+                onChange={handleChange('name')}
+                onBlur={handleBlur}
+                error={errors.name}
+              />
+              
 
-                        <View style={{marginVertical:10}}>
-                            <Text style={styles.text1}>By signing up, you accept our  <Text style={{ color: '#2AC171' }} onPress={() => navigation.navigate('TermAndCodition')}>Terms and Conditions</Text></Text>
-                        </View>
-                        {/* Submit button */}
-                        <View style={{marginTop:15 }}>
+              <CustomInput
+                placeholder="Email address"
+                name="email"
+                value={values.email}
+                onChange={handleChange('email')}
+                onBlur={handleBlur}
+                error={errors.email}
+              />
 
-                            <CustomButton title={'SignUp'} 
-                            backgroundColor={Colors.red} 
-                            paddingVertical={15} 
-                            onPress={handleSubmit} />
-                        </View>
-                        <View style={styles.linecontainer}>
-                            <View style={styles.line}></View>
-                            <Text style={styles.text1}>OR</Text>
-                            <View style={styles.line}></View>
-                            <View></View>
-                        </View>
+              <CustomInput
+                placeholder="Phone"
+                name="phone"
+                value={values.phone}
+                onChange={handleChange('phone')}
+                onBlur={handleBlur}
+                error={errors.phone}
+              />
 
-                        <View style={{ marginTop: 30 }}>
+              <CustomInput
+                placeholder="Password"
+                name="password"
+                value={values.password}
+                onChange={handleChange('password')}
+                onBlur={handleBlur}
+                error={errors.password}
+                secureTextEntry={true}
+              />
 
-                            <CustomButton title={'Continue with Google'} 
-                            backgroundColor={Colors.black} 
-                            paddingVertical={15} 
-                            image={require('../Assets/Images/Google.png')} 
-                            borderColor={Colors.white}/>
-                        </View>
+              <CustomInput
+                placeholder="Confirm Password"
+                name="password"
+                value={values.password}
+                onChange={handleChange('password')}
+                onBlur={handleBlur}
+                error={errors.password}
+                secureTextEntry={true}
+              />
 
-                    </View>
-                </View>
-            )}
+              <View style={{ marginVertical: 10 }}>
+                <Text style={styles.text1}>By signing up, you accept our  <Text style={{ color: Colors.blue }} onPress={() => navigation.navigate('TermAndCodition')}>Terms and Conditions</Text></Text>
+              </View>
+
+              <View style={{ marginTop: 15 ,bottom:10}}>
+                <CustomButton title={'SignUp'}
+                  backgroundColor={Colors.blue}
+                  paddingVertical={15}
+                  onPress={handleSubmit}
+                />
+              </View>
+              <Text style={styles.text2}>Already have account?   <Text style={{color:Colors.blue}} onPress={()=>navigation.navigate('Login')}>login in</Text></Text>
+           
+            </View>
+            </ScrollView>
+            </View>
+        
+          )}
         </Formik>
         </KeyboardAvoidingView>
-    </ScrollView>
-    );
+   
+      
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        marginBottom: 16,
-    },
-    label: {
-        fontSize: 16,
-        marginBottom: 8,
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        padding: 8,
-    },
-    error: {
-        color: Colors.red,
-        fontSize: 12,
-    },
-    form: {
-        // margin: 16,
-        paddingHorizontal: 35,
-        marginTop: "30%",
+  form: {
+    paddingHorizontal: 20,
+    
+    // Remove backgroundColor and flex
+    // backgroundColor: 'red',
+//   flex: 3,
+    //  top: "40%",
+    // bottom:40
 
-    },
-    text: {
-        fontSize: 46,
-        fontWeight: '400',
-        color: Colors.redsecondry,
-    },
-    heading: {
-        color: Colors.white,
-        fontSize: 17,
-        fontWeight: '600',
-        marginTop: 20,
+  },
+  heading: {
+    color: Colors.white,
+    fontSize: 29,
+    fontWeight: '800',
+    marginTop: 20,
+  },
+  text1: {
+    color: Colors.white,
+    fontWeight: '400',
+    fontSize: 12,
+  },
+  signupcontainer:{
+    flex: 1,
+    backgroundColor:Colors.Primary,
+    borderTopRightRadius:30,
+    borderTopLeftRadius:30,
+    height:'100%',
+    marginTop:-90
+  },
+  text2:{
+    color:Colors.white,
+    fontSize:14,
+    alignSelf:'center',
+    paddingVertical:10,
+    paddingBottom:20
 
-    },
-    text1: {
-        color: Colors.white,
-        fontWeight: '400',
-        fontSize: 12,
-    },
-    line: {
-        height: 3,
-        width: '42%',
-        backgroundColor: Colors.white,
-
-    },
-    linecontainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 18,
-        gap: 15
-    },
-    scrollViewContainer: {
-        flexGrow: 1,
-      },
-      keyboardAvoidingView: {
-        // flex: 1,
-       
-        
-      },
-      headerContent:{
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        justifyContent: 'space-between'
-      }
+  }
 });
+
 export default SignUp;

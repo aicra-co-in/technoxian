@@ -25,6 +25,12 @@ import WrcChalanges from "./Screens/WrcChalanges";
 
 import EventCalender from "./Screens/EventCalender";
 import RegistrationComponent from "./Screens/RegistrationComponent";
+import Splesh1 from "./Screens/Splesh1";
+import SignUpScreen from "./Screens/SignUpScreen";
+import Test from "./Constant/Test";
+import Card1 from "./Constant/Card1";
+import User from "./Screens/User";
+import Notification from "./Screens/Notification";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -35,8 +41,11 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"SignUp"}>
+        initialRouteName={"User"}>
+        <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
+        <Stack.Screen name="Splesh1" component={Splesh1}/>
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen}/>
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Calender" component={Calender}/>
         <Stack.Screen name="OtpVarification" component={OtpVarification}/>
@@ -55,6 +64,10 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="DrawerComponent" component={DrawerComponent} />
         <Stack.Screen name="Slider_Image" component={Slider_Image} />
         <Stack.Screen name="Card" component={Card} />
+        <Stack.Screen name="Card1" component={Card1} />
+        <Stack.Screen name="User" component={User} />
+        <Stack.Screen name="Notification" component={Notification} />
+
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="WrcChalanges" component={WrcChalanges} />
        

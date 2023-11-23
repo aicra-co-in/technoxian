@@ -17,7 +17,7 @@ const Me = () => {
       
       <CustomHeader back={true} 
       notification={true} 
-      filter={true} 
+      // filter={true} 
       scan={true}  
       source={require('../Assets/Images/Menu.png')}
       // title={'Home'}
@@ -29,6 +29,8 @@ const Me = () => {
       <Text style={styles.Text_heading}>Trending Team</Text>
       <Card1 />
       <Text style={styles.Text_heading}>Technoxian News</Text>
+      <Card />
+      <Text style={styles.Text_heading}>Subscription</Text>
       <Card />
       </ScrollView>
     </View>
@@ -48,7 +50,8 @@ const styles = StyleSheet.create({
     Text_heading:{
         color:Colors.white,
         fontFamily:'Poppins-Regular',
-        fontSize:20,
+        fontSize:18,
         fontWeight:'500',
+        marginTop:20
     }
 })

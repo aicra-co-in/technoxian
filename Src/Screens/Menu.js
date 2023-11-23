@@ -55,10 +55,10 @@ const Menu = () => {
       onPress={()=>navigation.navigate('HomeScreen')}/>
       <View style={styles.imageContainer}>
         <TouchableOpacity onPress={handleImagePicker} style={styles.img}>
-          {selectedImage && <Image source={{ uri: selectedImage }} style={styles.selectedImage} />}
+          {selectedImage ? <Image source={{ uri: selectedImage }} style={styles.selectedImage} />:<Image source={require('../Assets/Images/Robo.png')} style={{height:70,width:70,borderRadius:50}}/>}
         </TouchableOpacity>
         <TouchableOpacity>
-          <Image source={require('../Assets/Images/Arrow.png')} style={{ height: 20, width: 20 }} resizeMode='contain' />
+          <Image source={require('../Assets/Images/Arrow.png')} style={{ height: 15, width: 20 }} resizeMode='contain' />
         </TouchableOpacity>
       </View>
       <View style={styles.separator} />

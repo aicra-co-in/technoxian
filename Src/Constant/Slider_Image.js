@@ -51,6 +51,11 @@ const SliderImage = () => {
       <SliderBox
         images={images}
         onCurrentImagePressed={handleImagePress}
+        autoplay
+       circleLoop
+       resizeMethod={'resize'}
+  resizeMode={'cover'}
+  
         ImageComponentStyle={{borderRadius: 15, width: '91%', marginTop: 5,right:15}}
       />
     </View>

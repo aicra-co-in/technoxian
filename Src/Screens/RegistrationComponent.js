@@ -54,7 +54,7 @@ const RegistrationComponent = () => {
                 notification={true}
                 //   filter={true} 
                 scan={true}
-                source={require('../Assets/Images/Menu.png')}
+                source={require('../Assets/Images/Back.png')}
                 title={'Wrc Registration    '}
                 onPress={() => navigation.navigate('Menu')} />
 
@@ -247,7 +247,7 @@ const RegistrationComponent = () => {
                                     <View style={{ marginTop: 15 }}>
 
                                         <CustomButton title={'SignUp'}
-                                            backgroundColor={Colors.red}
+                                            backgroundColor={Colors.blue}
                                             paddingVertical={15}
                                             onPress={handleSubmit} />
                                     </View>

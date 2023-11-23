@@ -24,10 +24,10 @@ const data = [
         <View>
             <Dropdown
                 style={[styles.dropdown, { backgroundColor: bgcolor }]}
-                placeholderStyle={[styles.placeholderStyle, { color: 'gray' }]}
+                placeholderStyle={[styles.placeholderStyle, { color: 'gray' ,fontSize:13}]}
                 selectedTextStyle={[styles.selectedTextStyle, { color: 'gray' }]}
                 inputSearchStyle={styles.inputSearchStyle}
-                iconStyle={[styles.iconStyle, { tintColor: 'black' }]}
+                iconStyle={[styles.iconStyle, { tintColor: 'gray' }]}
                 data={data}
                 search
                 maxHeight={300}

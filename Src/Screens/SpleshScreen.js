@@ -7,7 +7,7 @@ const SpleshScreen = () => {
     useEffect(() => {
         // Navigate to the next screen after 2 seconds
         const timer = setTimeout(() => {
-          navigation.navigate('Login'); 
+          navigation.navigate('Splesh1'); 
         }, 2000);
     
         return () => clearTimeout(timer);

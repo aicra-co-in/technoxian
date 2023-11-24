@@ -31,6 +31,7 @@ import Test from "./Constant/Test";
 import Card1 from "./Constant/Card1";
 import User from "./Screens/User";
 import Notification from "./Screens/Notification";
+import Card3 from "./Constant/Card3";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -41,7 +42,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"User"}>
+        initialRouteName={"HomeScreen"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -65,6 +66,7 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="Slider_Image" component={Slider_Image} />
         <Stack.Screen name="Card" component={Card} />
         <Stack.Screen name="Card1" component={Card1} />
+        <Stack.Screen name="Card3" component={Card3} />
         <Stack.Screen name="User" component={User} />
         <Stack.Screen name="Notification" component={Notification} />
 

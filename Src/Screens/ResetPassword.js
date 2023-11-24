@@ -11,19 +11,19 @@ const ResetPassword = () => {
 
     
     <ScrollView style={styles.container}>
-      <Text style={[styles.heading, { marginTop: 10 }]}>Reset Password
+      <Text style={[styles.heading, { marginTop: 10 }]}> <Text style={{color:Colors.pink}}> Reset</Text> Password
  </Text>
       
 
       <Image source={require('../Assets/Images/ForgetPassword.png')} style={styles.img} />
       <Text style={styles.text
-      }>Try creating a simple password that you can reember. and complicated for someone to guess.</Text>
+      }>Try creating a simple <Text style={{color:Colors.pink}}>Password </Text>  that you can remember. </Text>
       <CustomInput placeholder={'Enter New Password'} />
       <CustomInput placeholder={'Confirm Password'} />
       <View style={{marginTop:20}}>
 
       <CustomButton title={'Forget Password'}
-        backgroundColor={Colors.blue}
+        backgroundColor={Colors.pink}
         paddingVertical={15}
         
         // borderColor={Colors.white} 
@@ -40,7 +40,7 @@ export default ResetPassword
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: Colors.Primary,
+      backgroundColor: Colors.black,
       padding: 20,
   
     },
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: '500',
       fontFamily: 'Poppins-Regular',
-      textAlign: 'center',
+      // textAlign: 'center',
       marginTop: 10
     },
     text1: {

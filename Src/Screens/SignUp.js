@@ -51,7 +51,7 @@ const SignUp = () => {
  
 
     <KeyboardAvoidingView
-    style={{ flex: 1, backgroundColor: 'red' }}
+    style={{ flex: 1, backgroundColor: 'black' }}
     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
   >
  
@@ -131,17 +131,17 @@ const SignUp = () => {
               />
 
               <View style={{ marginVertical: 10 }}>
-                <Text style={styles.text1}>By signing up, you accept our  <Text style={{ color: Colors.blue }} onPress={() => navigation.navigate('TermAndCodition')}>Terms and Conditions</Text></Text>
+                <Text style={styles.text1}>By signing up, you accept our  <Text style={{ color: Colors.pink }} onPress={() => navigation.navigate('TermAndCodition')}>Terms and Conditions</Text></Text>
               </View>
 
               <View style={{ marginTop: 15 ,bottom:10}}>
                 <CustomButton title={'SignUp'}
-                  backgroundColor={Colors.blue}
+                  backgroundColor={Colors.pink}
                   paddingVertical={15}
                   onPress={handleSubmit}
                 />
               </View>
-              <Text style={styles.text2}>Already have account?   <Text style={{color:Colors.blue}} onPress={()=>navigation.navigate('Login')}>login in</Text></Text>
+              <Text style={styles.text2}>Already have account?   <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('Login')}>Login in</Text></Text>
            
             </View>
             </ScrollView>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   signupcontainer:{
     flex: 1,
-    backgroundColor:Colors.Primary,
+    backgroundColor:Colors.black,
     borderTopRightRadius:30,
     borderTopLeftRadius:30,
     height:'100%',

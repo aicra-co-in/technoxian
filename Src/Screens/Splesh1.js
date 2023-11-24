@@ -18,27 +18,27 @@ const Splesh1 = () => {
   return (
     <View style={styles.container}>
       <Image source={require('../Assets/Images/Boy.png')} resizeMode='contain' style={{ height: '40%', width: '100%' }} />
-      <Text style={styles.text}> Latest News About All Events</Text>
+      <Text style={styles.text}> <Text style={{color:Colors.pink}}>Latest</Text> News About All Events</Text>
       <Text style={styles.text1}>
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
         standard dummy text ever since the 1500s,
       </Text>
       <View style={styles.btncontainer}>
-        <View style={{ width: '30%' }}>
+        <View style={{ width: '35%' }}>
           <CustomButton
             title={'SignUp'}
-            backgroundColor={Colors.blue}
-            paddingVertical={15}
-            borderColor={Colors.Primary}
+            backgroundColor={Colors.pink}
+            paddingVertical={18}
+            borderColor={Colors.black}
             onPress={() => navigation.navigate('SignUp')}
           />
         </View>
-        <View style={{ width: '30%' }}>
+        <View style={{ width: '35%' }}>
           <CustomButton
             title={'Login'}
-            backgroundColor={buttonClicked ? Colors.blue : Colors.Primary}
+            backgroundColor={ Colors.black}
             paddingVertical={15}
-            borderColor={Colors.Primary}
+            borderColor={Colors.black}
             onPress={handlePress}
           />
         </View>
@@ -51,15 +51,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: Colors.Primary,
+    backgroundColor: Colors.black,
   },
   text: {
-    fontSize: 30,
+    fontSize: 40,
     color: Colors.white,
     lineHeight: 36,
     fontWeight: '600',
     marginTop: 40,
     paddingRight: 50,
+    lineHeight:45
   },
   text1: {
     color: Colors.white,

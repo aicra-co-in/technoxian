@@ -8,7 +8,7 @@ import Colors from "./Src/Assets/Theme/Theme";
 const App = () => {
   return (
     <>
-      <StatusBar  backgroundColor={Colors.Primary} />
+      <StatusBar  backgroundColor={Colors.black} />
       
 
       < Navigators/>

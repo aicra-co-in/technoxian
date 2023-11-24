@@ -29,7 +29,7 @@ export default SpleshScreen
 const styles = StyleSheet.create({
     container:{
          flex:1,
-         backgroundColor:Colors.Primary,
+         backgroundColor:Colors.black,
        
 
 

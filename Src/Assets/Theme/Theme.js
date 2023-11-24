@@ -92,6 +92,7 @@ const Colors = {
     secondry:'#705FAA',
     redsecondry:'#FF3D00',
     Primary:'#08233D',
+    pink:"#FF7401",
 
   };
   export default Colors;  

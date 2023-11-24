@@ -102,7 +102,7 @@ const Login = () => {
                                 <View style={{ marginTop: 15 }}>
 
                                     <CustomButton title={'Login'}
-                                        backgroundColor={Colors.blue}
+                                        backgroundColor={Colors.pink}
                                         paddingVertical={15}
                                         onPress={handleSubmit}
 
@@ -123,7 +123,7 @@ const Login = () => {
                                         image={require('../Assets/Images/Google.png')}
                                         borderColor={Colors.white} />
                                 </View>
-                                <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.blue}} onPress={()=>navigation.navigate('SignUp')}>Sign Up</Text></Text>
+                                <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('SignUp')}>Sign Up</Text></Text>
                             </View>
                         </ScrollView>
                     </View>
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     text1: {
-        color: '#fff',
+        color: Colors.pink,
         fontWeight: '400',
         fontSize: 14,
     },
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     signupcontainer: {
         flex: 1,
-        backgroundColor: Colors.Primary,
+        backgroundColor: Colors.black,
         borderTopRightRadius: 30,
         borderTopLeftRadius: 30,
         height: '100%',

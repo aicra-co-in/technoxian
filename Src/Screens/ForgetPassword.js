@@ -10,19 +10,19 @@ const ForgetPassword = () => {
   const navigation=useNavigation();
   return (
     <ScrollView style={styles.container}>
-      <Text style={[styles.heading, { marginTop: 20 }]}>Forget Password ?</Text>
+      <Text style={[styles.heading, { marginTop: 20 }]}><Text style={{color:Colors.pink}}>Forget</Text> Password ?</Text>
       
       <Image source={require('../Assets/Images/ForgetPassword.png')} style={styles.img} />
       <Text style={styles.text
-      }>Input the email associated with
-        your account.</Text>
+      }>Input the<Text style={{color:Colors.pink}}> email</Text> associated with
+        your <Text style={{color:Colors.pink}}>account.</Text ></Text>
       
 
       <CustomInput placeholder={'Enter Email Address'} />
       <View style={{marginTop:20}}>
 
       <CustomButton title={'Forget Password'}
-        backgroundColor={Colors.blue}
+        backgroundColor={Colors.pink}
         paddingVertical={15}
         
         // borderColor={Colors.white} 
@@ -38,7 +38,7 @@ export default ForgetPassword
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.Primary,
+    backgroundColor: Colors.black,
     padding: 20,
 
   },

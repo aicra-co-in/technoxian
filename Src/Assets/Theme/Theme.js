@@ -1,9 +1,9 @@
 const Colors = {
-  tersery:"#013262",
+  tersery:"#2B3038",
   red:"#ff0000",
     amethyst: '#9966cc',
     aqua: '#00ffff',
-    black:'#000000',
+    black:'#13171A',
     azure: '#007fff',
     blue:'#1976D2',
     beige: '#f5f5dc',
@@ -90,9 +90,9 @@ const Colors = {
     zest: '#e5841b',
     white:'#ffffff',
     secondry:'#705FAA',
-    redsecondry:'#FF3D00',
+    redsecondry:'#C43033',
     Primary:'#08233D',
-    pink:"#FF7401",
+    pink:"#ED0000",
 
   };
   export default Colors;  

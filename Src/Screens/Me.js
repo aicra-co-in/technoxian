@@ -7,6 +7,7 @@ import SliderImage from '../Constant/Slider_Image'
 import Card1 from '../Constant/Card1'
 import { useNavigation } from '@react-navigation/native'
 import Card3 from '../Constant/Card3'
+import Card2 from '../Constant/Card2'
 
 
 const Me = () => {
@@ -24,16 +25,18 @@ const Me = () => {
       // title={'Home'}
       onPress={()=>navigation.navigate('Menu')}/>
     <ScrollView showsVerticalScrollIndicator={false}>
-      {/* <SliderImage /> */}
+<SliderImage/>
       <Text style={styles.Text_heading}>Live Matches</Text>
       <Card3/>
-      <Text style={styles.Text_heading}>WRC Challenges</Text>
-      <Card />
-      <Text style={styles.Text_heading}>Trending Team</Text>
-      <Card1 />
-      <Text style={styles.Text_heading}>Technoxian News</Text>
-      <Card />
-      <Text style={styles.Text_heading}>Subscription</Text>
+      <Text style={styles.Text_heading}>Upcoming Matches</Text>
+      <Card2/>
+      {/* <Text style={styles.Text_heading}>WRC Challenges</Text> */}
+      {/* <Card /> */}
+      {/* <Text style={styles.Text_heading}>Trending Team</Text>
+      <Card1 /> */}
+      {/* <Text style={styles.Text_heading}>Technoxian News</Text> */}
+      {/* <Card /> */}
+      <Text style={styles.Text_heading}>Teams</Text>
       <Card />
       </ScrollView>
     </View>

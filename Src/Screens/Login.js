@@ -67,7 +67,7 @@ const Login = () => {
                             <View style={styles.form}>
 
 
-                                <Text style={styles.heading}>Well Come</Text>
+                                <Text style={styles.heading}>WellCome</Text>
 
 
 

@@ -28,7 +28,7 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
         style={[
           styles.cardContainer,
           {
-            backgroundColor: selectedId === item.id ? '#f96342' : Colors.tersery,
+            backgroundColor: selectedId === item.id ? '#f96342' : '#2B3038',
           },
         ]}
       >

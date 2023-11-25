@@ -18,7 +18,7 @@ const Splesh1 = () => {
   return (
     <View style={styles.container}>
       <Image source={require('../Assets/Images/Boy.png')} resizeMode='contain' style={{ height: '40%', width: '100%' }} />
-      <Text style={styles.text}> <Text style={{color:Colors.pink}}>Latest</Text> News About All Events</Text>
+      <Text style={styles.text}> <Text style={{color:Colors.redsecondry}}>Latest</Text> News About All Events</Text>
       <Text style={styles.text1}>
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
         standard dummy text ever since the 1500s,
@@ -28,7 +28,7 @@ const Splesh1 = () => {
           <CustomButton
             title={'SignUp'}
             backgroundColor={Colors.pink}
-            paddingVertical={18}
+            paddingVertical={15}
             borderColor={Colors.black}
             onPress={() => navigation.navigate('SignUp')}
           />

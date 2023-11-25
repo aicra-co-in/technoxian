@@ -7,6 +7,7 @@ import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
+import CustomcountryPicker from '../Constant/CustomcountryPicker';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -28,10 +29,7 @@ const SignupSchema = Yup.object().shape({
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
     'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
   ),
-  phone: Yup.string().email('Invalid email')
-    .trim()
-    .min(10)
-    .max(10).required('required'),
+ 
 });
 
 const SignUp = () => {
@@ -40,7 +38,7 @@ const SignUp = () => {
     name: '',
     email: '',
     password: '',
-    phone: '',
+   
   };
 
   const handleSubmit = (values) => {
@@ -101,15 +99,10 @@ const SignUp = () => {
                 error={errors.email}
               />
 
-              <CustomInput
-                placeholder="Phone"
-                name="phone"
-                value={values.phone}
-                onChange={handleChange('phone')}
-                onBlur={handleBlur}
-                error={errors.phone}
-              />
+            <View style={{marginTop:12}}>
 
+            
+      <CustomcountryPicker/>
               <CustomInput
                 placeholder="Password"
                 name="password"
@@ -119,7 +112,7 @@ const SignUp = () => {
                 error={errors.password}
                 secureTextEntry={true}
               />
-
+</View>
               <CustomInput
                 placeholder="Confirm Password"
                 name="password"

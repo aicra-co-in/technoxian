@@ -32,6 +32,8 @@ import Card1 from "./Constant/Card1";
 import User from "./Screens/User";
 import Notification from "./Screens/Notification";
 import Card3 from "./Constant/Card3";
+import WinnerCard from "./Constant/WinnerCard";
+import CustomcountryPicker from "./Constant/CustomcountryPicker";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -42,7 +44,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"HomeScreen"}>
+        initialRouteName={"SignUp"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -75,6 +77,9 @@ const Navigators = ({ Screenames }) => {
        
         <Stack.Screen name="EventCalender" component={EventCalender} />
         <Stack.Screen name="RegistrationComponent"component={RegistrationComponent} />
+        <Stack.Screen name="WinnerCard"component={WinnerCard} />
+        <Stack.Screen name="CustomcountryPicker"component={CustomcountryPicker} />
+
 
 
       </Stack.Navigator>

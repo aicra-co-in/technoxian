@@ -93,6 +93,7 @@ const Colors = {
     redsecondry:'#C43033',
     Primary:'#08233D',
     pink:"#ED0000",
+    card:'#2B3038'
 
   };
   export default Colors;  

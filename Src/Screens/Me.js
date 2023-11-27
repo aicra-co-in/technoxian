@@ -8,6 +8,8 @@ import Card1 from '../Constant/Card1'
 import { useNavigation } from '@react-navigation/native'
 import Card3 from '../Constant/Card3'
 import Card2 from '../Constant/Card2'
+import WinnerCard from '../Constant/WinnerCard'
+import NewsCard from '../Constant/NewsCard'
 
 
 const Me = () => {
@@ -26,18 +28,25 @@ const Me = () => {
       onPress={()=>navigation.navigate('Menu')}/>
     <ScrollView showsVerticalScrollIndicator={false}>
 <SliderImage/>
-      <Text style={styles.Text_heading}>Live Matches</Text>
-      <Card3/>
-      <Text style={styles.Text_heading}>Upcoming Matches</Text>
-      <Card2/>
-      {/* <Text style={styles.Text_heading}>WRC Challenges</Text> */}
-      {/* <Card /> */}
+      <Text style={styles.Text_heading}>WRC Challenges</Text>
+      {/* <Card3/> */}
+      {/* <Text style={styles.Text_heading}>Upcoming Matches</Text> */}
+      {/* <Card2/> */}
+      <Card />
+      <Text style={styles.Text_heading}>WRC Team</Text>
+      <WinnerCard />
       {/* <Text style={styles.Text_heading}>Trending Team</Text>
       <Card1 /> */}
       {/* <Text style={styles.Text_heading}>Technoxian News</Text> */}
       {/* <Card /> */}
       <Text style={styles.Text_heading}>Teams</Text>
-      <Card />
+      <Card2 />
+      <Text style={styles.Text_heading}>Trending News</Text>
+     <View style={{marginBottom:10}}>
+
+      <NewsCard/>
+     </View>
+
       </ScrollView>
     </View>
  

@@ -47,7 +47,7 @@ export default User;
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:Colors.Primary,
+    backgroundColor:Colors.black,
     padding:15,
     // alignItems:'center',
     // justifyContent:'center'

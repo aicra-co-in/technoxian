@@ -69,7 +69,7 @@ const EventCalender = () => {
   );
 
   return (
-    <View style={{flex:1,backgroundColor:Colors.Primary,padding:15}}>
+    <View style={{flex:1,backgroundColor:Colors.black,padding:15}}>
         <CustomHeader
         back={true} 
         notification={true}

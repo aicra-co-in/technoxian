@@ -29,7 +29,7 @@ import CustomDropDown from '../Component/CustomDropDown';
 import CustomDropDown1 from '../Component/CustomDropDown1';
 import axios from 'axios';
 
-const RegistrationComponent = () => {
+const RoboclubRegistration = () => {
     const [countries, setCountries] = useState([]);
 
     const navigation = useNavigation()
@@ -73,11 +73,11 @@ const RegistrationComponent = () => {
     return (
         <View style={styles.container}>
             <CustomHeader back={true}
-                notification={true}
+                // notification={true}
                 //   filter={true} 
-                scan={true}
+                // scan={true}
                 source={require('../Assets/Images/Back.png')}
-                title={'Wrc Registration    '}
+                title={'Technoxian Club Registration'}
                 onPress={() => navigation.navigate('Menu')} />
 
             <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }}>
@@ -95,12 +95,12 @@ const RegistrationComponent = () => {
                                     {/* <CustomDropDown bgcolor={'white'}
                                         placeholder={'Select Competition: *'}
                                     /> */}
-                                    <CustomDropDown1
+                                    {/* <CustomDropDown1
                                         bgcolor={'white'}
                                         placeholder={'Select Competition: *'}
                                         validation={SignupSchema}
                                         field="competition"
-                                    />
+                                    /> */}
 
                                     <CustomInput
 
@@ -111,12 +111,12 @@ const RegistrationComponent = () => {
                                         onBlur={handleBlur}
                                         error={errors.name}
                                     />
-                                    <CustomDropDown1
+                                    {/* <CustomDropDown1
                                         bgcolor={'white'}
                                         placeholder={'Profile: *'}
                                         validation={SignupSchema}
                                         field="profile"
-                                    />
+                                    /> */}
 
 
                                     {/* Enter user Email */}
@@ -151,8 +151,8 @@ const RegistrationComponent = () => {
                                         error={errors.password}
                                         secureTextEntry={true}
                                     />
-                                    <View style={{ flexDirection: 'row', gap: 10 }}>
-                                        <View style={{ width: '49%', }}>
+                                   
+                                       
 
                                             <CustomInput
 
@@ -163,8 +163,8 @@ const RegistrationComponent = () => {
                                                 onBlur={handleBlur}
                                                 error={errors.name}
                                             />
-                                        </View>
-                                        <View style={{ width: '47%' }}>
+                                       
+                                        
 
                                             <CustomInput
 
@@ -175,12 +175,11 @@ const RegistrationComponent = () => {
                                                 onBlur={handleBlur}
                                                 error={errors.name}
                                             />
-                                        </View>
-                                    </View>
+                                       
+                                 
 
 
-                                    <View style={{ flexDirection: 'row', gap: 10 }}>
-                                        <View style={{ width: '49%', }}>
+                                   
 
                                             <CustomInput
 
@@ -191,8 +190,8 @@ const RegistrationComponent = () => {
                                                 onBlur={handleBlur}
                                                 error={errors.name}
                                             />
-                                        </View>
-                                        <View style={{ width: '47%' }}>
+                                       
+                                       
 
                                             <CustomInput
 
@@ -203,8 +202,7 @@ const RegistrationComponent = () => {
                                                 onBlur={handleBlur}
                                                 error={errors.name}
                                             />
-                                        </View>
-                                    </View>
+                                      
 
 
 
@@ -253,28 +251,15 @@ const RegistrationComponent = () => {
                                         </View>
                                     </View>
 
-                                    <View style={{ height: 100, backgroundColor: Colors.white, marginTop: 20, borderRadius: 10 }}>
-
-                                        <TextInput
-                                            style={styles.input}
-                                            placeholder={'Type your message here...'}
-                                            multiline
-                                            onChangeText={() => { }}
-                                        // onBlur={() => onBlur(name)}
-                                        // value={value}
-                                        // name={name}
-                                        // secureTextEntry={secureTextEntry} 
-
-                                        />
-                                    </View>
 
                                     <View style={{ marginTop: 15 }}>
 
                                         <CustomButton title={'SignUp'}
-                                            backgroundColor={Colors.blue}
+                                            backgroundColor={Colors.pink}
                                             paddingVertical={15}
                                             onPress={handleSubmit} />
                                     </View>
+                                    <Text style={styles.text2}>Already have account?   <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('RoboclubLogin')}>Login in</Text></Text>
                                 </View>
                             </View>
                         )}
@@ -285,7 +270,7 @@ const RegistrationComponent = () => {
     )
 }
 
-export default RegistrationComponent
+
 
 const styles = StyleSheet.create({
     container: {
@@ -301,4 +286,15 @@ const styles = StyleSheet.create({
         marginTop: 20,
 
     },
+    text2:{
+        color:Colors.white,
+        fontSize:14,
+        alignSelf:'center',
+        paddingVertical:10,
+        paddingBottom:20
+    
+      }
 })
+
+export default RoboclubRegistration
+

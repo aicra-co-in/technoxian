@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     // borderBottomWidth: 1,
     // borderBottomColor: Colors.white,
     // gap:15,
-    backgroundColor:Colors.Primary
+    backgroundColor:Colors.black
     // alignItems: 'center',
     // justifyContent: 'center',
   },

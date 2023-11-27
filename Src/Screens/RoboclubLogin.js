@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Image,CheckBox } from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Image } from 'react-native'
 import React from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +7,7 @@ import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
+import CustomHeader from '../Component/CustomHeader';
 const SignupSchema = Yup.object().shape({
 
 
@@ -20,7 +21,7 @@ const SignupSchema = Yup.object().shape({
         'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
     ),
 });
-const Login = () => {
+const RoboclubLogin = () => {
     const navigation = useNavigation()
     const initialValues = {
 
@@ -51,13 +52,7 @@ const Login = () => {
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
 
                     <View style={{ flex: 1, }}>
-                        <View style={{ height: '50%' }}>
-                            <Image
-                                source={require('../Assets/Images/Signup.png')}
-                                style={{ height: "102%", width: "110%", alignSelf: 'center' }}
-                                resizeMode='cover'
-                            />
-                        </View>
+                       
 
 
                         <ScrollView style={styles.signupcontainer}>
@@ -65,9 +60,15 @@ const Login = () => {
 
 
                             <View style={styles.form}>
+                            <CustomHeader back={true}
+                // notification={true}
+                //   filter={true} 
+                // scan={true}
+                source={require('../Assets/Images/Back.png')}
+                title={'TECHNOXIAN ROBOCLUB LOGIN'}
+                onPress={() => navigation.navigate('Menu')} />
 
-
-                                <Text style={styles.heading}>WelCome</Text>
+                                {/* <Text style={styles.heading}>TECHNOXIAN ROBOCLUB LOGIN</Text> */}
 
 
 
@@ -92,13 +93,12 @@ const Login = () => {
                                     onBlur={handleBlur}
                                     error={errors.password}
                                     secureTextEntry={true}
-                                    rightIcon={true}
                                 />
 
 
-                                <View style={{ marginVertical: 10, alignItems: 'flex-end' }}>
+                                {/* <View style={{ marginVertical: 10, alignItems: 'flex-end' }}>
                                     <Text style={styles.text1} onPress={() => navigation.navigate('ForgetPassword')}>Forget Password</Text>
-                                </View>
+                                </View> */}
                                 {/* Submit button */}
                                 <View style={{ marginTop: 15 }}>
 
@@ -109,13 +109,13 @@ const Login = () => {
 
                                     />
                                 </View>
-                                <View style={styles.linecontainer}>
+                                {/* <View style={styles.linecontainer}>
                                     <View style={styles.line}></View>
                                     <Text style={styles.text1}>OR</Text>
                                     <View style={styles.line}></View>
                                     <View></View>
-                                </View>
-
+                                </View> */}
+{/* 
                                 <View style={{ marginTop: 25 }}>
 
                                     <CustomButton title={'Continue with Google'}
@@ -123,8 +123,8 @@ const Login = () => {
                                         paddingVertical={15}
                                         image={require('../Assets/Images/Google.png')}
                                         borderColor={Colors.white} />
-                                </View>
-                                <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('SignUp')}>Sign Up</Text></Text>
+                                </View> */}
+                                <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('RoboclubRegistration')}>Sign Up</Text></Text>
                             </View>
                         </ScrollView>
                     </View>
@@ -166,9 +166,10 @@ const styles = StyleSheet.create({
     },
     heading: {
         color: Colors.white,
-        fontSize: 29,
+        fontSize: 20,
         fontWeight: '800',
         marginTop: 20,
+        alignSelf:'center'
     },
     text1: {
         color: Colors.pink,
@@ -203,10 +204,10 @@ const styles = StyleSheet.create({
     signupcontainer: {
         flex: 1,
         backgroundColor: Colors.black,
-        borderTopRightRadius: 30,
-        borderTopLeftRadius: 30,
-        height: '100%',
-        marginTop: -90
+        // borderTopRightRadius: 30,
+        // borderTopLeftRadius: 30,
+        // height: '100%',
+        // marginTop: -90
     },
     text2:{
         color:Colors.white,
@@ -220,5 +221,9 @@ const styles = StyleSheet.create({
 
 
 
-export default Login
+
+
+
+
+export default RoboclubLogin
 

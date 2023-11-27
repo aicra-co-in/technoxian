@@ -21,7 +21,7 @@ import DrawerComponent from "./Screens/DrawerComponent";
 import Slider_Image from "./Constant/Slider_Image";
 import Card from "./Constant/Card";
 import Menu from "./Screens/Menu";
-import WrcChalanges from "./Screens/WrcChalanges";
+
 
 import EventCalender from "./Screens/EventCalender";
 import RegistrationComponent from "./Screens/RegistrationComponent";
@@ -34,6 +34,11 @@ import Notification from "./Screens/Notification";
 import Card3 from "./Constant/Card3";
 import WinnerCard from "./Constant/WinnerCard";
 import CustomcountryPicker from "./Constant/CustomcountryPicker";
+import AddItem from "./Constant/AddItem";
+import WRCChalanges from "./Screens/WrcChalanges";
+import NewsCard from "./Constant/NewsCard";
+import RoboclubRegistration from "./Screens/RoboclubRegistration";
+import RoboclubLogin from "./Screens/RoboclubLogin";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -73,12 +78,16 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="Notification" component={Notification} />
 
         <Stack.Screen name="Menu" component={Menu} />
-        <Stack.Screen name="WrcChalanges" component={WrcChalanges} />
+        <Stack.Screen name="WrcChalanges" component={WRCChalanges} />
        
         <Stack.Screen name="EventCalender" component={EventCalender} />
         <Stack.Screen name="RegistrationComponent"component={RegistrationComponent} />
         <Stack.Screen name="WinnerCard"component={WinnerCard} />
         <Stack.Screen name="CustomcountryPicker"component={CustomcountryPicker} />
+        <Stack.Screen name="AddItem"component={AddItem} />
+        <Stack.Screen name="NewsCard"component={NewsCard} />
+        <Stack.Screen name="RoboclubRegistration"component={RoboclubRegistration} />
+        <Stack.Screen name="RoboclubLogin"component={RoboclubLogin} />
 
 
 

@@ -69,6 +69,8 @@ const CustomcountryPicker = () => {
               onBlur={() => setFieldTouched('phoneNumber')}
               keyboardType="phone-pad"
               maxLength={15}
+              
+              
             />
           </View>
           {touched.phoneNumber && errors.phoneNumber && (
@@ -95,10 +97,10 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 13,
   },
   countryCodeText: {
-    fontSize: 14,
+    fontSize: 13,
     color: 'black',
   },
   verticalLine: {

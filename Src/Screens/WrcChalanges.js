@@ -8,7 +8,7 @@ import Card1 from '../Constant/Card1'
 import CustomDropDown from '../Component/CustomDropDown'
 import { useNavigation } from '@react-navigation/native'
 
-const WrcChalanges = () => {
+const WRCChalanges = () => {
   const navigation=useNavigation();
   return (
     <View style={styles.container}>
@@ -36,12 +36,12 @@ const WrcChalanges = () => {
   )
 }
 
-export default WrcChalanges
+export default WRCChalanges
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:Colors.Primary,
+        backgroundColor:Colors.black,
         paddingHorizontal:15,
     },
     Text_heading:{

@@ -1,11 +1,17 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-import CustomDropDown from './CustomDropDown';
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 
-const CustomInput = ({ label, placeholder, name, value, onChange, onBlur, error, secureTextEntry,mxlength }) => {
+const CustomInput = ({ label, placeholder, name, value, onChange, onBlur, error, secureTextEntry, rightIcon, maxlength }) => {
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <View style={styles.container}>
-      
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.input}
@@ -14,9 +20,14 @@ const CustomInput = ({ label, placeholder, name, value, onChange, onBlur, error,
         onBlur={() => onBlur(name)}
         value={value}
         name={name}
-        secureTextEntry={secureTextEntry} 
-        
+        secureTextEntry={secureTextEntry && !isPasswordVisible}
+        // maxLength={maxlength} // Note: 'mxlength' in your code was likely a typo, changed it to 'maxLength'
       />
+      {rightIcon && (
+        <TouchableOpacity style={styles.rightIconContainer} onPress={togglePasswordVisibility}>
+          <Feather name={isPasswordVisible ? 'eye' : 'eye-off'} size={24} color="black" />
+        </TouchableOpacity>
+      )}
       {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
@@ -39,6 +50,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 8,
     backgroundColor: 'white',
+  },
+  rightIconContainer: {
+    position: 'absolute',
+    top: 35, // Adjust as needed based on your design
+    right: 12, // Adjust as needed based on your design
   },
   error: {
     color: 'red',

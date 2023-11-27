@@ -28,7 +28,7 @@ const data = [
                 selectedTextStyle={[styles.selectedTextStyle, { color: 'gray' }]}
                 inputSearchStyle={styles.inputSearchStyle}
                 iconStyle={[styles.iconStyle, { tintColor: 'gray' }]}
-                data={data}
+                data={data} 
                 search
                 maxHeight={300}
                 labelField="label"

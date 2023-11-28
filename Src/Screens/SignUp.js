@@ -54,10 +54,47 @@ const SignUp = () => {
     password: '',
   };
 
-  const handleSubmit = (values) => {
-    console.log("test");
-    // console.log('Form values:', values);
-    //  PostRegistration(values);
+  // const [postData, setPostData] = useState({
+  //   name: 'Ravi',
+  //   email: 'ravi119678@gmail.com',
+  //   mobile: '7870561523',
+  //   password: '12345',
+  //   countrycode:'91',
+  // });
+
+  const handlePostRequest = async (values) => {
+    console.log("hhhhhhjadjhagd",values)
+    try {
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('mobile', values.mobile);
+      formData.append('countrycode', values.countrycode);
+      formData.append('password', values.password);
+
+      const response = await axios.post(
+        'https://api.technoxian.com/development/user_Registration.php',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      console.log('Response:', response.data);
+      // Handle the response here
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle errors here
+    }
+  };
+
+  const handleSubmit = (value,{ resetForm }) => {
+    handlePostRequest(value);
+    navigation.navigate('Login')
+    console.log(value)
+    resetForm()
+  
 
   };
 
@@ -80,32 +117,32 @@ const SignUp = () => {
     setIsPickerVisible(!isPickerVisible);
   };
 
-  const PostRegistration = async (values) => {
-    try {
-      console.log('Making API call with values:', values);
-      const response = await axios({
-        url: UserRegistration,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {
-          name: values.name,
-          email: values.email,
-          mobile: values.mobile,
-          countryCode: `+${countryCode}`,
-          password: 'abcd',
-        },
-      });
+  
 
-      console.log(response.status);
-      console.log(response.data)
-      // setCountries(countryNames);
-      // console.log(response.data[0])
-    } catch (error) {
-      console.error('Error fetching countries:', error);
-    }
-  };
+  // const PostRegistration = async (values) => {
+  //   console.log("data",values);
+  //   try {
+  //     const response = await axios({
+  //       url: UserRegistration,
+  //       method: 'post',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       data: {
+  //         name: values.name,
+  //         email: values.email,
+  //         mobile: values.mobile,
+  //         countryCode: `+${countryCode}`,
+  //         password: values.password,
+  //       },
+  //     });
+  //     console.log("hellooooookhjsfgshgfhgsh",response)
+  //     // setCountries(countryNames);
+  //     // console.log(response.data[0])
+  //   } catch (error) {
+  //     console.error('Error fetching countries:', error);
+  //   }
+  // };
   
 
   return (
@@ -121,7 +158,7 @@ const SignUp = () => {
         onSubmit={handleSubmit}
         validationSchema={SignupSchema}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, errors,touched,setFieldTouched }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors,touched,setFieldTouched ,resetForm}) => (
 
           <View style={{ flex: 1, }}>
             <View style={{ height: '50%' }}>
@@ -187,17 +224,17 @@ const SignUp = () => {
             <TextInput
               style={styles.input}
               placeholder="Enter your phone number"
-              value={values.phoneNumber}
-              onChangeText={handleChange('phoneNumber')}
-              onBlur={() => setFieldTouched('phoneNumber')}
+              value={values.mobile}
+              onChangeText={handleChange('mobile')}
+              onBlur={() => setFieldTouched('mobile')}
               keyboardType="phone-pad"
               maxLength={15}
               
               
             />
           </View>
-          {touched.phoneNumber && errors.phoneNumber && (
-            <Text style={styles.validation}>{errors.phoneNumber}</Text>
+          {touched.mobile && errors.mobile && (
+            <Text style={styles.validation}>{errors.mobile}</Text>
           )}
         </View>
                   <CustomInput

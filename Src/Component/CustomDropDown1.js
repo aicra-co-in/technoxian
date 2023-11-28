@@ -17,8 +17,9 @@ const data = [
     { label: "Item 8", value: "8" },
   ]
 
-  const CustomDropDown1 = ({ bgcolor, placeholder, validation, field }) => {
+  const CustomDropDown1 = ({ bgcolor, placeholder, validation, field,Country,onChange }) => {
     const formik = useFormikContext();
+    const dropdownData = Country || data;
 
     return (
         <View>
@@ -28,7 +29,7 @@ const data = [
                 selectedTextStyle={[styles.selectedTextStyle, { color: 'gray' }]}
                 inputSearchStyle={styles.inputSearchStyle}
                 iconStyle={[styles.iconStyle, { tintColor: 'gray' }]}
-                data={data} 
+                data={dropdownData} 
                 search
                 maxHeight={300}
                 labelField="label"
@@ -37,10 +38,7 @@ const data = [
                 activeColor="rgba(0, 0, 0, 0.25)"
                 searchPlaceholder="Search..."
                 value={formik.values[field]}
-                onChange={(item) => {
-                    formik.setFieldValue(field, item.value);
-                    formik.setFieldTouched(field, true, false);
-                }}
+                onChange={onChange}
             />
             {formik.touched[field] && formik.errors[field] && (
                 <Text style={styles.errorText}>{formik.errors[field]}</Text>

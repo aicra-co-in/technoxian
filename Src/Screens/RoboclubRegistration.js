@@ -13,11 +13,25 @@ const SignupSchema = Yup.object().shape({
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
-
+    institutename: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
+    mobile: Yup.string().required('Mobile number is required')
+        .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Invalid mobile number format')
+        .min(7, 'Mobile number must be at least 7 Number')
+        .max(15, 'Mobile number must be at most 15 Number'),
     password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
-    competition: Yup.string().required(('Please Select Completition')),
-    profile: Yup.string().required(('Please Select Profile')),
+    captain: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    clubname: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    // profile: Yup.string().required(('Please Select Profile')),
     country: Yup.string().required(('Please Select Country')),
     state: Yup.string().required(('Please Select State')),
     city: Yup.string().required(('Please Select City')),
@@ -31,33 +45,84 @@ import axios from 'axios';
 
 const RoboclubRegistration = () => {
     const [countries, setCountries] = useState([]);
+    const [state, setstate] = useState([]);
+    const [countryid, setcountryid] = useState([])
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectState,setSelectState]=useState(null);
 
     const navigation = useNavigation()
 
 
-//    const fetchCountry = async () => {
-//         try {
-//             const response = await axios.get('https://restcountries.com/v3.1/independent?status=true');
+    const fetchCountry = async () => {
+        try {
+            const response = await axios.get('https://restcountries.com/v3.1/independent?status=true');
+            console.log(response)
+            const countryNames = response.data.map(country => ({
+                label: country.name.common,
+                value: country.cca2,
+                id: country.ccn3
 
-//             const countryNames = response.data.map(item => item.name.common);
-//             // console.log('Country API Response:', countryNames);
-//             //  setCountries(countryNames);
-//             // console.log(response.data[0])
-//         } catch (error) {
-//             console.error('Error fetching countries:', error);
-//         }
-//     };
+            }));
+            countryNames.forEach(country => {
+                console.log('id:', country.id);
+                setcountryid(country.id)
+                if (!selectedCountry) {
+                    setSelectedCountry(country);
+                  }
+            });
 
-//     useEffect(() => {
-//         fetchCountry()
-//     }, [])
+            setCountries(countryNames);
+            // console.log(countryNames)
+        } catch (error) {
+            console.error('Error fetching countries:', error);
+        }
+
+    };
+
+
+
+
+    const fetchState = async () => {
+        try {
+            const response = await axios.get('https://api.technoxian.com/development/getState.php?id',{
+                params:{
+                    id:countryid
+                }
+            });
+            console.log(response)
+            const stateNames = response.data.users.map(state => ({
+                label: state.statename,
+                value: state.id
+            }));
+
+            setstate(stateNames);
+            console.log(stateNames)
+            console.log(response.data)
+        } catch (error) {
+            console.error('Error fetching stateNames:', error);
+        }
+    };
+    useEffect(() => {
+           fetchCountry();
+         fetchState();
+    }, []);
+
+
+
+
+
+
+
+
 
     const initialValues = {
         name: '',
+        institutename: '',
         email: '',
+        mobile: '',
         password: '',
-        profile: '',
-        competition: '',
+        captain: '',
+        clubname: '',
         country: '',
         state: '',
         city: '',
@@ -87,7 +152,7 @@ const RoboclubRegistration = () => {
                         onSubmit={handleSubmit}
                         validationSchema={SignupSchema}
                     >
-                        {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched }) => (
+                        {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched ,}) => (
                             <View style={{ flex: 1, backgroundColor: Colors.black }}>
                                 <View style={styles.form}>
                                     {/* UserName CustomInput */}
@@ -111,6 +176,18 @@ const RoboclubRegistration = () => {
                                         onBlur={handleBlur}
                                         error={errors.name}
                                     />
+                                    <CustomInput
+
+
+                                        placeholder="Institute/College/School Name:*"
+                                        name="institutename"
+                                        value={values.institutename}
+                                        onChange={handleChange('institutename')}
+                                        onBlur={handleBlur}
+                                        error={errors.institutename}
+                                    // secureTextEntry={true}
+                                    />
+
                                     {/* <CustomDropDown1
                                         bgcolor={'white'}
                                         placeholder={'Profile: *'}
@@ -121,12 +198,23 @@ const RoboclubRegistration = () => {
 
                                     {/* Enter user Email */}
                                     <CustomInput
-                                        placeholder="Email address:*"
+                                        placeholder="Institute Email address:*"
                                         name="email"
                                         value={values.email}
                                         onChange={handleChange('email')}
                                         onBlur={handleBlur}
                                         error={errors.email}
+                                    />
+                                    <CustomInput
+
+                                        placeholder="Institute Mobile Number: *"
+                                        name="mobile"
+                                        value={values.mobile}
+                                        onChange={handleChange('mobile')}
+                                        onBlur={handleBlur}
+                                        error={errors.mobile}
+                                        keyboardType="phone-pad"
+                                        maxLength={15}
                                     />
                                     {/* For Password */}
                                     <CustomInput
@@ -140,69 +228,58 @@ const RoboclubRegistration = () => {
                                         error={errors.password}
                                         secureTextEntry={true}
                                     />
+
+
+
                                     <CustomInput
 
-
-                                        placeholder="Institute/College/School Name:*"
-                                        name="password"
-                                        value={values.password}
-                                        onChange={handleChange('password')}
+                                        placeholder="Club_Captain: *"
+                                        name="captain"
+                                        value={values.captain}
+                                        onChange={handleChange('captain')}
                                         onBlur={handleBlur}
-                                        error={errors.password}
-                                        secureTextEntry={true}
+                                        error={errors.captain}
                                     />
-                                   
-                                       
-
-                                            <CustomInput
-
-                                                placeholder="RoboClub Id: *"
-                                                name="name"
-                                                value={values.name}
-                                                onChange={handleChange('name')}
-                                                onBlur={handleBlur}
-                                                error={errors.name}
-                                            />
-                                       
-                                        
-
-                                            <CustomInput
-
-                                                placeholder="RoboClub Name: *"
-                                                name="name"
-                                                value={values.name}
-                                                onChange={handleChange('name')}
-                                                onBlur={handleBlur}
-                                                error={errors.name}
-                                            />
-                                       
-                                 
 
 
-                                   
 
-                                            <CustomInput
+                                    <CustomInput
 
-                                                placeholder="DOB: *"
-                                                name="name"
-                                                value={values.name}
-                                                onChange={handleChange('name')}
-                                                onBlur={handleBlur}
-                                                error={errors.name}
-                                            />
-                                       
-                                       
+                                        placeholder="Club Name: *"
+                                        name="clubname"
+                                        value={values.clubname}
+                                        onChange={handleChange('clubname')}
+                                        onBlur={handleBlur}
+                                        error={errors.clubname}
+                                    />
 
-                                            <CustomInput
 
-                                                placeholder="Mobile Number: *"
-                                                name="name"
-                                                value={values.name}
-                                                onChange={handleChange('name')}
-                                                onBlur={handleBlur}
-                                                error={errors.name}
-                                            />
-                                      
+
+
+
+                                    {/* 
+                                    <CustomInput
+
+                                        placeholder="DOB: *"
+                                        name="name"
+                                        value={values.name}
+                                        onChange={handleChange('name')}
+                                        onBlur={handleBlur}
+                                        error={errors.name}
+                                    /> */}
+
+
+
+                                    {/* <CustomInput
+
+                                        placeholder="Mobile Number: *"
+                                        name="name"
+                                        value={values.name}
+                                        onChange={handleChange('name')}
+                                        onBlur={handleBlur}
+                                        error={errors.name}
+                                    /> */}
+
 
 
 
@@ -214,7 +291,11 @@ const RoboclubRegistration = () => {
                                                 placeholder={'Country: *'}
                                                 validation={SignupSchema}
                                                 field="country"
-                                                // data={countries}
+                                                Country={countries}
+                                                onChange={(selectedItem) => {
+                                                    setSelectedCountry(selectedItem);
+                                                    console.log('Selected Country:', selectedItem);
+                                                  }}
 
                                             />
                                         </View>
@@ -225,6 +306,11 @@ const RoboclubRegistration = () => {
                                                 placeholder={'State: *'}
                                                 validation={SignupSchema}
                                                 field="state"
+                                                Country={state}
+                                                onChange={(selectedItem)=>{
+                                             setSelectState(selectedItem)
+                                             console.log("countery",selectedItem)
+                                                }}
                                             />
                                         </View>
                                     </View>
@@ -259,7 +345,7 @@ const RoboclubRegistration = () => {
                                             paddingVertical={15}
                                             onPress={handleSubmit} />
                                     </View>
-                                    <Text style={styles.text2}>Already have account?   <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('RoboclubLogin')}>Login in</Text></Text>
+                                    <Text style={styles.text2}>Already have account?   <Text style={{ color: Colors.pink }} onPress={() => navigation.navigate('RoboclubLogin')}>Login in</Text></Text>
                                 </View>
                             </View>
                         )}
@@ -286,14 +372,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
 
     },
-    text2:{
-        color:Colors.white,
-        fontSize:14,
-        alignSelf:'center',
-        paddingVertical:10,
-        paddingBottom:20
-    
-      }
+    text2: {
+        color: Colors.white,
+        fontSize: 14,
+        alignSelf: 'center',
+        paddingVertical: 10,
+        paddingBottom: 20
+
+    }
 })
 
 export default RoboclubRegistration

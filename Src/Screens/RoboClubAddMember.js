@@ -9,24 +9,24 @@ import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
 import CustomHeader from '../Component/CustomHeader';
 const SignupSchema = Yup.object().shape({
-
+    name: Yup.string().email('Invalid email').trim()
+    .min(4)
+    .max(25)
+    .required('Required'),
 
     email: Yup.string().email('Invalid email').trim()
         .min(10)
         .max(25)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
-    password: Yup.string().min(5, 'Too Short').required('Required').max(8, 'Too Long!').matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
-    ),
+    mobile: Yup.string().min(5, 'Too Short').required('Required')
 });
-const RoboclubLogin = () => {
+const RoboClubAddMember = () => {
     const navigation = useNavigation()
     const initialValues = {
-
+        name:'',
         email: '',
-        password: ''
+        mobile: ''
         // Define your initial form values here
         // For example:
         // fieldName: '',
@@ -65,14 +65,22 @@ const RoboclubLogin = () => {
                 //   filter={true} 
                 // scan={true}
                 source={require('../Assets/Images/Back.png')}
-                title={'TECHNOXIAN ROBOCLUB LOGIN'}
-                onPress={() => navigation.navigate('HomeScreen')} />
+                title={'Add New Member'}
+                onPress={() => navigation.goBack()} />
 
                                 {/* <Text style={styles.heading}>TECHNOXIAN ROBOCLUB LOGIN</Text> */}
 
 
 
 
+                                <CustomInput
+                                    placeholder="Name"
+                                    name="name"
+                                    value={values.name}
+                                    onChange={handleChange('name')}
+                                    onBlur={handleBlur}
+                                    error={errors.name}
+                                />
 
                                 <CustomInput
                                     placeholder="Email address"
@@ -86,13 +94,13 @@ const RoboclubLogin = () => {
 
 
                                 <CustomInput
-                                    placeholder="Password"
-                                    name="password"
-                                    value={values.password}
-                                    onChange={handleChange('password')}
+                                    placeholder="Phone"
+                                    name="mobile"
+                                    value={values.mobile}
+                                    onChange={handleChange('mobile')}
                                     onBlur={handleBlur}
-                                    error={errors.password}
-                                    secureTextEntry={true}
+                                    error={errors.mobile}
+                                   
                                 />
 
 
@@ -102,7 +110,7 @@ const RoboclubLogin = () => {
                                 {/* Submit button */}
                                 <View style={{ marginTop: 15 }}>
 
-                                    <CustomButton title={'Login'}
+                                    <CustomButton title={'Submit'}
                                         backgroundColor={Colors.pink}
                                         paddingVertical={15}
                                         onPress={handleSubmit}
@@ -124,7 +132,7 @@ const RoboclubLogin = () => {
                                         image={require('../Assets/Images/Google.png')}
                                         borderColor={Colors.white} />
                                 </View> */}
-                                <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('RoboclubRegistration')}>Sign Up</Text></Text>
+                                {/* <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('RoboclubRegistration')}>Sign Up</Text></Text> */}
                             </View>
                         </ScrollView>
                     </View>
@@ -225,5 +233,9 @@ const styles = StyleSheet.create({
 
 
 
-export default RoboclubLogin
+
+
+
+
+export default RoboClubAddMember
 

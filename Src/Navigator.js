@@ -39,6 +39,10 @@ import WRCChalanges from "./Screens/WrcChalanges";
 import NewsCard from "./Constant/NewsCard";
 import RoboclubRegistration from "./Screens/RoboclubRegistration";
 import RoboclubLogin from "./Screens/RoboclubLogin";
+import RoboClubUpdate from "./Screens/RoboClubUpdate";
+import RoboClubDeshBoard from "./Screens/RoboClubDeshBoard";
+import RoboClubAddMember from "./Screens/RoboClubAddMember";
+import ClubMemberList from "./Screens/ClubMemberList";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -49,7 +53,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"SignUp"}>
+        initialRouteName={"RoboclubRegistration"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -88,6 +92,10 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="NewsCard"component={NewsCard} />
         <Stack.Screen name="RoboclubRegistration"component={RoboclubRegistration} />
         <Stack.Screen name="RoboclubLogin"component={RoboclubLogin} />
+        <Stack.Screen name="RoboClubUpdate"component={RoboClubUpdate} />
+        <Stack.Screen name="RoboClubDeshBoard"component={RoboClubDeshBoard} />
+        <Stack.Screen name="RoboClubAddMember"component={RoboClubAddMember} />
+        <Stack.Screen name="ClubMemberList"component={ClubMemberList} />
 
 
 

@@ -6,6 +6,7 @@ import CustomInput from '../Component/CustomInput';
 import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import CustomDropDown1 from '../Component/CustomDropDown1';
 // import Colors from '../Assets/Theme/Theme';
 const SignupSchema = Yup.object().shape({
@@ -45,92 +46,99 @@ import axios from 'axios';
 
 const RoboclubRegistration = () => {
     const [countries, setCountries] = useState([]);
-    const [state, setstate] = useState([]);
-    const [countryid, setcountryid] = useState([])
+    const [states, setStates] = useState([]);
+    const [cities, setCities] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
-    const [selectState, setSelectState] = useState(null);
-    const [selectCity,setselectCity]=useState(null);
-    const [city,setCity]=useState([])
-
-    const navigation = useNavigation()
-
-
-    const fetchCountry = async () => {
-        try {
-            const response = await axios.get('https://api.technoxian.com/development/country.php'); 
-            // console.log("country data",response)
-            const countryNames = response.data.users.map(country => ({
-                label: country.name,
-                value: country.sortname,
-                id: country.id
-
-            }));
-            countryNames.forEach(country => {
-                // console.log('id:', country.id);
-                setcountryid(country.id)
-                if (!selectedCountry) {
-                    setSelectedCountry(country);
-                }
-            });
-
-            setCountries(countryNames);
-            // console.log(countryNames)
-        } catch (error) {
-            console.error('Error fetching countries:', error);
-        }
-
-    };
-
-
-
-
-    const fetchState = async () => {
-        // console.log("countryid",selectedCountry);
-        try {
-            const response = await axios.get(`https://api.technoxian.com/development/getState.php?id=${selectedCountry.id}`);
-            // console.log("State list", response.data);
-            const stateNames = response.data.users.map(state => ({
-                label: state.statename,
-                value: state.countryId,
-                id: state.id
-
-            }));
-            setstate(stateNames);
-     console.log(stateNames)
-            
-            // stateNames.forEach(state => {
-            //      console.log('id:', state.label);
-            //     //  setstate(state.label)
-                
-            // });
-        } catch (error) {
-            console.log("State list", error.message);
-        }
-    };
-
-
-    const fetchCity = async () => {
-        try {
-          const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${1}`);
-        //    console.log("City list", response.data);
-          const CityNames = response.data.users.map(city => ({
-            label: city.cityName,
-            value: city.state_id,
-            id: city.id
-          }));
-          setCity(CityNames);
-        //  console.log("CityNames----", CityNames);
-        } catch (error) {
-          console.log("City list", error.message);
-        }
-      };
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectCity,SetSelectCity]=useState(null)
 
     useEffect(() => {
-        // fetchCountry();
-        //  fetchState();
-        // fetchCity();
+        fetchCountries();
     }, []);
 
+    const fetchCountries = async () => {
+        try {
+          const response = await axios.get('https://api.technoxian.com/development/country.php');
+          const countryNames = response.data.users.map(country => ({
+            label: country.name,
+            value: country.sortname,
+            id: country.id,
+          }));
+      
+          setCountries(countryNames);
+      
+          if (countryNames.length > 0) {
+            const defaultCountry = countryNames[0];
+            setSelectedCountry(defaultCountry);
+            // console.log('Selected Country ID:', defaultCountry.id);
+      
+            // Set the selected country ID in AsyncStorage
+            await AsyncStorage.setItem('CountryId', defaultCountry.id);
+      
+            // Fetch states based on the default country
+            fetchStates(defaultCountry.id);
+          }
+        } catch (error) {
+          console.error('Error fetching countries:', error);
+        }
+      };
+      
+
+      const fetchStates = async () => {
+        try {
+            // Retrieve the country ID from AsyncStorage
+            const countryId = await AsyncStorage.getItem('CountryId');
+    
+            // Make sure countryId is not null or undefined before proceeding
+            if (countryId) {
+                const response = await axios.get(`https://api.technoxian.com/development/getState.php?id=${countryId}`);
+                // console.log(response)
+                const stateNames = response.data.users.map(state => ({
+                    label: state.statename,
+                    value: state.countryId,
+                    id: state.id,
+                }));
+    
+                setStates(stateNames);
+                // console.log("---------->>>>>>>>",stateNames)
+                setSelectedState(stateNames);
+    
+                if (stateNames.length > 0) {
+                    const defaultState=stateNames[0];
+                    setSelectedState(defaultState);
+                    // console.log(defaultState.id)
+                    await AsyncStorage.setItem('stateId',defaultState.id)
+                    fetchCities(defaultState.id);
+                }
+            } else {
+                console.error('CountryId not found in AsyncStorage');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    };
+    
+
+    const fetchCities = async (stateId) => {
+        try {
+            stateId=await AsyncStorage.getItem('stateId')
+            if(stateId){
+            const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${stateId}`);
+        //  console.log(response.data)
+            const cityNames = response.data.users.map(city => ({
+                label: city.cityName,
+                value: city.state_id,
+                id: city.id,
+            }));
+
+            setCities(cityNames);
+            SetSelectCity(cityNames);
+        }
+            //  console.log(cityNames)
+        } catch (error) {
+            console.error('Error fetching cities:', error);
+        }
+    };
 
 
 
@@ -320,27 +328,33 @@ const RoboclubRegistration = () => {
                                                 validation={SignupSchema}
                                                 field="country"
                                                 Country={countries}
+                                                selectedValue={selectedCountry}
                                                 onChange={(selectedItem) => {
-                                                    //console.log('Selected Country:', selectedItem);
                                                     setSelectedCountry(selectedItem);
-                                                    // Call fetchState here
-                                                     fetchState();
-                                                }}
+                                                    // console.log('Selected Country ID:', selectedItem.id);
 
+                                                    // Set the selected country ID in AsyncStorage
+                                                    AsyncStorage.setItem('CountryId', selectedItem.id);
+
+                                                    // Fetch states based on the selected country
+                                                    fetchStates(selectedItem.id);
+                                                
+                                                }}
                                             />
                                         </View>
                                         <View style={{ width: '47%' }}>
-
                                             <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'State: *'}
                                                 validation={SignupSchema}
                                                 field="state"
-                                                Country={state}
+                                                Country={states}
+                                                selectedValue={selectedState}
                                                 onChange={(selectedItem) => {
-                                                    setSelectState(selectedItem)
-                                                    console.log("State----->>>", selectedItem)
-                                                    fetchCity();
+                                                    setSelectedState(selectedItem);
+                                                    // fetchCities(selectedItem.id);
+                                                    AsyncStorage.setItem('stateId', selectedItem.id);
+                                                    fetchCities(selectedItem.id)
                                                 }}
                                             />
                                         </View>
@@ -358,15 +372,13 @@ const RoboclubRegistration = () => {
                                             <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'City: *'}
-                                                 validation={SignupSchema}
+                                                validation={SignupSchema}
                                                 field="city"
-                                                Country={city}
-                                                onChange={(selectedItem) => {
-                                                    setselectCity(selectedItem)
-                                                    console.log("countery id", selectedItem)
-                                                    
+                                                Country={cities}
+                                                selectedState={selectCity}
+                                                onChange={(selectedItem)=>{
+                                                    setSelectedCountry(selectedItem)
                                                 }}
-                                                
                                             />
                                         </View>
                                         <View style={{ width: '47%' }}>

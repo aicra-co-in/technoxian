@@ -33,9 +33,7 @@ const SignupSchema = Yup.object().shape({
         .max(50, 'Too Long!')
         .required('Required'),
     // profile: Yup.string().required(('Please Select Profile')),
-    country: Yup.string().required(('Please Select Country')),
-    state: Yup.string().required(('Please Select State')),
-    city: Yup.string().required(('Please Select City')),
+
 
 });
 import Colors from '../Assets/Theme/Theme'
@@ -43,52 +41,55 @@ import CustomHeader from '../Component/CustomHeader'
 import CustomDropDown from '../Component/CustomDropDown';
 import CustomDropDown1 from '../Component/CustomDropDown1';
 import axios from 'axios';
+import { countryapi, roboregistration } from '../restApi/Apiconfig';
 
 const RoboclubRegistration = () => {
+    const navigation=useNavigation()
     const [countries, setCountries] = useState([]);
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedState, setSelectedState] = useState(null);
-    const [selectCity,SetSelectCity]=useState(null)
+    const [selectCity, SetSelectCity] = useState(null);
 
     useEffect(() => {
         fetchCountries();
+        // RegistrationApi();sfdf
     }, []);
 
     const fetchCountries = async () => {
         try {
-          const response = await axios.get('https://api.technoxian.com/development/country.php');
-          const countryNames = response.data.users.map(country => ({
-            label: country.name,
-            value: country.sortname,
-            id: country.id,
-          }));
-      
-          setCountries(countryNames);
-      
-          if (countryNames.length > 0) {
-            const defaultCountry = countryNames[0];
-            setSelectedCountry(defaultCountry);
-            // console.log('Selected Country ID:', defaultCountry.id);
-      
-            // Set the selected country ID in AsyncStorage
-            await AsyncStorage.setItem('CountryId', defaultCountry.id);
-      
-            // Fetch states based on the default country
-            fetchStates(defaultCountry.id);
-          }
-        } catch (error) {
-          console.error('Error fetching countries:', error);
-        }
-      };
-      
+            const response = await axios.get(countryapi);
+            const countryNames = response.data.users.map(country => ({
+                label: country.name,
+                value: country.sortname,
+                id: country.id,
+            }));
 
-      const fetchStates = async () => {
+            setCountries(countryNames);
+
+            if (countryNames.length > 0) {
+                const defaultCountry = countryNames[0];
+                // console.log('Selected Country ID:', defaultCountry.id);
+
+                // Set the selected country ID in AsyncStorage
+                await AsyncStorage.setItem('CountryId', defaultCountry.id);
+                setSelectedCountry(defaultCountry.id);
+
+                // Fetch states based on the default country
+                fetchStates(defaultCountry.id);
+            }
+        } catch (error) {
+            console.error('Error fetching countries:', error);
+        }
+    };
+
+
+    const fetchStates = async () => {
         try {
             // Retrieve the country ID from AsyncStorage
             const countryId = await AsyncStorage.getItem('CountryId');
-    
+
             // Make sure countryId is not null or undefined before proceeding
             if (countryId) {
                 const response = await axios.get(`https://api.technoxian.com/development/getState.php?id=${countryId}`);
@@ -98,17 +99,17 @@ const RoboclubRegistration = () => {
                     value: state.countryId,
                     id: state.id,
                 }));
-    
+
                 setStates(stateNames);
                 // console.log("---------->>>>>>>>",stateNames)
                 setSelectedState(stateNames);
-    
+
                 if (stateNames.length > 0) {
-                    const defaultState=stateNames[0];
-                    setSelectedState(defaultState);
+                    const defaultState = stateNames[0];
                     // console.log(defaultState.id)
-                    await AsyncStorage.setItem('stateId',defaultState.id)
+                    await AsyncStorage.setItem('stateId', defaultState.id)
                     fetchCities(defaultState.id);
+                    setSelectedState(defaultState.id);
                 }
             } else {
                 console.error('CountryId not found in AsyncStorage');
@@ -117,23 +118,26 @@ const RoboclubRegistration = () => {
             console.error('Error fetching states:', error);
         }
     };
-    
+
 
     const fetchCities = async (stateId) => {
         try {
-            stateId=await AsyncStorage.getItem('stateId')
-            if(stateId){
-            const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${stateId}`);
-        //  console.log(response.data)
-            const cityNames = response.data.users.map(city => ({
-                label: city.cityName,
-                value: city.state_id,
-                id: city.id,
-            }));
+            stateId = await AsyncStorage.getItem('stateId')
+            if (stateId) {
+                const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${stateId}`);
+                //  console.log(response.data)
+                const cityNames = response.data.users.map(city => ({
+                    label: city.cityName,
+                    value: city.state_id,
+                    id: city.id,
+                }));
 
-            setCities(cityNames);
-            SetSelectCity(cityNames);
-        }
+                setCities(cityNames);
+                if (cityNames.length > 0) {
+                    const defaultCity = cityNames[0];
+                    SetSelectCity(defaultCity.id);
+                }
+            }
             //  console.log(cityNames)
         } catch (error) {
             console.error('Error fetching cities:', error);
@@ -144,10 +148,54 @@ const RoboclubRegistration = () => {
 
 
 
+    const RegistrationApi = async (values) => {
+
+        // console.log("My input value", values);
+        // console.log("Country=======", selectedCountry.label)
+        // console.log("State=======", selectedState.label)
+        // console.log("City=======", selectCity.label)
 
 
+        try {
+            const data = new FormData();
+            //     data.append('institute', values.name);
+            //     data.append('Institute_email', values.institutename);
+            //     data.append('Institute_number', values.mobile);
+            //     data.append('country',selectedCountry.label);
+            //     data.append('state', selectedState.label);
+            //     data.append('city',"Abc");
+            //     data.append('club_Captain', values.captain);
+            //     data.append('club_name', values.clubname);
+            //     data.append('txtpassword', values.password);
+            data.append('institute', values.name);
+            data.append('Institute_email', values.email);
+            data.append('Institute_number', values.mobile);
+            data.append('country', selectedCountry.label);
+            data.append('state', selectedState.label);
+            data.append('city', selectCity.label);
+            data.append('club_Captain',values.captain);
+            data.append('club_name', values.clubname);
+            data.append('txtpassword', values.password);
 
 
+            const responce = await axios.post(roboregistration,
+
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+            // console.log('------>>>', responce.data)
+            
+            if (responce.data.error === 'false') {
+            
+                navigation.navigate('RoboclubLogin'); 
+            }
+        } catch (error) {
+            console.log(responce.error)
+        }
+    }
 
 
 
@@ -159,18 +207,14 @@ const RoboclubRegistration = () => {
         password: '',
         captain: '',
         clubname: '',
-        country: '',
-        state: '',
-        city: '',
-        // Define your initial form values here
-        // For example:
-        // fieldName: '',
     };
 
-    const handleSubmit = (values) => {
-        // Handle form submission here
-        console.log(values);
+    const handleSubmit = (values, { resetForm }) => {
+        RegistrationApi(values);
+        // navigation.navigate('RoboclubLogin')
+//  resetForm()
     };
+
     return (
         <View style={styles.container}>
             <CustomHeader back={true}
@@ -188,7 +232,7 @@ const RoboclubRegistration = () => {
                         onSubmit={handleSubmit}
                         validationSchema={SignupSchema}
                     >
-                        {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched, }) => (
+                        {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched, resetForm }) => (
                             <View style={{ flex: 1, backgroundColor: Colors.black }}>
                                 <View style={styles.form}>
                                     {/* UserName CustomInput */}
@@ -325,8 +369,8 @@ const RoboclubRegistration = () => {
                                             <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'Country: *'}
-                                                validation={SignupSchema}
-                                                field="country"
+                                                // validation={SignupSchema}
+                                                // field="country"
                                                 Country={countries}
                                                 selectedValue={selectedCountry}
                                                 onChange={(selectedItem) => {
@@ -338,7 +382,7 @@ const RoboclubRegistration = () => {
 
                                                     // Fetch states based on the selected country
                                                     fetchStates(selectedItem.id);
-                                                
+
                                                 }}
                                             />
                                         </View>
@@ -346,8 +390,8 @@ const RoboclubRegistration = () => {
                                             <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'State: *'}
-                                                validation={SignupSchema}
-                                                field="state"
+                                                // validation={SignupSchema}
+                                                // field="state"
                                                 Country={states}
                                                 selectedValue={selectedState}
                                                 onChange={(selectedItem) => {
@@ -372,12 +416,12 @@ const RoboclubRegistration = () => {
                                             <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'City: *'}
-                                                validation={SignupSchema}
-                                                field="city"
+                                                // validation={SignupSchema}
+                                                // field="city"
                                                 Country={cities}
                                                 selectedState={selectCity}
-                                                onChange={(selectedItem)=>{
-                                                    setSelectedCountry(selectedItem)
+                                                onChange={(selectedItem) => {
+                                                    SetSelectCity(selectedItem)
                                                 }}
                                             />
                                         </View>
@@ -405,8 +449,6 @@ const RoboclubRegistration = () => {
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

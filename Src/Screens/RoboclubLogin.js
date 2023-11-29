@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
 import CustomHeader from '../Component/CustomHeader';
+import axios from 'axios';
+import { roboclublogin } from '../restApi/Apiconfig';
 const SignupSchema = Yup.object().shape({
 
 
@@ -23,6 +25,57 @@ const SignupSchema = Yup.object().shape({
 });
 const RoboclubLogin = () => {
     const navigation = useNavigation()
+
+
+// {*******================Apiconfig======***********}
+
+
+const LoginApiClub = async (values) => {
+    console.log("jhgdjhsgdhsghg",values)
+     try {
+         const formData = new FormData();
+  
+   formData.append('email', values.email);
+   formData.append('password', values.password);
+
+       const response = await axios.post(
+         roboclublogin,
+         formData,
+         {
+           headers: {
+             'Content-Type': 'multipart/form-data',
+           },
+         }
+       );
+       console.log('Response:', response);
+       if(response.data.error===false){
+navigation.navigate('HomeScreen')
+       }
+       // Handle the response here
+     } catch (error) {
+       console.error('Error:', error.response?.data || 'Something went wrong');
+       // Handle errors here
+     }
+   };
+   
+
+//  const handleSubmit = (values,{ resetForm }) => {
+//      // Handle form submission here
+//      console.log(values);
+//      // if(values.data.error===false){
+
+//      //     navigation.navigate('HomeScreen');
+//      // }
+     
+//      handleLoginRequest(values)
+//      resetForm();
+//  };
+
+
+
+
+
+
     const initialValues = {
 
         email: '',

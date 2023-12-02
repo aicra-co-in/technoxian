@@ -16,10 +16,10 @@ const SignupSchema = Yup.object().shape({
         .max(25)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
-    password: Yup.string().min(5, 'Too Short').required('Required').max(8, 'Too Long!').matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
-    ),
+        password: Yup.string().required('Required').matches(
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
+          ),
 });
 const Login = () => {
     const navigation = useNavigation()
@@ -155,10 +155,10 @@ navigation.navigate('HomeScreen')
 
                                 <View style={{ marginTop: 25 }}>
 
-                                    <CustomButton title={'Continue with Google'}
+                                    <CustomButton title={'Guest Login'}
                                         backgroundColor={Colors.black}
                                         paddingVertical={15}
-                                        image={require('../Assets/Images/Google.png')}
+                                        // image={require('../Assets/Images/Google.png')}
                                         borderColor={Colors.white} />
                                 </View>
                                 <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('SignUp')}>Sign Up</Text></Text>

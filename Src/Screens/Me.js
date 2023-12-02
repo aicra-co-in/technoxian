@@ -39,12 +39,13 @@ const Me = () => {
       <Card1 /> */}
       {/* <Text style={styles.Text_heading}>Technoxian News</Text> */}
       {/* <Card /> */}
-      <Text style={styles.Text_heading}>Teams</Text>
+      <Text style={styles.Text_heading}>TX Robo Club</Text>
       <Card2 />
       <Text style={styles.Text_heading}>Trending News</Text>
      <View style={{marginBottom:10}}>
 
       <NewsCard/>
+      {/* <WinnerCard /> */}
      </View>
 
       </ScrollView>

@@ -43,6 +43,10 @@ import RoboClubUpdate from "./Screens/RoboClubUpdate";
 import RoboClubDeshBoard from "./Screens/RoboClubDeshBoard";
 import RoboClubAddMember from "./Screens/RoboClubAddMember";
 import ClubMemberList from "./Screens/ClubMemberList";
+import ShowMessagenotification from "./Constant/ShowMessage";
+import ViewNews from "./Screens/ViewNews";
+import Card2 from "./Constant/Card2";
+import TodoScreen from "./Screens/TodoScreen";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -53,7 +57,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"RoboclubRegistration"}>
+        initialRouteName={"HomeScreen"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -78,6 +82,7 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="Card" component={Card} />
         <Stack.Screen name="Card1" component={Card1} />
         <Stack.Screen name="Card3" component={Card3} />
+        <Stack.Screen name="Card2" component={Card2} />
         <Stack.Screen name="User" component={User} />
         <Stack.Screen name="Notification" component={Notification} />
 
@@ -96,6 +101,9 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="RoboClubDeshBoard"component={RoboClubDeshBoard} />
         <Stack.Screen name="RoboClubAddMember"component={RoboClubAddMember} />
         <Stack.Screen name="ClubMemberList"component={ClubMemberList} />
+        <Stack.Screen name="ShowMessagenotification"component={ShowMessagenotification} />
+        <Stack.Screen name="ViewNews"component={ViewNews} />
+        <Stack.Screen name="TodoScreen"component={TodoScreen} />
 
 
 

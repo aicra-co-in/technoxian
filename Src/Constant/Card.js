@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, Image, TouchableOpacity, Dimensions,Text } from 'react-native';
 import Colors from '../Assets/Theme/Theme';
-
+import axios from 'axios';
+import { wrcChalengesApi } from '../restApi/Apiconfig';
+import {useNavigation, useRoute} from '@react-navigation/native';
 const { width, height } = Dimensions.get('window');
 
 const data = [
@@ -16,11 +18,36 @@ const data = [
 ];
 
 const Card = ({ horizontal = true, numColumns = 1 }) => {
+  const imagePath='https://api.technoxian.com/development/document/'
+  const navigation=useNavigation()
+  const [detail,Setdetail]=useState([]);
   const [selectedId, setSelectedId] = useState(null);
 
   const handlePress = (id) => {
     setSelectedId(id);
+    fetchData();
   };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(wrcChalengesApi);
+      console.log(response.data.users);
+      Setdetail(response.data.users) ;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle errors as needed, e.g., show an error message to the user
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+
+
+
+
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handlePress(item.id)}>
@@ -34,9 +61,10 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
       >
         <View style={{alignItems:'center'}}>
 
-        <Image source={item.img} style={styles.cardImage} resizeMode='contain' />
-        <Text style={styles.text}>{item.tex}</Text>
-        <Text style={{fontSize:14,color:'white'}}>{item.text1}</Text>
+        <Image source={{ uri:imagePath + item.image}} style={styles.cardImage} resizeMode='contain' />
+        <Text style={styles.text}>{item.name}</Text>
+        <Text style={{fontSize:13,color:'white'}}>{item.date}</Text>
+        <Text style={{color:'white',fontSize:13}}>{item.venue}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -45,7 +73,7 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
   if (numColumns === 1) {
     return (
       <FlatList
-        data={data}
+        data={detail}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         horizontal={horizontal}
@@ -55,7 +83,7 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
   } else if (numColumns === 2) {
     return (
       <FlatList
-        data={data}
+        data={detail}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
@@ -64,7 +92,7 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
   } else if (numColumns === 3) {
     return (
       <FlatList
-        data={data}
+        data={detail}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         numColumns={3}
@@ -82,17 +110,17 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 15,
     overflow: 'hidden',
-     padding: 22,
+     padding: 5,
     // alignItems:"center"
   },
   cardImage: {
-    width: height * 0.15,
-    height: width * 0.15,
+    width: 100,
+    height:90,
     // padding:30
   },
   text:{
     color:Colors.white,
-    fontSize:16,
+    fontSize:15,
     marginTop:6
   }
 });

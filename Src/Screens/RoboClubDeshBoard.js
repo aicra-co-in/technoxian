@@ -17,12 +17,12 @@ const data = [
     text: 'Add Club Member',
     screen:'RoboClubAddMember'
   },
-  {
-    id:3,
-    img: require('../Assets/Images/Mgroup.png'),
-    text: 'Club Member List',
-    screen:'ClubMemberList'
-  },
+  // {
+  //   id:3,
+  //   img: require('../Assets/Images/Mgroup.png'),
+  //   text: 'Club Member List',
+  //   screen:'ClubMemberList'
+  // },
   // Add more data items if needed
 ];
 
@@ -40,9 +40,9 @@ const RoboClubDeshBoard = () => {
   return (
     <View style={styles.container}>
       <CustomHeader back={true}
-                notification={true}
+                // notification={true}
                 //   filter={true} 
-                scan={true}
+                // scan={true}
                 source={require('../Assets/Images/Back.png')}
                 title={'Deshboard    '}
                 onPress={() => navigation.navigate('RoboclubLogin')} />

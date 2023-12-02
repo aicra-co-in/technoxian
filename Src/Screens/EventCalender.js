@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View, Image, FlatList,TouchableOpacity } from 'react-native';
 import Calender from '../Constant/Calender';
 import Colors from '../Assets/Theme/Theme';
 import { useNavigation } from '@react-navigation/native'
 import CustomHeader from '../Component/CustomHeader';
+import { wrcChalengesApi } from '../restApi/Apiconfig';
+import axios from 'axios';
 
 const data = [
   {
@@ -57,12 +59,33 @@ const data = [
 ];
 
 const EventCalender = () => {
+  const imagePath='https://api.technoxian.com/development/document/'
+  const [detail,Setdetail]=useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(wrcChalengesApi);
+      console.log(response.data.users);
+      Setdetail(response.data.users) ;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle errors as needed, e.g., show an error message to the user
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+
+
   const navigation=useNavigation();
   const renderItem = ({ item }) => (
     <TouchableOpacity style={[styles.itemContainer,]}>
-      <Image source={item.img} style={styles.image} />
+      <Image source={{ uri:imagePath + item.image}}  style={styles.image} />
       <View style={styles.textContainer}>
-        <Text style={styles.heading}>{item.heading}</Text>
+        <Text style={styles.heading}>{item.name}</Text>
         <Text style={styles.date}>{item.date}</Text>
       </View>
     </TouchableOpacity>
@@ -72,7 +95,7 @@ const EventCalender = () => {
     <View style={{flex:1,backgroundColor:Colors.black,padding:15}}>
         <CustomHeader
         back={true} 
-        notification={true}
+        // notification={true}
         //  filter={true} 
          scan={true}  
          source={require('../Assets/Images/Back.png')}
@@ -80,7 +103,7 @@ const EventCalender = () => {
          />
      
       <FlatList
-        data={data}
+        data={detail}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />

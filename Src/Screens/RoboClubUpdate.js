@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput } from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -6,21 +6,66 @@ import CustomInput from '../Component/CustomInput';
 import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
+import ImagePicker from 'react-native-image-crop-picker'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import CustomDropDown1 from '../Component/CustomDropDown1';
 // import Colors from '../Assets/Theme/Theme';
 const SignupSchema = Yup.object().shape({
-    name: Yup.string()
+    insttitutename: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
 
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
-    competition: Yup.string().required(('Please Select Completition')),
-    profile: Yup.string().required(('Please Select Profile')),
-    country: Yup.string().required(('Please Select Country')),
-    state: Yup.string().required(('Please Select State')),
-    city: Yup.string().required(('Please Select City')),
+    insttitutemail: Yup.string().email('Invalid email')
+        .trim()
+        .min(10)
+        .max(25)
+        .required('Required')
+        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+
+    mobile: Yup.string().required('Mobile number is required')
+        .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Invalid mobile number format')
+        .min(7, 'Mobile number must be at least 7 Number')
+        .max(15, 'Mobile number must be at most 15 Number'),
+    headinstitutename: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+
+    headinsttitutemail: Yup.string().email('Invalid email')
+        .trim()
+        .min(10)
+        .max(25)
+        .required('Required')
+        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+    headmobile: Yup.string().required('Mobile number is required')
+        .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Invalid mobile number format')
+        .min(7, 'Mobile number must be at least 7 Number')
+        .max(15, 'Mobile number must be at most 15 Number'),
+    address: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
+    clubId: Yup.string().required('required'),
+    clubName: Yup.string().required('required'),
+    menterName: Yup.string().required('required'),
+
+    menteremail: Yup.string().email('Invalid email')
+        .trim()
+        .min(10)
+        .max(25)
+        .required('Required')
+        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+    menteraddress: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
+    captonName: Yup.string().required('required'),
+    captonemail: Yup.string().email('Invalid email')
+        .trim()
+        .min(10)
+        .max(25)
+        .required('Required')
+        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+    captonmobile: Yup.string().required('Mobile number is required')
+        .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Invalid mobile number format')
+        .min(7, 'Mobile number must be at least 7 Number')
+        .max(15, 'Mobile number must be at most 15 Number'),
+
 
 });
 import Colors from '../Assets/Theme/Theme'
@@ -28,9 +73,114 @@ import CustomHeader from '../Component/CustomHeader'
 import CustomDropDown from '../Component/CustomDropDown';
 import CustomDropDown1 from '../Component/CustomDropDown1';
 import axios from 'axios';
+import { countryapi, roboregistration } from '../restApi/Apiconfig';
 
 const RoboClubUpdate = () => {
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const [countries, setCountries] = useState([]);
+    const [states, setStates] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectCity, SetSelectCity] = useState(null);
+
+
+
+
+    useEffect(() => {
+        fetchCountries();
+        // RegistrationApi();sfdf
+    }, []);
+
+    const fetchCountries = async () => {
+        try {
+            const response = await axios.get(countryapi);
+            const countryNames = response.data.users.map(country => ({
+                label: country.name,
+                value: country.sortname,
+                id: country.id,
+            }));
+
+            setCountries(countryNames);
+
+            if (countryNames.length > 0) {
+                const defaultCountry = countryNames[0];
+                // console.log('Selected Country ID:', defaultCountry.id);
+
+                // Set the selected country ID in AsyncStorage
+                await AsyncStorage.setItem('CountryId', defaultCountry.id);
+                setSelectedCountry(defaultCountry.id);
+
+                // Fetch states based on the default country
+                fetchStates(defaultCountry.id);
+            }
+        } catch (error) {
+            console.error('Error fetching countries:', error);
+        }
+    };
+
+
+    const fetchStates = async () => {
+        try {
+            // Retrieve the country ID from AsyncStorage
+            const countryId = await AsyncStorage.getItem('CountryId');
+
+            // Make sure countryId is not null or undefined before proceeding
+            if (countryId) {
+                const response = await axios.get(`https://api.technoxian.com/development/getState.php?id=${countryId}`);
+                // console.log(response)
+                const stateNames = response.data.users.map(state => ({
+                    label: state.statename,
+                    value: state.countryId,
+                    id: state.id,
+                }));
+
+                setStates(stateNames);
+                // console.log("---------->>>>>>>>",stateNames)
+                setSelectedState(stateNames);
+
+                if (stateNames.length > 0) {
+                    const defaultState = stateNames[0];
+                    // console.log(defaultState.id)
+                    await AsyncStorage.setItem('stateId', defaultState.id)
+                    fetchCities(defaultState.id);
+                    setSelectedState(defaultState.id);
+                }
+            } else {
+                console.error('CountryId not found in AsyncStorage');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    };
+
+
+    const fetchCities = async (stateId) => {
+        try {
+            stateId = await AsyncStorage.getItem('stateId')
+            if (stateId) {
+                const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${stateId}`);
+                //  console.log(response.data)
+                const cityNames = response.data.users.map(city => ({
+                    label: city.cityName,
+                    value: city.state_id,
+                    id: city.id,
+                }));
+
+                setCities(cityNames);
+                if (cityNames.length > 0) {
+                    const defaultCity = cityNames[0];
+                    SetSelectCity(defaultCity.id);
+                }
+            }
+            //  console.log(cityNames)
+        } catch (error) {
+            console.error('Error fetching cities:', error);
+        }
+    };
+
+
 
     const navigation = useNavigation()
 
@@ -53,14 +203,22 @@ const RoboClubUpdate = () => {
     //     }, [])
 
     const initialValues = {
-        name: '',
-        email: '',
-        password: '',
-        profile: '',
-        competition: '',
-        country: '',
-        state: '',
-        city: '',
+        insttitutename: "",
+        insttitutemail: "",
+        mobile: "",
+        headinstitutename: "",
+        headinsttitutemail: '',
+        headmobile: '',
+        address: "",
+        clubId: '',
+        clubName: '',
+        menterName: "",
+        menteremail: '',
+        menteraddress: '',
+        captonName: '',
+        captonemail: '',
+        captonmobile: '',
+
         // Define your initial form values here
         // For example:
         // fieldName: '',
@@ -69,6 +227,20 @@ const RoboClubUpdate = () => {
     const handleSubmit = (values) => {
         // Handle form submission here
         console.log(values);
+    };
+
+
+
+
+    const handleImagePicker = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true,
+        }).then(image => {
+            console.log(image);
+            setSelectedImage(image.path);
+        });
     };
     return (
         <View style={styles.container}>
@@ -101,53 +273,57 @@ const RoboClubUpdate = () => {
 
 
                                             placeholder="Institute/College/School Name:*"
-                                            name="password"
-                                            value={values.password}
-                                            onChange={handleChange('password')}
+                                            name="insttitutename"
+                                            value={values.insttitutename}
+                                            onChange={handleChange('insttitutename')}
                                             onBlur={handleBlur}
-                                            error={errors.password}
-                                            secureTextEntry={true}
+                                            error={errors.insttitutename}
+                                            
                                         />
                                         <CustomInput
 
 
                                             placeholder="Institute/College/School Email:*"
-                                            name="password"
-                                            value={values.password}
-                                            onChange={handleChange('password')}
+                                            name="insttitutemail"
+                                            value={values.insttitutemail}
+                                            onChange={handleChange('insttitutemail')}
                                             onBlur={handleBlur}
-                                            error={errors.password}
-                                            secureTextEntry={true}
+                                            error={errors.insttitutemail}
+                                            
                                         />
                                         <CustomInput
 
                                             placeholder="Mobile Number: *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="mobile"
+                                            value={values.mobile}
+                                            onChange={handleChange('mobile')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.mobile}
                                         />
-                                        <View style={{ flexDirection: 'row', gap: 10 }}>
-                                            <View style={{ width: '49%', }}>
-                                                <CustomDropDown1
-                                                    bgcolor={'white'}
-                                                    placeholder={'Country: *'}
-                                                    validation={SignupSchema}
-                                                    field="country"
-                                                // data={countries}
+                                        <View style={{ gap: 10 }}>
 
-                                                />
-                                            </View>
-                                            <View style={{ width: '47%' }}>
 
-                                                <CustomDropDown1
-                                                    bgcolor={'white'}
-                                                    placeholder={'State: *'}
-                                                    validation={SignupSchema}
-                                                    field="state"
-                                                />
-                                            </View>
+                                            <CustomDropDown1
+                                                bgcolor={'white'}
+                                                placeholder={'Country: *'}
+                                                // validation={SignupSchema}
+                                                // field="country"
+                                                Country={countries}
+                                                selectedValue={selectedCountry}
+                                                onChange={(selectedItem) => {
+                                                    setSelectedCountry(selectedItem);
+                                                    // console.log('Selected Country ID:', selectedItem.id);
+
+                                                    // Set the selected country ID in AsyncStorage
+                                                    AsyncStorage.setItem('CountryId', selectedItem.id);
+
+                                                    // Fetch states based on the selected country
+                                                    fetchStates(selectedItem.id);
+
+                                                }}
+                                            />
+
+
                                         </View>
 
 
@@ -156,32 +332,73 @@ const RoboClubUpdate = () => {
                                             <View style={{ width: '49%', }}>
                                                 <CustomDropDown1
                                                     bgcolor={'white'}
-                                                    placeholder={'City: *'}
-                                                    validation={SignupSchema}
-                                                    field="city"
+                                                    placeholder={'State: *'}
+                                                    // validation={SignupSchema}
+                                                    // field="state"
+                                                    Country={states}
+                                                    selectedValue={selectedState}
+                                                    onChange={(selectedItem) => {
+                                                        setSelectedState(selectedItem);
+                                                        // fetchCities(selectedItem.id);
+                                                        AsyncStorage.setItem('stateId', selectedItem.id);
+                                                        fetchCities(selectedItem.id)
+                                                    }}
                                                 />
+
                                             </View>
                                             <View style={{ width: '47%' }}>
+
+                                                <CustomDropDown1
+                                                    bgcolor={'white'}
+                                                    placeholder={'City: *'}
+                                                    // validation={SignupSchema}
+                                                    // field="city"
+                                                    Country={cities}
+                                                    selectedState={selectCity}
+                                                    onChange={(selectedItem) => {
+                                                        SetSelectCity(selectedItem)
+                                                    }}
+                                                />
                                             </View>
 
                                         </View>
                                         <CustomInput
 
                                             placeholder="Head of Organization Name *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="headinstitutename"
+                                            value={values.headinstitutename}
+                                            onChange={handleChange('headinstitutename')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.headinstitutename}
+                                        />
+                                        <CustomInput
+
+                                            placeholder="Head of Organization Email *"
+                                            name="headinsttitutemail"
+                                            value={values.headinsttitutemail}
+                                            onChange={handleChange('headinsttitutemail')}
+                                            onBlur={handleBlur}
+                                            error={errors.headinsttitutemail}
+                                        />
+                                        <CustomInput
+
+                                            placeholder="Head of Organization No *"
+                                            name="headmobile"
+                                            value={values.headmobile}
+                                            onChange={handleChange('headmobile')}
+                                            onBlur={handleBlur}
+                                            error={errors.headmobile}
+                                            keyboardType="phone-pad"
+
                                         />
                                         <CustomInput
 
                                             placeholder="Address *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="address"
+                                            value={values.address}
+                                            onChange={handleChange('address')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.address}
                                         />
 
                                     </View>
@@ -201,26 +418,33 @@ const RoboClubUpdate = () => {
                                         <CustomInput
 
                                             placeholder="Club Id: *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="clubId"
+                                            value={values.clubId}
+                                            onChange={handleChange('clubId')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.clubId}
                                         />
 
 
                                         <CustomInput
 
                                             placeholder="Club Name: *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="clubName"
+                                            value={values.clubName}
+                                            onChange={handleChange('clubName')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.clubName}
                                         />
 
                                     </View>
 
+
+                                    <View style={{ height: 70, width: '100%', backgroundColor: Colors.wheat, marginTop: 20, borderRadius: 15, alignItems: "center", justifyContent: 'center' }}>
+                                        <TouchableOpacity onPress={handleImagePicker}>
+                                            <Text>UPLOAD IMAGE(jpg,jpeg,png)</Text>
+                                            <Image source={require('../Assets/Images/Add.png')} style={{ height: 30, width: 30, alignSelf: 'center' }} resizeMode='contain' />
+                                        </TouchableOpacity>
+                                    </View>
 
 
 
@@ -231,23 +455,23 @@ const RoboClubUpdate = () => {
 
                                         <CustomInput
 
-                                            placeholder="Name: *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            placeholder="Mentor Name: *"
+                                            name="menterName"
+                                            value={values.menterName}
+                                            onChange={handleChange('menterName')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.menterName}
                                         />
 
 
                                         <CustomInput
 
                                             placeholder="Email: *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="menteremail"
+                                            value={values.menteremail}
+                                            onChange={handleChange('menteremail')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.menteremail}
                                         />
                                         <CustomDropDown1
                                             bgcolor={'white'}
@@ -258,11 +482,11 @@ const RoboClubUpdate = () => {
                                         <CustomInput
 
                                             placeholder="Address *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="menteraddress"
+                                            value={values.menteraddress}
+                                            onChange={handleChange('menteraddress')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.menteraddress}
                                         />
                                     </View>
 
@@ -295,32 +519,37 @@ const RoboClubUpdate = () => {
                                         <CustomInput
 
                                             placeholder="Name: *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="captonName"
+                                            value={values.captonName}
+                                            onChange={handleChange('captonName')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.captonName}
                                         />
 
 
                                         <CustomInput
 
                                             placeholder="Email: *"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="captonemail"
+                                            value={values.captonemail}
+                                            onChange={handleChange('captonemail')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.captonemail}
                                         />
                                         <CustomInput
 
                                             placeholder="Mobile No*"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange('name')}
+                                            name="captonmobile"
+                                            value={values.captonmobile}
+                                            onChange={handleChange('captonmobile')}
                                             onBlur={handleBlur}
-                                            error={errors.name}
+                                            error={errors.captonmobile}
                                         />
+                                        {/* <View style={{ height: 70, width: '100%', backgroundColor: Colors.wheat, marginTop: 20, borderRadius: 15, alignItems: "center", justifyContent: 'center' }}>
+                                            <TouchableOpacity onPress={handleImagePicker}>
+                                                <Image source={require('../Assets/Images/Add.png')} style={{ height: 30, width: 30, }} resizeMode='contain' />
+                                            </TouchableOpacity>
+                                        </View> */}
                                     </View>
 
                                     <View style={{ marginTop: 15 }}>

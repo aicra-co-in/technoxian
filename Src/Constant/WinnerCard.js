@@ -1,6 +1,8 @@
 import { FlatList, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Colors from '../Assets/Theme/Theme';
+import axios from 'axios';
+import { WrcTeam } from '../restApi/Apiconfig';
 
 const data = [
   {
@@ -30,7 +32,29 @@ const data = [
   // Add more data objects if needed
 ];
 
+
+
+
+
 const WinnerCard = () => {
+
+
+  const getApi = async () => {
+    try {
+      // Assuming Axios is properly imported and WrcTeam is a valid URL
+      const response = await axios.get(WrcTeam);
+      // console.log(response.data.users);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  useEffect(() => {
+    // Call the getApi function when the component mounts
+    getApi();
+  }, []);
+  
+  
   const renderItem = ({ item }) => {
     return (
       <View style={{ marginHorizontal: 5 ,backgroundColor:Colors.card,borderRadius:20,padding:10,flex:1}}>

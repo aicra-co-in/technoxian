@@ -6,7 +6,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { useNavigation } from '@react-navigation/native';
 
 const data = [
-    { id: '1', text: "WRC Challenges",screen:'WrcChalanges' },
+    { id: '1', text: "WRC Challenges",screen:' ' },
     { id: '2', text: "Event Calendar" ,screen:'EventCalender'},
     { id: '3', text: "WRC Registration form" ,screen:'RegistrationComponent'},
     { id: '4', text: "Robo Club",screen:'Ruboclub' },

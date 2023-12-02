@@ -1,42 +1,65 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, ImageBackground, Linking, Alert } from 'react-native';
 import Colors from '../Assets/Theme/Theme';
-
-const data = [
-  {
-    id: 1,
-    img: require('../Assets/Images/Main.png'),
-    text: 'TECH SEMINAR',
-    text1: "Procession of Countries and States Contingents, Celebration with international bands, icons and performers.",
-  },
-  {
-    id: 2,
-    img: require('../Assets/Images/Main.png'),
-    text: 'TECH SEMINAR',
-    text1: "Procession of Countries and States Contingents, Celebration with international bands, icons and performers.",
-  },
-];
+import axios from 'axios';
+import { NewsApi } from '../restApi/Apiconfig';
+import { useNavigation } from '@react-navigation/native';
 
 const NewsCard = () => {
+  const imagepath="https://futuretech.media/wp-content/uploads/";
+  const navigation = useNavigation();
+  const [news, setNews] = useState([]);
+
+  const renderNewsApi = async () => {
+    try {
+      const response = await axios.get(NewsApi);
+      console.log("-------->>>>", response.data.users);
+      // console.log(imagepath+response.data.users.featured_image_url)
+      console.log('Image URL:', imagepath + response.data.users.featured_image_url);
+
+      setNews([response.data.users]); // Wrap the single news object in an array
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
+  };
+
+  useEffect(() => {
+    renderNewsApi();
+  }, []);
+
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.cardContainer}>
-        <Image source={item.img} style={styles.image} resizeMode='cover' />
-        <Text style={styles.text}>{item.text}</Text>
-        <Text style={styles.text1}>{item.text1}</Text>
+      <TouchableOpacity
+        style={styles.cardContainer}
+        onPress={() => navigation.navigate('ViewNews', { data: item })}
+      >
+        <ImageBackground
+          source={{ uri:imagepath + item.featured_image_url }}
+          style={styles.image}
+          resizeMode='cover'
+          onError={(error) => console.error('Image load error:', error.nativeEvent.error)}
+          >
+          {console.log('its path===',imagepath + item.featured_image_url)}
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{item.post_slug}</Text>
+            <Text style={styles.text1}>{item.post_title}</Text>
+          </View>
+        </ImageBackground>
       </TouchableOpacity>
     );
   };
+  
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={news}
         renderItem={renderItem}
         horizontal
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.ID.toString()}
         showsHorizontalScrollIndicator={false}
       />
+     
     </View>
   );
 };
@@ -45,30 +68,42 @@ export default NewsCard;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     marginTop: 16,
   },
   cardContainer: {
     backgroundColor: Colors.card,
-    borderRadius: 10,
-    width: 300, // Adjust the width as needed
+    borderRadius: 20,
+    width: 300,
     marginRight: 16,
+    overflow: 'hidden',
   },
   image: {
-    height: 120,
+    height: 150,
     width: '100%',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    padding: 8,
   },
   text: {
     color: Colors.white,
     fontSize: 18,
-    paddingHorizontal: 8,
-    paddingTop: 5,
+    fontWeight: 'bold',
   },
   text1: {
-    fontSize: 12,
     color: Colors.white,
-    paddingHorizontal: 8,
+    fontSize: 12,
+    fontWeight: 'bold',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.48,
+    shadowRadius: 11.95,
+    elevation: 18,
   },
 });

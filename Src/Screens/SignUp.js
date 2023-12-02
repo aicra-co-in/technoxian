@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, ImageBackground, Image, KeyboardAvoidingView, TextInput, TouchableOpacity, } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, ImageBackground, Image, KeyboardAvoidingView, TextInput, TouchableOpacity,Alert } from 'react-native';
 import React, { useState,useEffect } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -14,6 +14,8 @@ import axios from 'axios';
 import { UserRegistration } from '../restApi/Apiconfig';
 import CountryPicker from 'react-native-country-picker-modal';
 import Entypo from 'react-native-vector-icons/Entypo';
+import ShowMessageNotification from '../Constant/ShowMessage';
+import { useUser } from '../../UserContext';
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Too Short!')
@@ -45,6 +47,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const SignUp = () => {
+  const { setGlobalEmail } = useUser();
   const navigation = useNavigation();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const initialValues = {
@@ -81,7 +84,13 @@ const SignUp = () => {
           },
         }
       );
-      console.log('Response:', response.data);
+      console.log('Response:', response);
+      if(response.data.error==='false'){
+        setGlobalEmail(values.email);
+        navigation.navigate('Login'),
+        // <ShowMessageNotification message={'SignUp Successfully'}/>
+        Alert.alert('Success', 'SignUp Successful!');
+                  }
       // Handle the response here
     } catch (error) {
       console.error('Error:', error);
@@ -91,7 +100,7 @@ const SignUp = () => {
 
   const handleSubmit = (value,{ resetForm }) => {
     handlePostRequest(value);
-    navigation.navigate('Login')
+    // navigation.navigate('Login')
     console.log(value)
     resetForm()
   
@@ -263,8 +272,8 @@ const SignUp = () => {
                   <CheckBox
                     disabled={false}
                     value={toggleCheckBox}
-                    tintColor={toggleCheckBox ? 'red' : 'white'}
-                    style={{borderWidth:1,borderColor:'white'}}
+                    tintColors={{ true: 'red', false: 'white' }} 
+                    style={{ borderWidth: 1, borderColor: 'white' }}
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                   />
                    <Text style={styles.text1}>By signup, you accept our  <Text style={{ color: Colors.pink }} onPress={() => navigation.navigate('TermAndCodition')}>Terms and Conditions</Text></Text>

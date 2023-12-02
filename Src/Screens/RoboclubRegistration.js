@@ -364,8 +364,7 @@ const RoboclubRegistration = () => {
 
 
 
-                                    <View style={{ flexDirection: 'row', gap: 10 }}>
-                                        <View style={{ width: '49%', }}>
+                                        
                                             <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'Country: *'}
@@ -385,9 +384,22 @@ const RoboclubRegistration = () => {
 
                                                 }}
                                             />
-                                        </View>
-                                        <View style={{ width: '47%' }}>
-                                            <CustomDropDown1
+                                        
+                                        
+                                           
+                                        
+                                   
+
+
+
+
+                                    {/* Submit button */}
+
+
+
+                                    <View style={{ flexDirection: 'row', gap: 10 }}>
+                                        <View style={{ width: '49%', }}>
+                                        <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'State: *'}
                                                 // validation={SignupSchema}
@@ -402,18 +414,8 @@ const RoboclubRegistration = () => {
                                                 }}
                                             />
                                         </View>
-                                    </View>
-
-
-
-
-                                    {/* Submit button */}
-
-
-
-                                    <View style={{ flexDirection: 'row', gap: 10 }}>
-                                        <View style={{ width: '49%', }}>
-                                            <CustomDropDown1
+                                        <View style={{ width: '47%' }}>
+                                        <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'City: *'}
                                                 // validation={SignupSchema}
@@ -424,9 +426,6 @@ const RoboclubRegistration = () => {
                                                     SetSelectCity(selectedItem)
                                                 }}
                                             />
-                                        </View>
-                                        <View style={{ width: '47%' }}>
-
 
                                         </View>
                                     </View>

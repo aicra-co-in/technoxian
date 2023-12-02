@@ -48,7 +48,7 @@ const LoginApiClub = async (values) => {
          }
        );
        console.log('Response:', response);
-       if(response.data.error===false){
+       if(response.data.error==='false'){
 navigation.navigate('HomeScreen')
        }
        // Handle the response here
@@ -85,10 +85,16 @@ navigation.navigate('HomeScreen')
         // fieldName: '',
     };
 
-    const handleSubmit = (values) => {
+    const handleSubmit = (values,{ resetForm }) => {
         // Handle form submission here
         console.log(values);
-        navigation.navigate('RoboClubDeshBoard');
+        // if(values.data.error===false){
+
+        //     navigation.navigate('HomeScreen');
+        // }
+        
+        LoginApiClub(values)
+        resetForm();
     };
 
     return (

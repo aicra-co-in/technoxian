@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Image } from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -10,30 +10,50 @@ import Colors from '../Assets/Theme/Theme';
 import CustomHeader from '../Component/CustomHeader';
 const SignupSchema = Yup.object().shape({
     name: Yup.string().email('Invalid email').trim()
-    .min(4)
-    .max(25)
-    .required('Required'),
-
-    email: Yup.string().email('Invalid email').trim()
-        .min(10)
+        .min(4)
         .max(25)
-        .required('Required')
-        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
-    mobile: Yup.string().min(5, 'Too Short').required('Required')
+        .required('Required'),
+
+
 });
+
+const data = [{
+    id: 1,
+    img: require('../Assets/Images/1.png'),
+    text: 'Pathan Sahib',
+    text1: 'capton',
+},
+]
+
+
+
 const RoboClubAddMember = () => {
+    const renderItem = ({ item }) => {
+        return (
+            <TouchableOpacity style={styles.flatlistcontainer}>
+                <Image source={item.img} style={{ height: 55, width: 55 }} />
+                <View style={{ marginLeft: 15 }}>
+
+                    <Text style={{ fontSize: 18, color: 'white' }}>{item.text}</Text>
+                    <Text style={{ fontSize: 14, color: 'white' }}>{item.text1}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
+
+
+
+
     const navigation = useNavigation()
     const initialValues = {
-        name:'',
-        email: '',
-        mobile: ''
-        // Define your initial form values here
-        // For example:
-        // fieldName: '',
+        name: '',
+
+
     };
 
     const handleSubmit = (values) => {
-        // Handle form submission here
+
         console.log(values);
         navigation.navigate('RoboClubDeshBoard');
     };
@@ -52,7 +72,7 @@ const RoboClubAddMember = () => {
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
 
                     <View style={{ flex: 1, }}>
-                       
+
 
 
                         <ScrollView style={styles.signupcontainer}>
@@ -60,13 +80,11 @@ const RoboClubAddMember = () => {
 
 
                             <View style={styles.form}>
-                            <CustomHeader back={true}
-                // notification={true}
-                //   filter={true} 
-                // scan={true}
-                source={require('../Assets/Images/Back.png')}
-                title={'Add New Member'}
-                onPress={() => navigation.goBack()} />
+                                <CustomHeader back={true}
+
+                                    source={require('../Assets/Images/Back.png')}
+                                    title={'Add New Member'}
+                                    onPress={() => navigation.goBack()} />
 
                                 {/* <Text style={styles.heading}>TECHNOXIAN ROBOCLUB LOGIN</Text> */}
 
@@ -82,57 +100,27 @@ const RoboClubAddMember = () => {
                                     error={errors.name}
                                 />
 
-                                <CustomInput
-                                    placeholder="Email address"
-                                    name="email"
-                                    value={values.email}
-                                    onChange={handleChange('email')}
-                                    onBlur={handleBlur}
-                                    error={errors.email}
-                                />
 
+                                <View style={{ marginTop: 5, alignItems: 'center' }}>
 
-
-                                <CustomInput
-                                    placeholder="Phone"
-                                    name="mobile"
-                                    value={values.mobile}
-                                    onChange={handleChange('mobile')}
-                                    onBlur={handleBlur}
-                                    error={errors.mobile}
-                                   
-                                />
-
-
-                                {/* <View style={{ marginVertical: 10, alignItems: 'flex-end' }}>
-                                    <Text style={styles.text1} onPress={() => navigation.navigate('ForgetPassword')}>Forget Password</Text>
-                                </View> */}
-                                {/* Submit button */}
-                                <View style={{ marginTop: 15 }}>
-
-                                    <CustomButton title={'Submit'}
+                                    <CustomButton title={'Add Team'}
                                         backgroundColor={Colors.pink}
                                         paddingVertical={15}
                                         onPress={handleSubmit}
 
                                     />
                                 </View>
-                                {/* <View style={styles.linecontainer}>
-                                    <View style={styles.line}></View>
-                                    <Text style={styles.text1}>OR</Text>
-                                    <View style={styles.line}></View>
-                                    <View></View>
-                                </View> */}
-{/* 
-                                <View style={{ marginTop: 25 }}>
 
-                                    <CustomButton title={'Continue with Google'}
-                                        backgroundColor={Colors.black}
-                                        paddingVertical={15}
-                                        image={require('../Assets/Images/Google.png')}
-                                        borderColor={Colors.white} />
-                                </View> */}
-                                {/* <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('RoboclubRegistration')}>Sign Up</Text></Text> */}
+
+
+
+                                <FlatList
+                                    data={data}
+                                    renderItem={renderItem}
+                                    keyExtractor={(item) => item.id.toString()} />
+
+
+
                             </View>
                         </ScrollView>
                     </View>
@@ -177,7 +165,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '800',
         marginTop: 20,
-        alignSelf:'center'
+        alignSelf: 'center'
     },
     text1: {
         color: Colors.pink,
@@ -212,19 +200,26 @@ const styles = StyleSheet.create({
     signupcontainer: {
         flex: 1,
         backgroundColor: Colors.black,
+        padding: 10
         // borderTopRightRadius: 30,
         // borderTopLeftRadius: 30,
         // height: '100%',
         // marginTop: -90
     },
-    text2:{
-        color:Colors.white,
-        fontSize:14,
-        alignSelf:'center',
-        paddingVertical:10,
-        paddingBottom:20
-    
-      }
+    text2: {
+        color: Colors.white,
+        fontSize: 14,
+        alignSelf: 'center',
+        paddingVertical: 10,
+        paddingBottom: 20
+
+    }, flatlistcontainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'red',
+        padding: 10, borderRadius: 15,
+        marginTop: 10
+    },
 });
 
 

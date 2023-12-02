@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
+import { Sliderimg } from "../restApi/Apiconfig";
 
 const Slider_Image = () => {
-  const [images, setImages] = useState([
-    "https://source.unsplash.com/1024x768/?nature",
-    "https://source.unsplash.com/1024x768/?water",
-    "https://source.unsplash.com/1024x768/?girl",
-    "https://source.unsplash.com/1024x768/?tree",
-    // require('./assets/images/girl.jpg'),
-  ]);
+  const imagePath='https://api.technoxian.com/development/document/'
+  
+  const [images, setImages] = useState([]);
 
   const handleImagePress = (index) => {
     console.warn(`image ${index} pressed`);
   };
+
+const sliderApi=async()=>{
+  try {
+  const res=await axios.get(Sliderimg)
+  const imageBaseUrl = "https://api.technoxian.com/development/document/";
+  const mySliderData = res.data.users.map(item => `${imageBaseUrl}${item.image}`);
+  // console.log("my slider data",mySliderData);
+  setImages(mySliderData)
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+useEffect(()=>{
+sliderApi()
+},[])
+
+
 
   return (
     <View style={styles.container}>

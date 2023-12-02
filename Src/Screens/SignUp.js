@@ -89,7 +89,7 @@ const SignUp = () => {
         setGlobalEmail(values.email);
         navigation.navigate('Login'),
         // <ShowMessageNotification message={'SignUp Successfully'}/>
-        Alert.alert('Success', 'SignUp Successful!');
+        Alert.alert('Success', 'SignUp Successfully!');
                   }
       // Handle the response here
     } catch (error) {

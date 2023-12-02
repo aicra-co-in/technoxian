@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, Text, StyleSheet} from 'react-native';
 
 import {
@@ -8,6 +8,7 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field'; 
 import Colors from '../Assets/Theme/Theme';
+import axios from 'axios';
 
 const CELL_COUNT = 4;
 const CodeInputComponent = () => {
@@ -18,6 +19,34 @@ const CodeInputComponent = () => {
       value,
       setValue,
     });
+
+
+    const ForgetApi = async (value) => {
+      try {
+        const formData = new FormData();
+        formData.append('Email', value.Email);
+  
+        const response = await axios.post(
+          'https://api.technoxian.com/development/Forgot_Password.php',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+        // if(response.data.error===false){
+        //   navigation.navigate('ForgetOtp')
+        // }
+        console.log('Response:', response);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  
+    };
+//   useEffect(()=>{
+// handleSubmit()
+//   },[])
     return (
         <SafeAreaView style={styles.root}>
           <CodeField
@@ -56,7 +85,8 @@ const CodeInputComponent = () => {
           borderWidth: 2,
           borderColor: Colors.white,
           textAlign: 'center',
-          backgroundColor:Colors.white
+          backgroundColor:Colors.white,
+          alignItems:'center'
         },
         focusCell: {
           borderColor: Colors.white,
@@ -65,13 +95,13 @@ const CodeInputComponent = () => {
              flex:1,
             backgroundColor:Colors.white,
             
-             padding:18
+             padding:20
                 },
                 text:{
                 fontSize:16,
                 color:Colors.white,
                 textAlign:'center',
-                padding:10
+                // padding:20
             }
       });
 export default CodeInputComponent

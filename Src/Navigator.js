@@ -47,6 +47,9 @@ import ShowMessagenotification from "./Constant/ShowMessage";
 import ViewNews from "./Screens/ViewNews";
 import Card2 from "./Constant/Card2";
 import TodoScreen from "./Screens/TodoScreen";
+import ApplyWrcCompitition from "./Screens/ApplyWrcCompitition";
+import Bloglist from "./Screens/Bloglist";
+import TestList from "./Screens/TestList";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -57,7 +60,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"HomeScreen"}>
+        initialRouteName={"SpleshScreen"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -103,7 +106,10 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="ClubMemberList"component={ClubMemberList} />
         <Stack.Screen name="ShowMessagenotification"component={ShowMessagenotification} />
         <Stack.Screen name="ViewNews"component={ViewNews} />
+        <Stack.Screen name="ApplyWrcCompitition"component={ApplyWrcCompitition} />
+        <Stack.Screen name="Bloglist"component={Bloglist} />
         <Stack.Screen name="TodoScreen"component={TodoScreen} />
+        <Stack.Screen name="TestList"component={TestList} />
 
 
 

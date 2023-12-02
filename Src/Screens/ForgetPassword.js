@@ -1,36 +1,62 @@
-import { StyleSheet, Text, View, ScrollView, Image ,TextInput} from 'react-native'
-import React, { useEffect } from 'react'
+import { StyleSheet, Text, View, ScrollView, Image, TextInput } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import Colors from '../Assets/Theme/Theme';
 import CustomInput from '../Component/CustomInput';
 import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { forgrtPassword } from '../restApi/Apiconfig';
-import { useUser } from '../../UserContext';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 const SignupSchema = Yup.object().shape({
- 
-  email: Yup.string().email('Invalid email')
-    .trim()
+
+
+  Email: Yup.string().email('Invalid email').trim()
     .min(10)
     .max(25)
     .required('Required')
-    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),})
-    
-  
-  
-  const ForgetPassword = () => {
-  const initialValues = {
-    email: '',};
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
 
-  const { email } = useUser();
+});
+
+const ForgetPassword = () => {
+  const initialValues = {
+    Email: '',
+  };
+
   const navigation = useNavigation();
 
-  const ForgetApi = async (enteredEmail) => {
+  // const ForgetApi = async (value) => {
+  //   console.log("jhgdjhsgdhsghg", value.email);
+  //   try {
+  //     const data = value.email;
+  //     console.log('data',data)
+
+
+  //     const response = await axios.post(
+  //       'https://api.technoxian.com/development/Forgot_Password.php',
+
+  //     data,
+  //       {
+  //         // headers: {
+  //         //   ...data.getHeaders(),
+  //         // },
+  //       }
+  //     );
+
+
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
+
+
+  const ForgetApi = async (value) => {
     try {
       const formData = new FormData();
-      formData.append('email', 'test1@mailinator.com');
+      formData.append('Email', value.Email);
 
       const response = await axios.post(
         'https://api.technoxian.com/development/Forgot_Password.php',
@@ -41,68 +67,56 @@ const SignupSchema = Yup.object().shape({
           },
         }
       );
-
-      console.log(response)
-      console.log('emailis--',email)
-      if (enteredEmail === email) {
-        console.log('Emails match!');
-       
-        navigation.navigate('ForgetOtp');
-      } else {
-        console.log('Emails do not match!');
-        // Handle the case where the entered email doesn't match the global email
+      if(response.data.error===false){
+        navigation.navigate('ForgetOtp')
       }
+      console.log('Response:', response);
     } catch (error) {
-      console.error('Error:', error.response?.data || 'Something went wrong');
+      console.error('Error:', error);
     }
+
   };
 
-  useEffect(() => {
-    ForgetApi()
-  }, []);
 
-  const handleSubmit = (value) => {
-   
-    // navigation.navigate('Login')
-    console.log(value)
-   
-  
 
+  const handleSubmit = (values) => {
+    console.log(values);
+    ForgetApi(values);
+    // navigation.navigate('ForgetOtp')
   };
 
   return (
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={SignupSchema}
-      >
-        {({ handleChange, handleBlur, handleSubmit, values, errors,touched,setFieldTouched ,resetForm}) => (
-    <ScrollView style={styles.container}>
-      <Text style={[styles.heading, { marginTop: 20 }]}>Forget Password?</Text>
-      <Image source={require('../Assets/Images/ForgetPassword.png')} style={styles.img} />
-      <Text style={styles.text}>Input the email associated with your account.</Text>
-      <CustomInput
-                  placeholder="Email address"
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange('email')}
-                  onBlur={handleBlur}
-                  error={errors.email}
-                />
-      <View style={{ marginTop: 20 }}>
-        <CustomButton
-          title={'Forget Password'}
-          backgroundColor={Colors.pink}
-          paddingVertical={15}
-          // onPress={() => navigation.navigate('ForgetOtp')}
-        />
-      </View>
-    </ScrollView>
-       )}
-       </Formik>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={SignupSchema}
+    >
+      {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+        <ScrollView style={styles.container}>
+          <Text style={[styles.heading, { marginTop: 20 }]}>Forget Password?</Text>
+          <Image source={require('../Assets/Images/ForgetPassword.png')} style={styles.img} />
+          <Text style={styles.text}>Input the email associated with your account.</Text>
+          <CustomInput
+            placeholder="Email address"
+            name="Email"
+            value={values.Email}
+            onChange={handleChange('Email')}
+            onBlur={handleBlur('Email')}
+            error={errors.Email}
+          />
+          <View style={{ marginTop: 20 }}>
+            <CustomButton
+              title={'Forget Password'}
+              backgroundColor={Colors.pink}
+              paddingVertical={15}
+              onPress={handleSubmit}
+            />
+          </View>
+        </ScrollView>
+      )}
+    </Formik>
   );
-}
-
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,

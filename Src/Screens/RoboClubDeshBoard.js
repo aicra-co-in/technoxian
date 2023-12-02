@@ -15,14 +15,20 @@ const data = [
     id:2,
     img: require('../Assets/Images/Mgroup.png'),
     text: 'Add Club Member',
-    screen:'RoboClubAddMember'
+    screen:'TestList'
   },
-  // {
-  //   id:3,
-  //   img: require('../Assets/Images/Mgroup.png'),
-  //   text: 'Club Member List',
-  //   screen:'ClubMemberList'
-  // },
+  {
+    id:3,
+    img: require('../Assets/Images/Mgroup.png'),
+    text: 'Apply Wrc Compitition',
+    screen:'ApplyWrcCompitition'
+  },
+  {
+    id:4,
+    img: require('../Assets/Images/Mgroup.png'),
+    text: 'Blog List',
+    screen:'Bloglist'
+  },
   // Add more data items if needed
 ];
 
@@ -52,6 +58,7 @@ const RoboClubDeshBoard = () => {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+        
       />
     </View>
   );
@@ -62,21 +69,21 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: 'center',
     // justifyContent: 'center',
-    padding: 16,
+     padding: 20,
     backgroundColor:Colors.black
   },
   cardContainer: {
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 8,
-    padding: 16,
+     padding: 8,
     marginBottom: 16,
     alignItems: 'center',
     backgroundColor:Colors.card
   },
   cardImage: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     resizeMode: 'contain',
     marginBottom: 8,
   },

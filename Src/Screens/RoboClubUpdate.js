@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity } from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput, Image, TouchableOpacity ,Alert} from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -53,6 +53,7 @@ const SignupSchema = Yup.object().shape({
         .max(25)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+        Mentor_Designation:Yup.string().required('required'),
     menteraddress: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
     captonName: Yup.string().required('required'),
     captonemail: Yup.string().email('Invalid email')
@@ -67,13 +68,14 @@ const SignupSchema = Yup.object().shape({
         .max(15, 'Mobile number must be at most 15 Number'),
 
 
+
 });
 import Colors from '../Assets/Theme/Theme'
 import CustomHeader from '../Component/CustomHeader'
 import CustomDropDown from '../Component/CustomDropDown';
 import CustomDropDown1 from '../Component/CustomDropDown1';
 import axios from 'axios';
-import { countryapi, roboregistration } from '../restApi/Apiconfig';
+import { WrcUpdate, countryapi, roboregistration } from '../restApi/Apiconfig';
 
 const RoboClubUpdate = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -202,6 +204,70 @@ const RoboClubUpdate = () => {
     //         fetchCountry()
     //     }, [])
 
+
+
+
+
+    const RegistrationApi = async (values) => {
+
+        // console.log("My input value", values);
+        // console.log("Country=======", selectedCountry.label)
+        // console.log("State=======", selectedState.label)
+        // console.log("City=======", selectCity.label)
+
+
+        try {
+            const data = new FormData();
+            data.append('Club_Id', values.clubId);
+            data.append('Institute_Name', values.insttitutename);
+            data.append('Institute_Email', values.insttitutemail);
+            data.append('Institute_Mobile', values.mobile);
+            data.append('City', selectCity.label);
+            data.append('State', selectedState.label);
+            data.append('Country', selectedCountry.label);
+            data.append('Head_of_Organization_Name', values.headinstitutename);
+            data.append('Head_of_Organization_Email', values.headinsttitutemail);
+            data.append('Head_of_Organization_Mobile', values.headmobile);
+            data.append('Address', values.address);
+            data.append('WRC_Competition', 'Innovation Challenge');
+            data.append('Club_Name', values.clubName);
+            data.append('clublogo', selectedImage);
+            data.append('captainlogo', selectedImage);
+            data.append('Mentor_Name', values.menterName);
+            data.append('Mentor_Email', values.menteremail);
+            data.append('Mentor_Designation', values.Mentor_Designation);
+            data.append('Mentor_Mobile', '7870561525');
+            data.append('Captain_Name', values.captonName);
+            data.append('Captain_Email', values.captonemail);
+            data.append('Captain_Mob_Number', values.captonmobile);
+
+
+            const responce = await axios.post(WrcUpdate,
+
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+            console.log('------>>>', responce)
+
+            if (responce.data.message=== "Club Information Successfully Updated") {
+
+                navigation.navigate('RoboClubDeshBoard'); 
+                Alert.alert('Success', 'Update  Successfully!');
+            }
+        } catch (error) {
+            console.log(responce.error)
+        }
+    }
+
+    useEffect(() => {
+        RegistrationApi()
+    }, [])
+
+
+
     const initialValues = {
         insttitutename: "",
         insttitutemail: "",
@@ -214,6 +280,7 @@ const RoboClubUpdate = () => {
         clubName: '',
         menterName: "",
         menteremail: '',
+        Mentor_Designation:'',
         menteraddress: '',
         captonName: '',
         captonemail: '',
@@ -225,7 +292,7 @@ const RoboClubUpdate = () => {
     };
 
     const handleSubmit = (values) => {
-        // Handle form submission here
+        RegistrationApi(values)
         console.log(values);
     };
 
@@ -278,7 +345,7 @@ const RoboClubUpdate = () => {
                                             onChange={handleChange('insttitutename')}
                                             onBlur={handleBlur}
                                             error={errors.insttitutename}
-                                            
+
                                         />
                                         <CustomInput
 
@@ -289,7 +356,7 @@ const RoboClubUpdate = () => {
                                             onChange={handleChange('insttitutemail')}
                                             onBlur={handleBlur}
                                             error={errors.insttitutemail}
-                                            
+
                                         />
                                         <CustomInput
 
@@ -445,6 +512,12 @@ const RoboClubUpdate = () => {
                                             <Image source={require('../Assets/Images/Add.png')} style={{ height: 30, width: 30, alignSelf: 'center' }} resizeMode='contain' />
                                         </TouchableOpacity>
                                     </View>
+                                    <View style={{ height: 70, width: '100%', backgroundColor: Colors.wheat, marginTop: 20, borderRadius: 15, alignItems: "center", justifyContent: 'center' }}>
+                                        <TouchableOpacity onPress={handleImagePicker}>
+                                            <Text>UPLOAD CAPTON IMAGE(jpg,jpeg,png)</Text>
+                                            <Image source={require('../Assets/Images/Add.png')} style={{ height: 30, width: 30, alignSelf: 'center' }} resizeMode='contain' />
+                                        </TouchableOpacity>
+                                    </View>
 
 
 
@@ -473,11 +546,14 @@ const RoboClubUpdate = () => {
                                             onBlur={handleBlur}
                                             error={errors.menteremail}
                                         />
-                                        <CustomDropDown1
-                                            bgcolor={'white'}
-                                            placeholder={'Designation *'}
-                                            validation={SignupSchema}
-                                            field="city"
+                                        <CustomInput
+
+                                            placeholder="Mentor_Designation *"
+                                            name="Mentor_Designation"
+                                            value={values.Mentor_Designation}
+                                            onChange={handleChange('Mentor_Designation')}
+                                            onBlur={handleBlur}
+                                            error={errors.Mentor_Designation}
                                         />
                                         <CustomInput
 
@@ -555,7 +631,7 @@ const RoboClubUpdate = () => {
                                     <View style={{ marginTop: 15 }}>
 
                                         <CustomButton title={'Update Club'}
-                                            backgroundColor={Colors.blue}
+                                            backgroundColor={Colors.red}
                                             paddingVertical={15}
                                             onPress={handleSubmit} />
                                     </View>

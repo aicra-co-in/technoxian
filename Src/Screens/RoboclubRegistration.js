@@ -23,7 +23,10 @@ const SignupSchema = Yup.object().shape({
         .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Invalid mobile number format')
         .min(7, 'Mobile number must be at least 7 Number')
         .max(15, 'Mobile number must be at most 15 Number'),
-    password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
+        password: Yup.string().required('Required').matches(
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
+          ),
     captain: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
@@ -186,7 +189,7 @@ const RoboclubRegistration = () => {
                         'Content-Type': 'multipart/form-data',
                     },
                 })
-            // console.log('------>>>', responce.data)
+             console.log('signUp------>>>', responce)
             
             if (responce.data.error === 'false') {
             

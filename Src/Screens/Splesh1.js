@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView } from 'react-native';
 import Colors from '../Assets/Theme/Theme';
 import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
@@ -14,15 +14,24 @@ const Splesh1 = () => {
   const navigation = useNavigation();
 
 
-const GetNeweApi=async()=>{
-  const res=await axios.get(NewsApi)
-  // console.log(res.data.users)
-  setNewsText(res.data.users)
-}
-useEffect(()=>{
-GetNeweApi()
-},[])
+  const renderNewsApi = async () => {
+    try {
+      const response = await axios.get(NewsApi);
+      console.log("-------->>>>", response.data.users.post_content);
+      // console.log(imagepath+response.data.users.featured_image_url)
+      const plainText = response.data.users.post_content.replace(/<[^>]+>/g, '');
+      const first30Words = plainText.split(' ').slice(0, 30).join(' ');
 
+      setNewsText(first30Words);
+ 
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
+  };
+
+  useEffect(() => {
+    renderNewsApi();
+  }, []);
 
 
 
@@ -35,9 +44,12 @@ GetNeweApi()
   return (
     <View style={styles.container}>
       <Image source={require('../Assets/Images/Moy.png')} resizeMode='contain' style={{ height: '40%', width: '100%' }} />
+      <ScrollView>
+
+      
       <Text style={styles.text}> <Text style={{color:Colors.redsecondry}}>Latest</Text> News About All Events</Text>
       <Text style={styles.text1}>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
+        {newsText}
       </Text>
       <View style={styles.btncontainer}>
         <View style={{ width: '35%' }}>
@@ -59,6 +71,7 @@ GetNeweApi()
           />
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };

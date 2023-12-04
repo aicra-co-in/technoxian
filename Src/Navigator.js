@@ -60,7 +60,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"SpleshScreen"}>
+        initialRouteName={"SignUp"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>

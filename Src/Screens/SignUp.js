@@ -15,7 +15,7 @@ import { UserRegistration } from '../restApi/Apiconfig';
 import CountryPicker from 'react-native-country-picker-modal';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ShowMessageNotification from '../Constant/ShowMessage';
-import { useUser } from '../../UserContext';
+
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Too Short!')
@@ -47,7 +47,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const SignUp = () => {
-  const { setGlobalEmail } = useUser();
+ 
   const navigation = useNavigation();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const initialValues = {
@@ -86,7 +86,7 @@ const SignUp = () => {
       );
       console.log('Response:', response);
       if(response.data.error==='false'){
-        setGlobalEmail(values.email);
+        
         navigation.navigate('Login'),
         // <ShowMessageNotification message={'SignUp Successfully'}/>
         Alert.alert('Success', 'SignUp Successfully!');

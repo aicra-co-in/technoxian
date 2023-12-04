@@ -20,11 +20,17 @@ const data = [
   {
     id:3,
     img: require('../Assets/Images/Mgroup.png'),
+    text: 'Club Member List',
+    screen:'ClubMemberList'
+  },
+  {
+    id:4,
+    img: require('../Assets/Images/Mgroup.png'),
     text: 'Apply Wrc Compitition',
     screen:'ApplyWrcCompitition'
   },
   {
-    id:4,
+    id:5,
     img: require('../Assets/Images/Mgroup.png'),
     text: 'Blog List',
     screen:'Bloglist'
@@ -32,11 +38,14 @@ const data = [
   // Add more data items if needed
 ];
 
-const RoboClubDeshBoard = () => {
+const RoboClubDeshBoard = ({ route }) => {
+
+
+  const userId = route.params?.userId || 'DefaultUserId';
     const navigation=useNavigation()
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.cardContainer} onPress={()=>navigation.navigate(item.screen)}>
+      <TouchableOpacity style={styles.cardContainer} onPress={()=>navigation.navigate(item.screen, { userId })}>
         <Image source={item.img} style={styles.cardImage} tintColor={'white'}/>
         <Text style={styles.cardText}>{item.text}</Text>
       </TouchableOpacity>
@@ -53,7 +62,7 @@ const RoboClubDeshBoard = () => {
                 title={'Deshboard    '}
                 onPress={() => navigation.navigate('RoboclubLogin')} />
 
-                <Text style={{color:'white',fontSize:22,padding:10}}>Hi ! Jamshed</Text>
+                <Text style={{color:'white',fontSize:22,padding:10}}>{userId}</Text>
       <FlatList
         data={data}
         renderItem={renderItem}

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, FlatList } from 'react-native';
+import { View, TextInput, Button, StyleSheet, FlatList, Alert } from 'react-native';
 import Colors from '../Assets/Theme/Theme';
 import { useNavigation } from '@react-navigation/native';
 import CustomHeader from '../Component/CustomHeader';
 import axios from 'axios';
 import CustomButton from '../Component/CustomButton';
 
-const TestList = () => {
+const TestList = ({ route }) => {
   const navigation = useNavigation();
+  const userId = route.params?.userId || 'DefaultUserId';
   const [userData, setUserData] = useState([{ name: '', email: '', mobile: '' }]);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const TestList = () => {
   const postApiAddlist = async (value) => {
     try {
       const data = new FormData();
-      data.append('Club_id', 'TXCLB25609944');
+      data.append('Club_id', userId);
       data.append('Team_Name', value.name);
       data.append('Team_Mobile', value.mobile);
       data.append('Team_Email', value.email);
@@ -32,7 +33,12 @@ const TestList = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(res)
+      console.log(res.data.message)
+      if(res.data.message==="Club Member Add successfully."){
+        Alert.alert('Club Member Add successfully.')
+      }else{
+        Alert.alert(' Member Already Registered.')
+      }
     } catch (error) {
       console.log(error);
     }

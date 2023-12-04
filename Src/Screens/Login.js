@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Image,CheckBox } from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Image, CheckBox } from 'react-native'
 import React from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -16,10 +16,10 @@ const SignupSchema = Yup.object().shape({
         .max(25)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
-        password: Yup.string().required('Required').matches(
-            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-            'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
-          ),
+    password: Yup.string().required('Required').matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
+    ),
 });
 const Login = () => {
     const navigation = useNavigation()
@@ -34,42 +34,44 @@ const Login = () => {
 
 
     const handleLoginRequest = async (values) => {
-       console.log("jhgdjhsgdhsghg",values)
+        console.log("jhgdjhsgdhsghg", values)
         try {
             const formData = new FormData();
-     
-      formData.append('email', values.email);
-      formData.append('password', values.password);
 
-          const response = await axios.post(
-            'https://api.technoxian.com/development/user_Login.php',
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
+            formData.append('email', values.email);
+            formData.append('password', values.password);
+
+            const response = await axios.post(
+                'https://api.technoxian.com/development/user_Login.php',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            console.log('Response:', response.data.message.user_id);
+            if (response.data.error === false) {
+                navigation.navigate('HomeScreen', {
+                    user_id: response.data.message.user_id,
+                })
             }
-          );
-          console.log('Response:', response);
-          if(response.data.error===false){
-navigation.navigate('HomeScreen')
-          }
-          // Handle the response here
-        } catch (error) {
-          console.error('Error:', error.response?.data || 'Something went wrong');
-          // Handle errors here
-        }
-      };
-      
 
-    const handleSubmit = (values,{ resetForm }) => {
+        } catch (error) {
+            console.error('Error:', error.response?.data || 'Something went wrong');
+            // Handle errors here
+        }
+    };
+
+
+    const handleSubmit = (values, { resetForm }) => {
         // Handle form submission here
         console.log(values);
         // if(values.data.error===false){
 
         //     navigation.navigate('HomeScreen');
         // }
-        
+
         handleLoginRequest(values)
         resetForm();
     };
@@ -85,7 +87,7 @@ navigation.navigate('HomeScreen')
                 onSubmit={handleSubmit}
                 validationSchema={SignupSchema}
             >
-                {({ handleChange, handleBlur, handleSubmit, values, errors ,resetForm}) => (
+                {({ handleChange, handleBlur, handleSubmit, values, errors, resetForm }) => (
 
                     <View style={{ flex: 1, }}>
                         <View style={{ height: '50%' }}>
@@ -159,9 +161,11 @@ navigation.navigate('HomeScreen')
                                         backgroundColor={Colors.black}
                                         paddingVertical={15}
                                         // image={require('../Assets/Images/Google.png')}
-                                        borderColor={Colors.white} />
+                                        borderColor={Colors.white}
+                                        onPress={() => navigation.navigate('HomeScreen')} />
+
                                 </View>
-                                <Text style={styles.text2}>Don’t have an account? <Text style={{color:Colors.pink}} onPress={()=>navigation.navigate('SignUp')}>Sign Up</Text></Text>
+                                <Text style={styles.text2}>Don’t have an account? <Text style={{ color: Colors.pink }} onPress={() => navigation.navigate('SignUp')}>Sign Up</Text></Text>
                             </View>
                         </ScrollView>
                     </View>
@@ -245,14 +249,14 @@ const styles = StyleSheet.create({
         height: '100%',
         marginTop: -90
     },
-    text2:{
-        color:Colors.white,
-        fontSize:14,
-        alignSelf:'center',
-        paddingVertical:10,
-        paddingBottom:20
-    
-      }
+    text2: {
+        color: Colors.white,
+        fontSize: 14,
+        alignSelf: 'center',
+        paddingVertical: 10,
+        paddingBottom: 20
+
+    }
 });
 
 

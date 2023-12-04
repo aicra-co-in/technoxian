@@ -75,7 +75,7 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
       <FlatList
         data={detail}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+         keyExtractor={(item) => item.id.toString()}
         horizontal={horizontal}
         showsHorizontalScrollIndicator={false}
       />

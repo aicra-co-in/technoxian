@@ -11,8 +11,9 @@ import TxStore from './TxStore';
 import Services from './Services';
 import User from './User';
 
-const HomeScreen = () => {
+const HomeScreen = ({ route }) => {
   const Tab = createBottomTabNavigator();
+  const { user_id } = route.params
   return (
     <Tab.Navigator
       initialRouteName="Feed"
@@ -97,6 +98,7 @@ const HomeScreen = () => {
       <Tab.Screen
         name="User"
         component={User}
+        initialParams={{ user_id: user_id }}
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: ({ color, size ,focused}) => (

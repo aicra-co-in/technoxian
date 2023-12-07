@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
+import React, { useState, useEffect } from 'react'
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import {useNavigation} from '@react-navigation/native';
-const {width, height} = Dimensions.get('window');
-
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const { width, height } = Dimensions.get('window');
 export default function CustomHeader({
   title,
   filter,
@@ -24,34 +25,58 @@ export default function CustomHeader({
   onPress,
 }) {
   const pointsTo = useNavigation();
+  const [userImageUri, setUserImageUri] = useState('');
+  useEffect(() => {
+    const fetchUserImageUri = async () => {
+      try {
+        // Retrieve user image URL from AsyncStorage
+        const imageUri = await AsyncStorage.getItem('userImageUri');
+
+        // Update the state with the retrieved image URL
+        setUserImageUri(imageUri);
+      } catch (error) {
+        console.error('Error retrieving user image URL:', error);
+      }
+    };
+
+    // Call the function to fetch user image URL
+    fetchUserImageUri();
+  }, []); //
   return (
-    <View style={[styles.headerContainer, {backgroundColor: bgColor}]}>
-      <View style={{flex: 2}}>
+    <View style={[styles.headerContainer, { backgroundColor: bgColor }]}>
+      <View style={{ flex: 2 }}>
         {back && (
           <TouchableOpacity onPress={onPress}>
 
-          
-          <Image
-          source={source}
-          resizeMode="contain"
-          style={{width: 20, height: 17,tintColor:'white'}}
-        />
-        </TouchableOpacity>
+
+            <Image
+              source={source}
+              resizeMode="contain"
+              style={{ width: 20, height: 17, tintColor: 'white' }}
+            />
+          </TouchableOpacity>
         )}
         {profile && (
           <TouchableOpacity onPress={() => pointsTo.navigate('Profile')}>
-            <Image
-              source={require('../Assets/Images/Search.png')}
-              resizeMode="contain"
-              style={{width: 30, height: 30}}
-            />
+            {(userImageUri) ? (
+              // Show the selected image permanently for the specific user_id
+              <Image source={{ uri: userImageUri }} style={styles.selectedImage} />
+            ) : (
+              // Show a default image for other user_ids or when no image is selected
+              <Image
+                source={require('../Assets/Images/Search.png')}
+                resizeMode="contain"
+                style={{ width: 30, height: 30 }}
+              />
+            )}
+
           </TouchableOpacity>
         )}
       </View>
       <Text
         style={[
           styles.headText,
-          {flex: 5, marginBottom: Platform.OS === 'ios' ? 0 : -3},
+          { flex: 5, marginBottom: Platform.OS === 'ios' ? 0 : -3 },
         ]}>
         {title}
       </Text>
@@ -68,7 +93,7 @@ export default function CustomHeader({
             <Image
               source={require('../Assets/Images/Search.png')}
               resizeMode="contain"
-              style={{width: 22, height: 22}}
+              style={{ width: 22, height: 22 }}
             />
           </TouchableOpacity>
         )}
@@ -77,7 +102,7 @@ export default function CustomHeader({
             <Image
               source={require('../Assets/Images/Notification.png')}
               resizeMode="contain"
-              style={{width: 25, height: 25}}
+              style={{ width: 25, height: 25 }}
             />
           </TouchableOpacity>
         )}
@@ -86,7 +111,7 @@ export default function CustomHeader({
             <Image
               source={require('../Assets/Images/Profile.png')}
               resizeMode="contain"
-              style={{width: 25, height: 25}}
+              style={{ width: 25, height: 25 }}
             />
           </TouchableOpacity>
         )}
@@ -119,5 +144,10 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 16,
     alignItems: 'center',
     paddingVertical: 10,
+  },
+  selectedImage: {
+    width: 30, height: 30,
+    resizeMode: 'cover',
+    borderRadius: 50
   },
 });

@@ -6,14 +6,15 @@ import Colors from '../Assets/Theme/Theme'
 
 
 const data = [
-    { label: "Item 1", value: "1" },
-    { label: "Item 2", value: "2" },
-    { label: "Item 3", value: "3" },
-    { label: "Item 4", value: "4" },
-    { label: "Item 5", value: "5" },
-    { label: "Item 6", value: "6" },
-    { label: "Item 7", value: "7" },
-    { label: "Item 8", value: "8" },
+    { label: "Innovation Contest", value: "1" },
+    { label: "RoboSoccer", value: "2" },
+    { label: "WRC Bots Combat", value: "3" },
+    { label: "Robo Race", value: "4" },
+    { label: "Fastest Line Follower", value: "5" },
+    { label: "Water Rocket", value: "6" },
+    { label: "Maze Solver", value: "7" },
+    { label: "Rc Creaft", value: "8" },
+    { label: "Drone Competition", value: "9" },
   ]
 
 const CustomDropDown = ({bgcolor,colors,placeholder}) => {

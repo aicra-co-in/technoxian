@@ -50,25 +50,34 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
 
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handlePress(item.id)}>
+    <TouchableOpacity onPress={() => navigation.navigate('WrcChalengesRegistration')} style={{margin:numColumns === 2 ? 1:5}}>
       <View
         style={[
           styles.cardContainer,
           {
-            backgroundColor: selectedId === item.id ? '#f96342' : '#2B3038',
+            backgroundColor:  '#2B3038',
+            width: numColumns === 2 ? width / 2.3 : '100%',
+            height: numColumns === 2 ? width / 2.3 : 'auto', // Adjust width for 2 columns
           },
         ]}
       >
-        <View style={{alignItems:'center'}}>
-
-        <Image source={{ uri:imagePath + item.image}} style={styles.cardImage} resizeMode='contain' />
-        <Text style={styles.text}>{item.name}</Text>
-        <Text style={{fontSize:13,color:'white'}}>{item.date}</Text>
-        <Text style={{color:'white',fontSize:13}}>{item.venue}</Text>
+        <View style={{ alignItems: 'center' }}>
+          <Image source={{ uri: imagePath + item.image }} style={styles.cardImage} resizeMode='contain' />
+          <Text style={styles.text}>{item.name}</Text>
+          
+          {/* Conditionally render additional information based on numColumns */}
+          {numColumns === 1 && (
+            <>
+              <Text style={{ fontSize: 13, color: 'white' }}>{item.date}</Text>
+              <Text style={{ color: 'white', fontSize: 13 }}>{item.venue}</Text>
+            </>
+          )}
         </View>
       </View>
     </TouchableOpacity>
   );
+  
+  
 
   if (numColumns === 1) {
     return (
@@ -107,10 +116,11 @@ export default Card;
 
 const styles = StyleSheet.create({
   cardContainer: {
-    margin: 5,
+    margin:  5,
     borderRadius: 15,
     overflow: 'hidden',
-     padding: 5,
+     padding: 7,
+  
     // alignItems:"center"
   },
   cardImage: {

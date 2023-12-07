@@ -18,11 +18,11 @@ const WRCChalanges = () => {
          scan={true} 
          source={require('../Assets/Images/Back.png')}
          title={'Wrc Chalanges    '}
-         onPress={()=>navigation.navigate('HomeScreen')}/>
+         onPress={()=>navigation.goBack()}/>
          <ScrollView showsVerticalScrollIndicator={false}>
       <SliderImage />
       <Text style={styles.Text_heading}>WRC Challenges</Text>
-      <Card numColumns={3} />
+      <Card numColumns={2} />
       <Text style={styles.Text_heading}>WRC Rule Book</Text>
       <View style={{marginBottom:20}}>
 

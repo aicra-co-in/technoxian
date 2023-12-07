@@ -32,7 +32,7 @@ const Me = () => {
       {/* <Card3/> */}
       {/* <Text style={styles.Text_heading}>Upcoming Matches</Text> */}
       {/* <Card2/> */}
-      <Card />
+      <Card numColumns={1} />
       <Text style={styles.Text_heading}>WRC Team</Text>
       <WinnerCard />
       {/* <Text style={styles.Text_heading}>Trending Team</Text>

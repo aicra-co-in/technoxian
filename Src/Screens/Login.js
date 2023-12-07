@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const SignupSchema = Yup.object().shape({
 
 
@@ -50,11 +52,16 @@ const Login = () => {
                     },
                 }
             );
-            console.log('Response:', response.data.message.user_id);
+            console.log('Response:', response.data.message);
             if (response.data.error === false) {
+                await AsyncStorage.setItem('user_id', response.data.message.user_id);
+                await AsyncStorage.setItem('user_Name', response.data.message.name);
+                await AsyncStorage.setItem('user_Email', response.data.message.email);
+                await AsyncStorage.setItem('user_Phone', response.data.message.mobile_no);
                 navigation.navigate('HomeScreen', {
-                    user_id: response.data.message.user_id,
-                })
+                    user_id: response.data.message,
+                }
+                )
             }
 
         } catch (error) {
@@ -73,7 +80,7 @@ const Login = () => {
         // }
 
         handleLoginRequest(values)
-        resetForm();
+        // resetForm();
     };
 
     return (
@@ -162,7 +169,7 @@ const Login = () => {
                                         paddingVertical={15}
                                         // image={require('../Assets/Images/Google.png')}
                                         borderColor={Colors.white}
-                                        onPress={() => navigation.navigate('HomeScreen')} />
+                                        onPress={() => navigation.navigate("HomeScreen", { user_id: null })} />
 
                                 </View>
                                 <Text style={styles.text2}>Don’t have an account? <Text style={{ color: Colors.pink }} onPress={() => navigation.navigate('SignUp')}>Sign Up</Text></Text>

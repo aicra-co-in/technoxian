@@ -6,7 +6,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { useNavigation } from '@react-navigation/native';
 
 const data = [
-    { id: '1', text: "WRC Challenges",screen:' ' },
+    { id: '1', text: "WRC Challenges",screen:'WRCChalanges' },
     { id: '2', text: "Event Calendar" ,screen:'EventCalender'},
     { id: '3', text: "WRC Registration form" ,screen:'RegistrationComponent'},
     { id: '4', text: "Robo Club",screen:'Ruboclub' },
@@ -52,7 +52,7 @@ const Menu = () => {
       scan={true}  
       source={require('../Assets/Images/Back.png')}
       title={'Menu'}
-      onPress={()=>navigation.navigate('HomeScreen')}/>
+      onPress={()=>navigation.goBack()}/>
       <View style={styles.imageContainer}>
         <TouchableOpacity onPress={handleImagePicker} style={styles.img}>
           {selectedImage ? <Image source={{ uri: selectedImage }} style={styles.selectedImage} />:<Image source={require('../Assets/Images/Robo.png')} style={{height:70,width:70,borderRadius:50}}/>}

@@ -50,6 +50,11 @@ import TodoScreen from "./Screens/TodoScreen";
 import ApplyWrcCompitition from "./Screens/ApplyWrcCompitition";
 import Bloglist from "./Screens/Bloglist";
 import TestList from "./Screens/TestList";
+import WrcChalengesRegistration from "./Screens/WrcChalengesRegistration";
+
+import MultipleSelector from "./Component/MultipleSelector";
+import ShowPaymentOptions from "./Screens/ShowPaymentOptions";
+import TesttextInput from "./Constant/TesttextInput";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -60,7 +65,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"SignUp"}>
+        initialRouteName={"WrcChalengesRegistration"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -90,7 +95,7 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="Notification" component={Notification} />
 
         <Stack.Screen name="Menu" component={Menu} />
-        <Stack.Screen name="WrcChalanges" component={WRCChalanges} />
+     
        
         <Stack.Screen name="EventCalender" component={EventCalender} />
         <Stack.Screen name="RegistrationComponent"component={RegistrationComponent} />
@@ -110,6 +115,11 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="Bloglist"component={Bloglist} />
         <Stack.Screen name="TodoScreen"component={TodoScreen} />
         <Stack.Screen name="TestList"component={TestList} />
+        <Stack.Screen name="WRCChalanges"component={WRCChalanges} />
+        <Stack.Screen name="WrcChalengesRegistration"component={WrcChalengesRegistration} />
+        <Stack.Screen name="ShowPaymentOptions"component={ShowPaymentOptions} />
+        <Stack.Screen name="MultipleSelector"component={MultipleSelector} />
+        <Stack.Screen name="TesttextInput"component={TesttextInput} />
 
 
 

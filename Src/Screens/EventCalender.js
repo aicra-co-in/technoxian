@@ -99,7 +99,7 @@ const EventCalender = () => {
         //  filter={true} 
          scan={true}  
          source={require('../Assets/Images/Back.png')}
-         onPress={()=>navigation.navigate('HomeScreen')}
+         onPress={()=>navigation.goBack()}
          />
      
       <FlatList

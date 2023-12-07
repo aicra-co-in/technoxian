@@ -10,6 +10,7 @@ const removeHtmlTags = (htmlString) => {
 };
 
 const ViewNews = ({data}) => {
+
     imagepath="https://futuretech.media/wp-content/uploads/";
     const route = useRoute();
     return (

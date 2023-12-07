@@ -13,3 +13,5 @@ export const Sliderimg=DevServerUrl+'/Home_Slider'
 export const WrcTeam=DevServerUrl+'/TX_WRC_Team.php'
 export const forgrtPassword=DevServerUrl+'/Forgot_Password.php'
 export const WrcUpdate=DevServerUrl+'/club_data_update'
+export const roboClubCompitition=DevServerUrl+'/wrc-competition-apply'
+

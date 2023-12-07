@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import Colors from '../Assets/Theme/Theme';
 import CustomHeader from '../Component/CustomHeader';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignupSchema = Yup.object().shape({
   userId: Yup.string().min(10).max(25).required('Required'),
@@ -41,7 +42,9 @@ const RoboclubLogin = () => {
 
       console.log('Response:', response.data);
       if (response.data.error === false) {
+        await AsyncStorage.setItem('Club_id', values.userId);
         navigation.navigate('RoboClubDeshBoard', {
+          
             userId: values.userId,
           });
       } else {
@@ -89,7 +92,7 @@ handleLoginRequest()
                 />
 
                 <CustomInput
-                  placeholder="Email address"
+                  placeholder="Enter Club ID"
                   name="userId"
                   value={values.userId}
                   onChange={handleChange('userId')}

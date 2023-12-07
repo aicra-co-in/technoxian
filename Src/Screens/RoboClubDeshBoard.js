@@ -27,7 +27,7 @@ const data = [
     id:4,
     img: require('../Assets/Images/Mgroup.png'),
     text: 'Apply Wrc Compitition',
-    screen:'ApplyWrcCompitition'
+    screen:'WrcChalengesRegistration'
   },
   {
     id:5,

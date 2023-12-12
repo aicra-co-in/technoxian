@@ -14,4 +14,15 @@ export const WrcTeam=DevServerUrl+'/TX_WRC_Team.php'
 export const forgrtPassword=DevServerUrl+'/Forgot_Password.php'
 export const WrcUpdate=DevServerUrl+'/club_data_update'
 export const roboClubCompitition=DevServerUrl+'/wrc-competition-apply'
-
+export const ClubMemberlistApi=DevServerUrl
+export const OtpVarificationApi=DevServerUrl+'/OTP_Verification'
+export const ForgetpassApi=DevServerUrl+'/Forgot_Password.php'
+export const UserLoginApi=DevServerUrl+'/user_Login.php'
+export const ResetPassApi=DevServerUrl+'/Change_Password'
+export const RoboClubLoginApi=DevServerUrl+'/login.php'
+export const UserRegistrationApi=DevServerUrl+'/user_Registration.php'
+export const AddListApi=DevServerUrl+'/club_member_add'
+export const CaptopnListApi=DevServerUrl
+export const PaymentSuccess=DevServerUrl+'/wrc-competition-payment-success.php'
+export const StateApi=DevServerUrl
+export const CityApi=DevServerUrl

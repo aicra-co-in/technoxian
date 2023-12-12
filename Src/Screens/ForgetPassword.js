@@ -5,14 +5,15 @@ import CustomInput from '../Component/CustomInput';
 import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import { forgrtPassword } from '../restApi/Apiconfig';
+import { ForgetpassApi, forgrtPassword } from '../restApi/Apiconfig';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import CustomHeader from '../Component/CustomHeader';
 const SignupSchema = Yup.object().shape({
 
 
-  Email: Yup.string().email('Invalid email').trim()
+  email: Yup.string().email('Invalid email').trim()
     .min(10)
     .max(25)
     .required('Required')
@@ -22,7 +23,7 @@ const SignupSchema = Yup.object().shape({
 
 const ForgetPassword = () => {
   const initialValues = {
-    Email: '',
+    email: '',
   };
 
   const navigation = useNavigation();
@@ -56,10 +57,10 @@ const ForgetPassword = () => {
   const ForgetApi = async (value) => {
     try {
       const formData = new FormData();
-      formData.append('Email', value.Email);
+      formData.append('Email',value.Email);
 
       const response = await axios.post(
-        'https://api.technoxian.com/development/Forgot_Password.php',
+       ForgetpassApi,
         formData,
         {
           headers: {
@@ -93,16 +94,24 @@ const ForgetPassword = () => {
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
         <ScrollView style={styles.container}>
+          <CustomHeader
+        back={true}
+        // notification={true}
+        // scan={true}
+        source={require('../Assets/Images/Back.png')}
+        // title={'User'}
+        onPress={() => navigation.goBack()}
+      />
           <Text style={[styles.heading, { marginTop: 20 }]}>Forget Password?</Text>
           <Image source={require('../Assets/Images/ForgetPassword.png')} style={styles.img} />
           <Text style={styles.text}>Input the email associated with your account.</Text>
           <CustomInput
             placeholder="Email address"
-            name="Email"
-            value={values.Email}
-            onChange={handleChange('Email')}
-            onBlur={handleBlur('Email')}
-            error={errors.Email}
+            name="email"
+            value={values.email}
+            onChange={handleChange('email')}
+            onBlur={handleBlur('email')}
+            error={errors.email}
           />
           <View style={{ marginTop: 20 }}>
             <CustomButton

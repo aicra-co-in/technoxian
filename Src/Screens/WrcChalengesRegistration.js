@@ -19,6 +19,7 @@ import Colors from '../Assets/Theme/Theme';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { requireNativeComponent } from 'react-native';
 import { Caption } from 'react-native-paper';
+import CustomHeader from '../Component/CustomHeader';
 
 const Country = [
     { label: "Innovation Contest", value: "1" },
@@ -81,7 +82,7 @@ const WrcChalengesRegistration = () => {
     const [list, setList] = useState([])
     const [selectList, setSelectList] = useState(null);
     const [clubid, setclubid] = useState(null)
-
+    const [multipleData, setmultipleData] = useState([]);
 
     const [text, onChangeText] = useState('');
 
@@ -156,7 +157,7 @@ const WrcChalengesRegistration = () => {
     };
 
     const handleConfirm = (date) => {
-       
+
         hideDatePicker();
 
         // Use toLocaleDateString to convert the date to a string
@@ -177,7 +178,7 @@ const WrcChalengesRegistration = () => {
     const RegistrationApi = async (value) => {
 
         console.log('========>>>>>ppppp', value)
-     
+
 
 
         try {
@@ -188,18 +189,18 @@ const WrcChalengesRegistration = () => {
             data.append('mentor_profile', profile.label);
             data.append('mentor_email', value.email);
             data.append('mentor_mobile', '');
-            data.append('club_name', '');
+            data.append('club_name', value.clubname);
             data.append('RoboClub_idcrt', '');
             data.append('city', selectCity.label);
             data.append('state', selectedState.label);
             data.append('country', selectedCountry.label);
             data.append('dob', selectedDate);
-            data.append('Seleccategory', '');
+            data.append('Seleccategory', multipleData);
             data.append('collage_name', value.institutename);
             data.append('captain_membership', '');
             data.append('captain_name', selectCaptain.label);
             data.append('captain_mobile', value.mobile);
-            data.append('captain_email', '');
+            data.append('captain_email', value.email);
 
 
             const responce = await axios.post(roboClubCompitition,
@@ -209,11 +210,14 @@ const WrcChalengesRegistration = () => {
                         'Content-Type': 'multipart/form-data',
                     },
                 })
-            console.log('signUp------>>>', responce.data.wrcid)
+            console.log('signUp------>>>', responce.data)
+            console.log('payment', responce.data.event_fee)
+            console.log('paymentCountry', responce.data.country)
+
             console.log('print value', value)
-            
+
             if (responce.data.message === "WRC Member Add successfully.") {
-                navigation.navigate('ShowPaymentOptions',{value:value,wrcId:responce.data.wrcid})
+                navigation.navigate('ShowPaymentOptions', { value: value, wrcId: responce.data.wrcid, payment: responce.data.event_fee, country: responce.data.country })
             }
 
         } catch (error) {
@@ -329,250 +333,262 @@ const WrcChalengesRegistration = () => {
         console.log('value', values)
         RegistrationApi(values)
     };
-
+    const handleSelectionChange = (selectedItems) => {
+        // Do something with the selected items, for example, send them to the server using Axios
+        console.log('Selected Items:', selectedItems);
+        setmultipleData(selectedItems)
+    };
     return (
-        <View style={{ flex: 1, }}>
-            <ImageBackground source={require('../Assets/Images/T-Banner.jpg')} style={{ flex: 1, width: '100%' }} resizeMode='stretch'>
-                <Formik
-                    initialValues={initialValues}
-                    onSubmit={handleSubmit}
-                    validationSchema={SignupSchema}
-                >
-                    {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched, resetForm }) => (
-                        <View style={{ padding: 15, marginTop: 90 }}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ flex: 1, backgroundColor: Colors.black, padding: 15, }}>
+            <CustomHeader
+                back={true}
+                // notification={true}
+                // scan={true}
+                source={require('../Assets/Images/Back.png')}
+                title={'Wrc Chalanges Registration'}
+                onPress={() => navigation.goBack()}
+            />
 
-                                <CustomDropDown1
-                                    bgcolor={'white'}
-                                    placeholder={'WRC Competition:*'}
-                                    validation={SignupSchema}
-                                    field="profile"
-                                    Country={Country}
-                                    onChange={(selectedItem) => {
-                                        setCompitition(selectedItem)
-                                    }}
-                                />
+            <Formik
+                initialValues={initialValues}
+                onSubmit={handleSubmit}
+                validationSchema={SignupSchema}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values, errors, setFieldTouched, resetForm }) => (
+                    <View style={{}}>
+                        <ScrollView showsVerticalScrollIndicator={false}>
 
-
-                                <CustomInput
-
-                                    placeholder="Applicant Name: *"
-                                    name="name"
-                                    value={values.name}
-                                    onChange={handleChange('name')}
-                                    onBlur={handleBlur}
-                                    error={errors.name}
-                                />
-                                <CustomDropDown1
-                                    bgcolor={'white'}
-                                    placeholder={'Profile:*'}
-                                    validation={SignupSchema}
-                                    field="profile"
-                                    Country={profile}
-                                    onChange={(selectedItem) => {
-                                        setProfile(selectedItem)
-                                    }}
-                                />
-                                <CustomInput
-
-                                    placeholder="Mobile Number: *"
-                                    name="mobile"
-                                    value={values.mobile}
-                                    onChange={handleChange('mobile')}
-                                    onBlur={handleBlur}
-                                    error={errors.mobile}
-                                    keyboardType="phone-pad"
-                                    maxLength={15}
-                                />
+                            <CustomDropDown1
+                                bgcolor={'white'}
+                                placeholder={'WRC Competition:*'}
+                                validation={SignupSchema}
+                                field="profile"
+                                Country={Country}
+                                onChange={(selectedItem) => {
+                                    setCompitition(selectedItem)
+                                }}
+                            />
 
 
+                            <CustomInput
 
+                                placeholder="Applicant Name: *"
+                                name="name"
+                                value={values.name}
+                                onChange={handleChange('name')}
+                                onBlur={handleBlur}
+                                error={errors.name}
+                            />
+                            <CustomDropDown1
+                                bgcolor={'white'}
+                                placeholder={'Profile:*'}
+                                validation={SignupSchema}
+                                field="profile"
+                                Country={profile}
+                                onChange={(selectedItem) => {
+                                    setProfile(selectedItem)
+                                }}
+                            />
+                            <CustomInput
 
-
-                                {/* Enter user Email */}
-                                <CustomInput
-                                    placeholder="Email address:*"
-                                    name="email"
-                                    value={values.email}
-                                    onChange={handleChange('email')}
-                                    onBlur={handleBlur}
-                                    error={errors.email}
-                                />
-                                <CustomInput
-
-
-                                    placeholder="Institute/College/School Name:*"
-                                    name="institutename"
-                                    value={values.institutename}
-                                    onChange={handleChange('institutename')}
-                                    onBlur={handleBlur}
-                                    error={errors.institutename}
-                                // secureTextEntry={true}
-                                />
-
-                                {/* For Password */}
-                                <TextInput
-                                    placeholder="Enter Club ID *:"
-                                    style={styles.input}
-                                    onChangeText={(newText) => onChangeText(newText)}
-                                    value={text}
-                                />
-
-
-                                <CustomInput
-
-                                    placeholder="Club Name: *"
-                                    name="clubname"
-                                    value={values.clubname}
-                                    onChange={handleChange('clubname')}
-                                    onBlur={handleBlur}
-                                    error={errors.clubname}
-                                />
+                                placeholder="Mobile Number: *"
+                                name="mobile"
+                                value={values.mobile}
+                                onChange={handleChange('mobile')}
+                                onBlur={handleBlur}
+                                error={errors.mobile}
+                                keyboardType="phone-pad"
+                                maxLength={15}
+                            />
 
 
 
 
-                                {/* {Date Picker } */}
-                                <View
+
+                            {/* Enter user Email */}
+                            <CustomInput
+                                placeholder="Email address:*"
+                                name="email"
+                                value={values.email}
+                                onChange={handleChange('email')}
+                                onBlur={handleBlur}
+                                error={errors.email}
+                            />
+                            <CustomInput
+
+
+                                placeholder="Institute/College/School Name:*"
+                                name="institutename"
+                                value={values.institutename}
+                                onChange={handleChange('institutename')}
+                                onBlur={handleBlur}
+                                error={errors.institutename}
+                            // secureTextEntry={true}
+                            />
+
+                            {/* For Password */}
+                            <TextInput
+                                placeholder="Enter Club ID *:"
+                                style={styles.input}
+                                onChangeText={(newText) => onChangeText(newText)}
+                                value={text}
+                            />
+
+
+                            <CustomInput
+
+                                placeholder="Club Name: *"
+                                name="clubname"
+                                value={values.clubname}
+                                onChange={handleChange('clubname')}
+                                onBlur={handleBlur}
+                                error={errors.clubname}
+                            />
+
+
+
+
+                            {/* {Date Picker } */}
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    borderWidth: 1,
+                                    borderRadius: 15,
+                                    borderColor: 'rgba(0, 0, 0, 0.25)',
+                                    paddingHorizontal: 16,
+                                    paddingVertical: 13,
+                                    marginTop: 10,
+                                    backgroundColor: 'white'
+                                }}>
+                                <Text
                                     style={{
-                                        flexDirection: 'row',
-                                        alignItems: 'center',
-                                        borderWidth: 1,
-                                        borderRadius: 15,
-                                        borderColor: 'rgba(0, 0, 0, 0.25)',
-                                        paddingHorizontal: 16,
-                                        paddingVertical: 13,
-                                        marginTop: 10,
-                                        backgroundColor: 'white'
+                                        flex: 1,
+                                        fontFamily: 'Gilroy-Regular',
+
+                                        paddingLeft: 6,
                                     }}>
-                                    <Text
-                                        style={{
-                                            flex: 1,
-                                            fontFamily: 'Gilroy-Regular',
+                                    {selectedDate ? selectedDate : 'Select Date of Birth'}
+                                </Text>
+                                <TouchableOpacity
+                                    onPress={() => setDatePickerVisibility(true)}>
+                                    <Image
+                                        style={{ width: 20, height: 20 }}
+                                        source={require('../Assets/Images/calendar.png')}
+                                    />
+                                </TouchableOpacity>
+                                <DateTimePickerModal
+                                    isVisible={isDatePickerVisible}
+                                    mode="date"
+                                    onConfirm={handleConfirm}
+                                    onCancel={hideDatePicker}
+                                />
 
-                                            paddingLeft: 6,
-                                        }}>
-                                        {selectedDate ? selectedDate : 'Select Date of Birth'}
-                                    </Text>
-                                    <TouchableOpacity
-                                        onPress={() => setDatePickerVisibility(true)}>
-                                        <Image
-                                            style={{ width: 20, height: 20 }}
-                                            source={require('../Assets/Images/calendar.png')}
-                                        />
-                                    </TouchableOpacity>
-                                    <DateTimePickerModal
-                                        isVisible={isDatePickerVisible}
-                                        mode="date"
-                                        onConfirm={handleConfirm}
-                                        onCancel={hideDatePicker}
+                            </View>
+
+
+                            <CustomDropDown1
+                                bgcolor={'white'}
+                                placeholder={'Country: *'}
+                                // validation={SignupSchema}
+                                // field="country"
+                                Country={countries}
+                                selectedValue={selectedCountry}
+                                onChange={(selectedItem) => {
+                                    setSelectedCountry(selectedItem);
+                                    // console.log('Selected Country ID:', selectedItem.id);
+
+                                    // Set the selected country ID in AsyncStorage
+                                    AsyncStorage.setItem('CountryId', selectedItem.id);
+
+                                    // Fetch states based on the selected country
+                                    fetchStates(selectedItem.id);
+
+                                }}
+                            />
+
+
+
+
+
+
+
+
+
+                            {/* Submit button */}
+
+
+
+                            <View style={{ flexDirection: 'row', gap: 10 }}>
+                                <View style={{ width: '49%', }}>
+                                    <CustomDropDown1
+                                        bgcolor={'white'}
+                                        placeholder={'State: *'}
+                                        // validation={SignupSchema}
+                                        // field="state"
+                                        Country={states}
+                                        selectedValue={selectedState}
+                                        onChange={(selectedItem) => {
+                                            setSelectedState(selectedItem);
+                                            // fetchCities(selectedItem.id);
+                                            AsyncStorage.setItem('stateId', selectedItem.id);
+                                            fetchCities(selectedItem.id)
+                                        }}
+                                    />
+                                </View>
+                                <View style={{ width: '47%' }}>
+                                    <CustomDropDown1
+                                        bgcolor={'white'}
+                                        placeholder={'City: *'}
+                                        // validation={SignupSchema}
+                                        // field="city"
+                                        Country={cities}
+                                        selectedState={selectCity}
+                                        onChange={(selectedItem) => {
+                                            SetSelectCity(selectedItem)
+                                        }}
                                     />
 
                                 </View>
+                            </View>
+
+                            <CustomDropDown1
+                                bgcolor={'white'}
+                                placeholder={'Select Captain:*'}
+                                validation={SignupSchema}
+                                Country={captain}
+                                selectedValue={selectCaptain}
+                                onChange={(selectedItem) => {
+                                    setSelectCaptain(selectedItem);
 
 
-                                <CustomDropDown1
-                                    bgcolor={'white'}
-                                    placeholder={'Country: *'}
-                                    // validation={SignupSchema}
-                                    // field="country"
-                                    Country={countries}
-                                    selectedValue={selectedCountry}
-                                    onChange={(selectedItem) => {
-                                        setSelectedCountry(selectedItem);
-                                        // console.log('Selected Country ID:', selectedItem.id);
+                                }}
 
-                                        // Set the selected country ID in AsyncStorage
-                                        AsyncStorage.setItem('CountryId', selectedItem.id);
+                            />
 
-                                        // Fetch states based on the selected country
-                                        fetchStates(selectedItem.id);
 
-                                    }}
+                            <MultipleSelector Country={list} onSelectionChange={handleSelectionChange} />
+
+
+
+
+                            <View style={{ marginTop: 25, marginBottom: 80 }}>
+                                <CustomButton title={'SignUp'}
+                                    backgroundColor={Colors.pink}
+                                    paddingVertical={15}
+                                    borderColor={'white'}
+                                    onPress={handleSubmit}
                                 />
+                            </View>
 
 
 
 
+                        </ScrollView>
+                    </View>
+                )}
+            </Formik>
 
-
-
-
-
-                                {/* Submit button */}
-
-
-
-                                <View style={{ flexDirection: 'row', gap: 10 }}>
-                                    <View style={{ width: '49%', }}>
-                                        <CustomDropDown1
-                                            bgcolor={'white'}
-                                            placeholder={'State: *'}
-                                            // validation={SignupSchema}
-                                            // field="state"
-                                            Country={states}
-                                            selectedValue={selectedState}
-                                            onChange={(selectedItem) => {
-                                                setSelectedState(selectedItem);
-                                                // fetchCities(selectedItem.id);
-                                                AsyncStorage.setItem('stateId', selectedItem.id);
-                                                fetchCities(selectedItem.id)
-                                            }}
-                                        />
-                                    </View>
-                                    <View style={{ width: '47%' }}>
-                                        <CustomDropDown1
-                                            bgcolor={'white'}
-                                            placeholder={'City: *'}
-                                            // validation={SignupSchema}
-                                            // field="city"
-                                            Country={cities}
-                                            selectedState={selectCity}
-                                            onChange={(selectedItem) => {
-                                                SetSelectCity(selectedItem)
-                                            }}
-                                        />
-
-                                    </View>
-                                </View>
-
-                                <CustomDropDown1
-                                    bgcolor={'white'}
-                                    placeholder={'Select Captain:*'}
-                                    validation={SignupSchema}
-                                    Country={captain}
-                                    selectedValue={selectCaptain}
-                                    onChange={(selectedItem) => {
-                                        setSelectCaptain(selectedItem);
-
-
-                                    }}
-
-                                />
-
-
-                                <MultipleSelector Country={list} />
-
-
-
-
-                                <View style={{ marginTop: 25, bottom: 10 }}>
-                                    <CustomButton title={'SignUp'}
-                                        backgroundColor={Colors.pink}
-                                        paddingVertical={15}
-                                        borderColor={'white'}
-                                        onPress={handleSubmit}
-                                    />
-                                </View>
-
-
-
-
-                            </ScrollView>
-                        </View>
-                    )}
-                </Formik>
-            </ImageBackground>
         </View>
     )
 }

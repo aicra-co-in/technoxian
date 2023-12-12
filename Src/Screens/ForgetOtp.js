@@ -13,6 +13,8 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field'; 
 import axios from 'axios';
+import { OtpVarificationApi } from '../restApi/Apiconfig';
+import CustomHeader from '../Component/CustomHeader';
 const CELL_COUNT = 4;
 
 const ForgetOtp = () => {
@@ -31,7 +33,7 @@ const ForgetOtp = () => {
         formData.append('otpcode', value);
   
         const response = await axios.post(
-          'https://api.technoxian.com/development/OTP_Verification',
+          OtpVarificationApi,
           formData,
           {
             headers: {
@@ -62,6 +64,14 @@ const handleSubmit = () => {
 
   return (
     <ScrollView style={styles.container1}>
+         <CustomHeader
+        back={true}
+        // notification={true}
+        // scan={true}
+        source={require('../Assets/Images/Back.png')}
+        // title={'User'}
+        onPress={() => navigation.goBack()}
+      />
       <Text style={[styles.heading, { marginTop: 20 }]}><Text style={{color:Colors.pink}}>Reset Password </Text> Varification</Text>
       
       <Image source={require('../Assets/Images/Verification.png')} style={styles.img} resizeMode='contain' />

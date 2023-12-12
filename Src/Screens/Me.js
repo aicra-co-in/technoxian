@@ -20,7 +20,7 @@ const Me = () => {
 
       
       <CustomHeader back={true} 
-      notification={true} 
+      // notification={true} 
       // filter={true} 
       scan={true}  
       source={require('../Assets/Images/Menu.png')}

@@ -4,6 +4,7 @@ import { Table, Row } from 'react-native-table-component';
 import CustomHeader from '../Component/CustomHeader';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { ClubMemberlistApi } from '../restApi/Apiconfig';
 
 const ClubMemberList = ({ route }) => {
   // const navigation=useNavigation()
@@ -23,7 +24,7 @@ const ClubMemberList = ({ route }) => {
   const ApiData = async () => {
     try {
       const response = await axios.get(
-        `https://api.technoxian.com/development/club_member_get?Club_id=${userId}`
+        ClubMemberlistApi+`/club_member_get?Club_id=${userId}`
       );
       setTableData(response.data.users);
     } catch (error) {

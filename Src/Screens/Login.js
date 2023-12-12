@@ -9,6 +9,7 @@ import GradientText from '../Constant/GradientText';
 import Colors from '../Assets/Theme/Theme';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserLoginApi } from '../restApi/Apiconfig';
 
 const SignupSchema = Yup.object().shape({
 
@@ -44,7 +45,7 @@ const Login = () => {
             formData.append('password', values.password);
 
             const response = await axios.post(
-                'https://api.technoxian.com/development/user_Login.php',
+                UserLoginApi,
                 formData,
                 {
                     headers: {

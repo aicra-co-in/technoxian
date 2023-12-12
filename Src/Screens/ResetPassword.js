@@ -8,6 +8,8 @@ const { height, width } = Dimensions.get('window');
 import axios from 'axios';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { ResetPassApi } from '../restApi/Apiconfig';
+import CustomHeader from '../Component/CustomHeader';
 const SignupSchema = Yup.object().shape({
 
 
@@ -44,7 +46,7 @@ const ResetPassword = () => {
       formData.append('confirm_password', values.resetpassword);
 
       const response = await axios.post(
-        'https://api.technoxian.com/development/Change_Password',
+        ResetPassApi,
         formData,
         {
           headers: {
@@ -85,6 +87,14 @@ const ResetPassword = () => {
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, resetForm }) => (
         <ScrollView style={styles.container}>
+           <CustomHeader
+        back={true}
+         notification={true}
+         scan={true}
+        source={require('../Assets/Images/Back.png')}
+        // title={'User'}
+        onPress={() => navigation.goBack()}
+      />
           <Text style={[styles.heading, { marginTop: 10 }]}> <Text style={{ color: Colors.pink }}> Reset</Text> Password
           </Text>
 

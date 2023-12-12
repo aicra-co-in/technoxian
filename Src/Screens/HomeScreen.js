@@ -64,10 +64,10 @@ const HomeScreen = ({ route }) => {
         name="Services"
         component={Services}
         options={{
-          tabBarLabel: 'Search',
+          tabBarLabel: 'Post',
           tabBarIcon: ({ color, size ,focused}) => (
             <Image
-              source={require('../Assets/Images/search1.png')}
+              source={require('../Assets/Images/video.png')}
               resizeMode='contain'
               style={{ width: 25, height: 25, tintColor: focused ? Colors.pink : Colors.white, }}
             />

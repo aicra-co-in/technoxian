@@ -1,70 +1,102 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React ,{useEffect, useState}from 'react'
-import Colors from '../Assets/Theme/Theme'
-import CustomHeader from '../Component/CustomHeader'
-import CustomButton from '../Component/CustomButton'
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import Colors from '../Assets/Theme/Theme';
+import CustomHeader from '../Component/CustomHeader';
+import CustomButton from '../Component/CustomButton';
 import RazorpayCheckout from 'react-native-razorpay';
-import {useRoute} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import axios from 'axios';
+import { PaymentSuccess } from '../restApi/Apiconfig';
+
 const ShowPaymentOptions = () => {
-    const [name,setName]=useState('')
-    const [mobile,setmobile]=useState('')
-    const [email,setemail]=useState('');
-   const [clubName,setClubName]=useState('')
-   const [getwrcId,setWrcId]=useState('')
+    const navigation = useNavigation();
+    const [name, setName] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [email, setEmail] = useState('');
+    const [clubName, setClubName] = useState('');
+    const [getwrcId, setWrcId] = useState('');
+    const [paymentdata, setPaymentData] = useState('');
+    const [paymentID, setpaymentID] = useState('');
+    const [Country, setCountry] = useState('');
     const route = useRoute();
     const { params } = route;
-    const { wrcId, value} = params || {};
+    const { wrcId, value, payment, country } = params || {};
+
     useEffect(() => {
-        console.log('value:', value.name);
-        console.log('wrcId--',wrcId)
-        setName(value.name)
-        setemail(value.email)
-        setmobile(value.mobile)
-        setClubName(value.clubname)
-        setWrcId(wrcId)
-        // console.log('additionalData:', value);
+        setName(value.name);
+        setEmail(value.email);
+        setMobile(value.mobile);
+        setClubName(value.clubname);
+        setWrcId(wrcId);
+        setPaymentData(payment);
+        setCountry(country);
     }, []);
-    const handlePayment = (value) => {
+
+    const handlePayment = () => {
+        const countryName = Country.toLowerCase();
+        const currency = countryName === 'india' ? 'INR' : 'USD';
+
         var options = {
-          description: 'Credits towards consultation',
-          image: 'https://i.imgur.com/3g7nmJC.jpg',
-          currency: 'INR',
-          key: 'rzp_test_WUfmMzVxfd8tbK',
-          amount: '295000', // Adjust the amount based on your requirements
-          name: 'TECHNOXIAN',
-          order_id: '', // Replace this with an order_id created using Orders API.
-          prefill: {
-            email: email, 
-            contact: mobile, 
-            name: name,
-          },
-          theme: { color: '#53a20e' },
-        };
-    
+            description: 'Credits towards consultation',
+            image: 'https://i.imgur.com/3g7nmJC.jpg',
+            currency: currency,
+            key: 'rzp_live_u3yEenHLKvnkIc',
+            amount: paymentdata * 100,
+            name: 'TECHNOXIAN',
+            order_id: '', // Replace this with an order_id created using Orders API.
+            prefill: {
+              email: email,
+              contact: mobile,
+              name: name,
+            },
+            theme: { color: '#FF0000' },
+          };
+
         RazorpayCheckout.open(options)
-          .then((data) => {
-            // Handle success
-            Alert.alert('Payment Success', `Payment ID: ${data.order_id}`);
-            // Additional logic based on successful payment, e.g., navigate to a success screen
-          })
-          .catch((error) => {
-            // Handle failure
-            Alert.alert('Payment Error', `Error: ${error.code} | ${error.description}`);
-            // Additional error handling logic, if needed
-          });
-      };
-   
+            .then((data) => {
+                // Handle success
+              
+                console.log(data.razorpay_payment_id)
+                setpaymentID(data.razorpay_payment_id)
+                navigation.navigate('ShowSuccesspayment');
+                handleApiPaymentGetWay();
+            })
+            .catch((error) => {
+                // Handle failure
+                Alert.alert(`Error: ${error.code} | ${error.description}`);
+            });
+    };
+
+    const handleApiPaymentGetWay = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('txnid', paymentID);
+            formData.append('wrc_id', getwrcId); // Use the actual wrcId instead of the hardcoded value
+
+            const response = await axios.post(PaymentSuccess, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('Response:', response.data);
+            // Handle the API response as needed
+        } catch (error) {
+            console.error('Error:', error);
+            // Display a user-friendly error message to the user
+            Alert.alert('Error', 'Failed to process payment. Please try again later.');
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={{ paddingHorizontal: 15 }}>
-
-                <CustomHeader back={true}
-                    //  notification={true} 
-                    //  filter={true} 
-                    //  scan={true} 
+                <CustomHeader
+                    back={true}
                     source={require('../Assets/Images/Back.png')}
                     title={'World Robotics Championship'}
-                    onPress={() => navigation.goBack()} />
+                    onPress={() => navigation.goBack()}
+                />
             </View>
             <View style={styles.card}>
           
@@ -98,44 +130,50 @@ const ShowPaymentOptions = () => {
                 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                     <Text style={styles.text}>Registration Fees</Text>
-                    <Text style={styles.text}>2950 /- INR</Text>
+                    <Text style={styles.text}>{paymentdata}</Text>
                 </View>
 
             </View>
-            <View style={{width:'40%',padding:20}}>
-                <CustomButton backgroundColor={Colors.pink}
+            <View style={{ width: '40%', padding: 20 }}>
+                <CustomButton
+                    backgroundColor={Colors.pink}
                     paddingVertical={15}
-                    borderColor={'white'} 
+                    borderColor={'white'}
                     title={'Pay Now'}
                     onPress={handlePayment}
-                 />
+                />
             </View>
         </View>
-    )
-}
-
-export default ShowPaymentOptions
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.black
+        backgroundColor: Colors.black,
     },
     card: {
         width: '90%',
         backgroundColor: Colors.card,
         alignSelf: 'center',
         padding: 20,
-        borderRadius: 25
+        borderRadius: 25,
     },
     heading: {
         fontSize: 20,
         color: Colors.white,
         alignSelf: 'center',
-        padding: 10
+        padding: 10,
+    },
+    infoRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
     },
     text: {
         fontSize: 14,
-        color: Colors.white
-    }
-})
+        color: Colors.white,
+    },
+});
+
+export default ShowPaymentOptions;

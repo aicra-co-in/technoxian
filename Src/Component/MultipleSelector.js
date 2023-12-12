@@ -3,17 +3,17 @@ import { StyleSheet, View } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const MultipleSelector = ({ Country, selectedValue, onChange, selectedState }) => {
+const MultipleSelector = ({ Country, selectedValue, onChange, selecteddata,onSelectionChange }) => {
   const [selected, setSelected] = useState([]);
 
   const dropdownData = Country || [];
 
   useEffect(() => {
     // Update the internal state when the selectedState prop changes externally
-    if (selectedState && selectedState.length > 0) {
-      setSelected(selectedState);
+    if (selecteddata && selecteddata.length > 0) {
+      setSelected(selecteddata);
     }
-  }, [selectedState]);
+  }, [selecteddata]);
 
   const handleSelectionChange = (selectedItems) => {
     setSelected(selectedItems);
@@ -22,6 +22,9 @@ const MultipleSelector = ({ Country, selectedValue, onChange, selectedState }) =
     // Call the provided onChange function with the selected items
     if (onChange) {
       onChange(selectedItems);
+    }
+    if (onSelectionChange) {
+      onSelectionChange(selectedItems);
     }
   };
 

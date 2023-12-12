@@ -13,6 +13,7 @@ const User = () => {
   const [name, getName] = useState('');
   const [Email, getEmail] = useState('');
   const [Phone, getPhone] = useState('');
+  const [guestUser, setGuestUser] = useState(true);
   const navigation = useNavigation();
   const route = useRoute();
   const user_id = route.params?.user_id;
@@ -26,17 +27,17 @@ const User = () => {
         const User_phone = await AsyncStorage.getItem('user_Phone');
         const userImageUri = await AsyncStorage.getItem('userImageUri');
 
-        console.log(user_id1);
-        setUserId(user_id1);
-        getName(user_Name);
-        getEmail(user_Email);
-        getPhone(User_phone);
-        setSelectedImage(userImageUri);
-        console.log('Selected Image URI:', userImageUri);
-
-
-       
-
+        if (user_id1) {
+          setGuestUser(false); // If user_id exists, it's not a guest user
+          setUserId(user_id1);
+          getName(user_Name);
+          getEmail(user_Email);
+          getPhone(User_phone);
+          setSelectedImage(userImageUri);
+          console.log('Selected Image URI:', userImageUri);
+        } else {
+          setGuestUser(true); // If user_id doesn't exist, it's a guest user
+        }
       } catch (error) {
         console.error('Error getting user data:', error);
       }
@@ -44,6 +45,7 @@ const User = () => {
 
     getUserData();
   }, []);
+
 
   const handleImagePicker = () => {
     ImagePicker.openPicker({
@@ -92,12 +94,20 @@ const User = () => {
     <View style={styles.container}>
       <CustomHeader
         back={true}
-        notification={true}
+        // notification={true}
         scan={true}
         source={require('../Assets/Images/Back.png')}
-        title={'Menu'}
+        title={'User'}
         onPress={() => navigation.goBack()}
       />
+       {guestUser ? (
+        <View style={{alignItems:'center',flex:1,justifyContent:'center'}}>
+
+        <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center', marginTop: 10, }}>
+          You are Login as  guest user
+        </Text>
+        </View>
+      ) : (
       <View style={{ width: '89%', backgroundColor: Colors.card, alignSelf: 'center', paddingVertical: 8, borderRadius: 20 }}>
         <View style={styles.imageContainer}>
         <TouchableOpacity onPress={handleImagePicker} style={styles.img}>
@@ -111,6 +121,8 @@ const User = () => {
 </TouchableOpacity>
 
         </View>
+
+       
         <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center', marginTop: 10 }}>
           User Id: {useId}
         </Text>
@@ -129,6 +141,7 @@ const User = () => {
           </Text>
         </View>
       </View>
+       )}
       <View style={styles.separator} />
     </View>
   );

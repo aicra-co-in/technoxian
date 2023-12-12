@@ -1,23 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Colors from '../Assets/Theme/Theme'
+import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import Colors from '../Assets/Theme/Theme';
+import { WebView } from 'react-native-webview';
 
 const TxStore = () => {
   return (
-    <View style={styles.container}>
-      <Text style={{color:'white',fontSize:20}}>TxStore Working On it</Text>
-    </View>
-  )
-}
+    
+      <WebView source={{ uri: 'https://abiraworld.com/store/' }} style={{ flex: 1 }} />
+   
+  );
+};
 
-export default TxStore
+export default TxStore;
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-  backgroundColor:Colors.black,
-    padding:15,
-    alignItems:'center',
-    justifyContent:'center'
-  }
-})
+  container: {
+    flex: 1,
+    backgroundColor: Colors.black,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

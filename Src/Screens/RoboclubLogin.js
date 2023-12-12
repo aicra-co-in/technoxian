@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { StyleSheet, View, ScrollView, KeyboardAvoidingView ,Text} from 'react-native';
+import { StyleSheet, View, ScrollView, KeyboardAvoidingView ,Text,Image} from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import CustomInput from '../Component/CustomInput';
@@ -9,6 +9,7 @@ import Colors from '../Assets/Theme/Theme';
 import CustomHeader from '../Component/CustomHeader';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RoboClubLoginApi } from '../restApi/Apiconfig';
 
 const SignupSchema = Yup.object().shape({
   userId: Yup.string().min(10).max(25).required('Required'),
@@ -31,7 +32,7 @@ const RoboclubLogin = () => {
       formData.append('Password', values.Password);
 
       const response = await axios.post(
-        'https://api.technoxian.com/development/login.php',
+       RoboClubLoginApi,
         formData,
         {
           headers: {
@@ -90,7 +91,7 @@ handleLoginRequest()
                   title={'TECHNOXIAN ROBOCLUB LOGIN'}
                   onPress={() => navigation.navigate('HomeScreen')}
                 />
-
+           <Image source={require('../Assets/Images/download.jpg')} style={{borderRadius:30,height:170,alignSelf:"center",marginTop:30}}/>
                 <CustomInput
                   placeholder="Enter Club ID"
                   name="userId"

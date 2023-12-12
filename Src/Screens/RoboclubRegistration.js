@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput } from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput ,Alert} from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -44,7 +44,7 @@ import CustomHeader from '../Component/CustomHeader'
 import CustomDropDown from '../Component/CustomDropDown';
 import CustomDropDown1 from '../Component/CustomDropDown1';
 import axios from 'axios';
-import { countryapi, roboregistration } from '../restApi/Apiconfig';
+import { CityApi, StateApi, countryapi, roboregistration } from '../restApi/Apiconfig';
 
 const RoboclubRegistration = () => {
     const navigation=useNavigation()
@@ -95,7 +95,7 @@ const RoboclubRegistration = () => {
 
             // Make sure countryId is not null or undefined before proceeding
             if (countryId) {
-                const response = await axios.get(`https://api.technoxian.com/development/getState.php?id=${countryId}`);
+                const response = await axios.get(StateApi+`/getState.php?id=${countryId}`);
                 // console.log(response)
                 const stateNames = response.data.users.map(state => ({
                     label: state.statename,
@@ -127,7 +127,7 @@ const RoboclubRegistration = () => {
         try {
             stateId = await AsyncStorage.getItem('stateId')
             if (stateId) {
-                const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${stateId}`);
+                const response = await axios.get(CityApi+`/getCity.php?id=${stateId}`);
                 //  console.log(response.data)
                 const cityNames = response.data.users.map(city => ({
                     label: city.cityName,
@@ -194,6 +194,7 @@ const RoboclubRegistration = () => {
             if (responce.data.error === 'false') {
             
                 navigation.navigate('RoboclubLogin'); 
+                Alert.alert( 'Success! Club registration has been completed successfully. Your RoboClub ID and password have been sent to the email you provided');
             }
         } catch (error) {
             console.log(responce.error)
@@ -225,7 +226,7 @@ const RoboclubRegistration = () => {
                 //   filter={true} 
                 // scan={true}
                 source={require('../Assets/Images/Back.png')}
-                title={'Technoxian Club Registration'}
+                title={'Technoxian RoboClub Registration'}
                 onPress={() => navigation.navigate('Menu')} />
 
             <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }}>
@@ -316,7 +317,7 @@ const RoboclubRegistration = () => {
 
                                     <CustomInput
 
-                                        placeholder="Club_Captain: *"
+                                        placeholder="Club Captain: *"
                                         name="captain"
                                         value={values.captain}
                                         onChange={handleChange('captain')}

@@ -8,8 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 const data = [
     { id: '1', text: "WRC Challenges",screen:'WRCChalanges' },
     { id: '2', text: "Event Calendar" ,screen:'EventCalender'},
-    { id: '3', text: "WRC Registration form" ,screen:'RegistrationComponent'},
-    { id: '4', text: "Robo Club",screen:'Ruboclub' },
+    { id: '3', text: "WRC Registration form" ,screen:'WrcChalengesRegistration'},
+    { id: '4', text: "Robo Club",screen:'RoboclubRegistration' },
     { id: '5', text: "TX Membership" ,screen:'TxMembership'},
     { id: '6', text: "Workshop" ,screen:'Workshop'},
     { id: '7', text: "Volunteer" ,screen:'Voluenter'},
@@ -47,7 +47,7 @@ const Menu = () => {
   return (
     <View style={styles.container}>
       <CustomHeader back={true} 
-      notification={true} 
+      // notification={true} 
       // filter={true} 
       scan={true}  
       source={require('../Assets/Images/Back.png')}

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import CustomHeader from '../Component/CustomHeader';
 import axios from 'axios';
 import CustomButton from '../Component/CustomButton';
+import { AddListApi } from '../restApi/Apiconfig';
 
 const TestList = ({ route }) => {
   const navigation = useNavigation();
@@ -28,7 +29,7 @@ const TestList = ({ route }) => {
       data.append('State', 'Delhi');
       data.append('Country', 'India');
 
-      const res = await axios.post('https://api.technoxian.com/development/club_member_add', data, {
+      const res = await axios.post(AddListApi, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

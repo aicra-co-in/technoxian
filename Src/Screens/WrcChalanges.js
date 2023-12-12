@@ -13,7 +13,7 @@ const WRCChalanges = () => {
   return (
     <View style={styles.container}>
          <CustomHeader back={true} 
-         notification={true} 
+        //  notification={true} 
         //  filter={true} 
          scan={true} 
          source={require('../Assets/Images/Back.png')}

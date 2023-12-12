@@ -11,7 +11,7 @@ import CustomcountryPicker from '../Constant/CustomcountryPicker';
 import Feather from 'react-native-vector-icons/Feather';
 import CheckBox from '@react-native-community/checkbox';
 import axios from 'axios';
-import { UserRegistration } from '../restApi/Apiconfig';
+import { UserRegistration, UserRegistrationApi } from '../restApi/Apiconfig';
 import CountryPicker from 'react-native-country-picker-modal';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ShowMessageNotification from '../Constant/ShowMessage';
@@ -76,7 +76,7 @@ const SignUp = () => {
       formData.append('password', values.password);
 
       const response = await axios.post(
-        'https://api.technoxian.com/development/user_Registration.php',
+        UserRegistrationApi,
         formData,
         {
           headers: {

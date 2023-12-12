@@ -75,7 +75,7 @@ import CustomHeader from '../Component/CustomHeader'
 import CustomDropDown from '../Component/CustomDropDown';
 import CustomDropDown1 from '../Component/CustomDropDown1';
 import axios from 'axios';
-import { WrcUpdate, countryapi, roboregistration } from '../restApi/Apiconfig';
+import { CityApi, StateApi, WrcUpdate, countryapi, roboregistration } from '../restApi/Apiconfig';
 
 const RoboClubUpdate = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -130,7 +130,7 @@ const RoboClubUpdate = () => {
 
             // Make sure countryId is not null or undefined before proceeding
             if (countryId) {
-                const response = await axios.get(`https://api.technoxian.com/development/getState.php?id=${countryId}`);
+                const response = await axios.get(StateApi+`/getState.php?id=${countryId}`);
                 // console.log(response)
                 const stateNames = response.data.users.map(state => ({
                     label: state.statename,
@@ -162,7 +162,7 @@ const RoboClubUpdate = () => {
         try {
             stateId = await AsyncStorage.getItem('stateId')
             if (stateId) {
-                const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${stateId}`);
+                const response = await axios.get(CityApi+`/getCity.php?id=${stateId}`);
                 //  console.log(response.data)
                 const cityNames = response.data.users.map(city => ({
                     label: city.cityName,

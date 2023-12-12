@@ -68,8 +68,8 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
           {/* Conditionally render additional information based on numColumns */}
           {numColumns === 1 && (
             <>
-              <Text style={{ fontSize: 13, color: 'white' }}>{item.date}</Text>
-              <Text style={{ color: 'white', fontSize: 13 }}>{item.venue}</Text>
+              {/* <Text style={{ fontSize: 13, color: 'white' }}>{item.date}</Text> */}
+              {/* <Text style={{ color: 'white', fontSize: 13 }}>{item.venue}</Text> */}
             </>
           )}
         </View>

@@ -10,7 +10,8 @@ const Slider_Image = () => {
   const [images, setImages] = useState([]);
 
   const handleImagePress = (index) => {
-    console.warn(`image ${index} pressed`);
+    // console.warn(`image ${index} pressed`);
+    console.log('imagePresed')
   };
 
 const sliderApi=async()=>{

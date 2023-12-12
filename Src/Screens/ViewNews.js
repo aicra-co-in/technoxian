@@ -6,7 +6,7 @@ import {useRoute} from '@react-navigation/native';
 
 const removeHtmlTags = (htmlString) => {
   // Regular expression to remove HTML tags, <li>, <ul>, and consecutive spaces and newline characters
-  return htmlString.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>|<li>|<\/li>|<ul>|<\/ul>|\s+/gmi, ' ').trim();
+  return htmlString.replace(/<[^>]+>/g, '').trim();
 };
 
 const ViewNews = ({data}) => {
@@ -14,7 +14,17 @@ const ViewNews = ({data}) => {
     imagepath="https://futuretech.media/wp-content/uploads/";
     const route = useRoute();
     return (
-        <View style={{flex: 1, backgroundColor: '#000'}}>
+        <View style={{flex: 1, backgroundColor: '#000',padding:15}}>
+         <CustomHeader
+                back={true}
+                // notification={true}
+                // scan={true}
+                source={require('../Assets/Images/Back.png')}
+                // title={'Wrc Chalanges Registration'}
+                onPress={() => navigation.goBack()}
+            />
+
+
           <Image
            source={{ uri: imagepath + route.params.data.featured_image_url }}
             style={{width: '100%', height: 200}}

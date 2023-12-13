@@ -17,12 +17,17 @@ const TermAndCodition = () => {
       onPress={()=>navigation.navigate('SignUp')}/>
       {/* <Text style={{alignSelf:'center',fontSize:20,color:Colors.white}}>Term And Conditions</Text> */}
       <Text style={styles.text}>
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-         piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard 
-         McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the 
-         more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the 
-         cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+      Technoxian.com recognizes the importance of protecting the privacy of the personal 
+      information collected, especially with respect to children’s privacy. We are committed to safeguarding the 
+      online privacy of our users and do not intend to share, rent, or sell event Organizer’s information to any third party.
+      This policy does not apply to the practices of companies or organizations that technoxian.com does not own or control or to 
+      people that technoxian.com does not manage or employ. This policy also does not apply to sites with which technoxian.com may
+       be linked.
+       Technoxian.com does not collect personal information about registrants (name, address, email, hobbies) unless they provide
+        it to us voluntarily and knowingly. Whenever technoxian.com does collect personal information, we will explicitly notify 
+        users that we are doing so. Children (under the age of 13) are not eligible to use the Website unsupervised and if you 
+        are under 13, we ask that you do not give any personal information to us. If you are under the age of 13, you may only 
+        use this Website under the supervision of your parent or guardian.
       </Text>
     </View>
   )
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
 
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     color:Colors.white,
     marginTop:20
 

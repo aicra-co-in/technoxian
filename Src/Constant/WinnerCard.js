@@ -1,8 +1,8 @@
-import { FlatList, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
+import { FlatList, Image, ImageBackground, StyleSheet, Text, Touchable, View ,TouchableOpacity} from 'react-native';
+import React, { useEffect, useState } from 'react';
 import Colors from '../Assets/Theme/Theme';
 import axios from 'axios';
-import { WrcTeam } from '../restApi/Apiconfig';
+import { ClubImagePath, WrcTeam, WrcTeamApi } from '../restApi/Apiconfig';
 
 const data = [
   {
@@ -37,13 +37,15 @@ const data = [
 
 
 const WinnerCard = () => {
+  const imagePath=ClubImagePath
 
-
+const [information,setInformation]=useState([])
   const getApi = async () => {
     try {
       // Assuming Axios is properly imported and WrcTeam is a valid URL
-      const response = await axios.get(WrcTeam);
-      // console.log(response.data.users);
+      const response = await axios.get(WrcTeamApi);
+       console.log(response.data.team);
+       setInformation(response.data.team)
     } catch (error) {
       console.log(error);
     }
@@ -56,26 +58,29 @@ const WinnerCard = () => {
   
   
   const renderItem = ({ item }) => {
-    return (
-      <View style={{ marginHorizontal: 5 ,backgroundColor:Colors.card,borderRadius:20,padding:10,flex:1}}>
-        <ImageBackground source={item.imgbg} style={{ height: 130, width: 170,  }} resizeMode='contain'>
-          <View style={{ flexDirection: 'row',justifyContent:'space-between', flex:1}}>
-            <View>
-              <Image source={item.img} resizeMode='contain' style={{ height: 37, width: 37 }} />
-              <Text style={[styles.text,{marginTop:30,}]}>{item.text}</Text>
-              <Text style={styles.text}>{item.text1}</Text> 
-            </View>
-            <Image source={item.user} resizeMode='contain' style={{ height: 135, width: 125, }} />
-          </View>
-        </ImageBackground>
-      </View>
-    );
+    // Check if the image URL is not an empty string
+    if (item.Club_img !== '') {
+      return (
+        <View style={{ marginHorizontal: 5, backgroundColor: Colors.card, borderRadius: 20, padding: 10, flex: 1,width:200 ,alignItems:'center'}}>
+          <TouchableOpacity>
+            <Image source={{ uri: imagePath + item.Club_img }} style={{ height: 60, width: 60, borderRadius: 30, alignSelf: "center" }} resizeMode='contain' />
+            <Text style={styles.text}>{item.captain_name}</Text>
+            {/* <Text style={styles.text}>{item.mentor_name}</Text> */}
+            <Text style={styles.text}>{item.club_name}</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  
+    // If Club_img is an empty string, return null (or any other fallback UI)
+    return null;
   };
+  
 
   return (
     <View style={{}}>
       <FlatList
-        data={data}
+        data={information}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         horizontal
@@ -92,5 +97,6 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 18,
     // marginTop: 30,
+    alignSelf:'center'
   },
 });

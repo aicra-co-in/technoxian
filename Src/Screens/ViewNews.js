@@ -6,12 +6,14 @@ import {useRoute} from '@react-navigation/native';
 
 const removeHtmlTags = (htmlString) => {
   // Regular expression to remove HTML tags, <li>, <ul>, and consecutive spaces and newline characters
-  return htmlString.replace(/<[^>]+>/g, '').trim();
+  return htmlString.replace(/<[^>]+>/g, ' ') // Remove HTML tags
+  .replace(/\s+/g, ' ')      // Replace consecutive spaces with a single space
+  .trim(); ;
 };
 
 const ViewNews = ({data}) => {
 
-    imagepath="https://futuretech.media/wp-content/uploads/";
+    
     const route = useRoute();
     return (
         <View style={{flex: 1, backgroundColor: '#000',padding:15}}>
@@ -21,51 +23,37 @@ const ViewNews = ({data}) => {
                 // scan={true}
                 source={require('../Assets/Images/Back.png')}
                 // title={'Wrc Chalanges Registration'}
-                onPress={() => navigation.goBack()}
+                onPress={() => navigation.navigate('Me')}
             />
 
 
           <Image
-           source={{ uri: imagepath + route.params.data.featured_image_url }}
-            style={{width: '100%', height: 200}}
+           source={{ uri: route.params.data. yoast_head_json.og_image[0].url }}
+            style={{ height: 200,borderRadius:30}}
           />
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: '800',
-              color: '#fff',
-              marginTop: 10,
-              alignSelf: 'center',
-    
-              width: '94%',
-            }}>
-            {route.params.data.post_title}
-          </Text>
-          <Text
-            style={{
-              fontSize: 14,
-              fontWeight: '600',
-              color: '#fff',
-              marginTop: 10,
-              alignSelf: 'center',
-    
-              width: '94%',
-            }}>
-            {route.params.data.post_date}
-          </Text>
+           <Text style={styles.dateText}>{route.params.data.title.rendered}</Text>
+          
+          
           <ScrollView>
             <Text
             style={{
               fontSize: 12,
               fontWeight: '600',
               color: '#fff',
-              marginTop: 10,
+             
               alignSelf: 'center',
               textAlign:'left',
     
               width: '94%',
+             
             }}>
-            {removeHtmlTags(route.params.data.post_content)}
+            {removeHtmlTags(route.params.data.content.rendered
+            .replace(/<[^>]+>/g, '')
+            .replace(/[^\w\s]/gi, '')
+            .replace(/\d+/g, '')
+            .split(' ')
+            .slice(0, 1000)
+            .join(' '))}
           </Text>
           </ScrollView>
           {/* <Text
@@ -108,5 +96,13 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         color: Colors.white
-    }
+    },
+    dateText: {
+      fontSize: 16,
+      color: Colors.white,
+      paddingHorizontal:10,
+    marginTop:30,
+      fontWeight:'bold',
+      padding:2,
+    },
 })

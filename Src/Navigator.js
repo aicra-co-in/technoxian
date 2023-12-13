@@ -56,6 +56,7 @@ import MultipleSelector from "./Component/MultipleSelector";
 import ShowPaymentOptions from "./Screens/ShowPaymentOptions";
 import TesttextInput from "./Constant/TesttextInput";
 import ShowSuccesspayment from "./Screens/ShowSuccesspayment";
+import TermAndCondictions from "./Screens/TermAndCondictions";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -66,7 +67,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"NewsCard"}>
+        initialRouteName={"SpleshScreen"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -122,6 +123,7 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="MultipleSelector"component={MultipleSelector} />
         <Stack.Screen name="TesttextInput"component={TesttextInput} />
         <Stack.Screen name="ShowSuccesspayment"component={ShowSuccesspayment} />
+        <Stack.Screen name="TermAndCondictions"component={TermAndCondictions} />
 
 
 

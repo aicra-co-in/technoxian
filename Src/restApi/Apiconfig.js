@@ -26,3 +26,16 @@ export const CaptopnListApi=DevServerUrl
 export const PaymentSuccess=DevServerUrl+'/wrc-competition-payment-success.php'
 export const StateApi=DevServerUrl
 export const CityApi=DevServerUrl
+export const upcommingnewsApi='https://futuretech.media/wp-json/wp/v2/posts/'
+export const WrcTeamApi=DevServerUrl+'/TX_WRC_Team.php'
+
+
+
+
+
+
+
+// {Image Path=====--------}
+
+export const ClubImagePath='https://roboclub.technoxian.com/mydoc/'
+export const cardImage='https://api.technoxian.com/development/document/'

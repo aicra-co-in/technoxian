@@ -227,7 +227,7 @@ const RoboclubRegistration = () => {
                 // scan={true}
                 source={require('../Assets/Images/Back.png')}
                 title={'Technoxian RoboClub Registration'}
-                onPress={() => navigation.navigate('Menu')} />
+                onPress={() => navigation.navigate('Me')} />
 
             <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }}>
                 <KeyboardAvoidingView>

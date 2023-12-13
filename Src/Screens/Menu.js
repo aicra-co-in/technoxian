@@ -17,6 +17,7 @@ const data = [
     { id: '9', text: "TX Shopee",screen:'TxShope' },
     { id: '10', text: "Live Support" ,screen:'LiveSupport'},
     { id: '11', text: "Refer and earn",screen:'ReffferAndEarn' },
+    { id: '12', text: "TermAndCondictions",screen:'TermAndCondictions' },
 ]
 
 const Menu = () => {
@@ -52,7 +53,7 @@ const Menu = () => {
       scan={true}  
       source={require('../Assets/Images/Back.png')}
       title={'Menu'}
-      onPress={()=>navigation.goBack()}/>
+      onPress={()=>navigation.navigate('Me')}/>
       <View style={styles.imageContainer}>
         <TouchableOpacity onPress={handleImagePicker} style={styles.img}>
           {selectedImage ? <Image source={{ uri: selectedImage }} style={styles.selectedImage} />:<Image source={require('../Assets/Images/Robo.png')} style={{height:70,width:70,borderRadius:50}}/>}

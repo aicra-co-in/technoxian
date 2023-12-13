@@ -1,20 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
 import axios from 'axios';
 import Colors from '../Assets/Theme/Theme';
 import { useNavigation } from '@react-navigation/native';
+import { upcommingnewsApi } from '../restApi/Apiconfig';
 
 const NewsCard = () => {
   const navigation = useNavigation();
   const [news, setNews] = useState([]);
+  const [blogImage, setBlogImage] = useState('');
+
+  const images = [
+    {
+      id: 1,
+      url: 'https://futuretech.media/wp-content/uploads/2023/12/Agritech_1699949305.webp',
+    },
+    {
+      id: 2,
+      url: 'https://www.technoxian.com/images/logo/TX-shieldlogo.png',
+    },
+  ];
 
   const renderNewsApi = async () => {
     try {
-      const response = await axios.get('https://futuretech.media/wp-json/wp/v2/posts/');
+      const response = await axios.get(upcommingnewsApi);
       if (response.data && response.data.length > 0) {
-        // setNews(response.data);
-        console.log(response.data)
         setNews(response.data)
+        console.log(response.data.title)
       } else {
         console.error('No news data found');
       }
@@ -28,14 +40,27 @@ const NewsCard = () => {
   }, []);
 
   const renderItem = ({ item }) => {
+    // console.log("item",item.yoast_head_json.og_image[0].url)
     return (
-      <View>
-        <ImageBackground source={{uri:'https://futuretech.media/wp-content/uploads/2023/12/unlocking-the-benefits-of-ai-in-education_-enhancing-learning-for-parents-and-students.png'}}
-        style={{height:120,width:'99%'}} >
-
-        <Text style={{fontSize:20,color:'red',paddingHorizontal:40}}>{item.date}</Text>
-        <Text style={{fontSize:20,color:'red',paddingHorizontal:40}}>{item.title}</Text>
-        </ImageBackground>
+      <View style={styles.newsContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('ViewNews', { data: item })}>
+          <View style={{ backgroundColor: Colors.card, width: 300, borderRadius: 20,height:220,width:300 }}>
+            <Image
+              style={{ height: 100, width: 300, borderTopLeftRadius:20,borderTopRightRadius:20 }}
+              source={{ uri: item.yoast_head_json.og_image[0].url }}
+            />
+            <Text style={styles.dateText}>{item.title.rendered}</Text>
+            <Text style={styles.contentText}>
+              {item.content.rendered
+                .replace(/<[^>]+>/g, '')
+                .replace(/[^\w\s]/gi, '')
+                .replace(/\d+/g, '')
+                .split(' ')
+                .slice(0, 35)
+                .join(' ')}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -49,7 +74,6 @@ const NewsCard = () => {
         keyExtractor={(item) => item.id.toString()}
         showsHorizontalScrollIndicator={false}
       />
-      <Text>hihihihi</Text>
     </View>
   );
 };
@@ -60,23 +84,28 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 16,
   },
-  image: {
-    width: 300,
-    height: 200,
-    marginRight: 16,
+  newsContainer: {
+    marginLeft: 10,
+    // borderRadius: 30, // Updated borderRadius to 30
+    overflow: 'hidden',
+   
   },
-  textContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    padding: 8,
+  imageBackground: {
+    height: 150,
+    width: 250,
+    borderRadius: 20,
   },
-  text: {
+  dateText: {
+    fontSize: 15,
     color: Colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
+    paddingHorizontal: 10,
+    marginTop:3,
+    fontWeight: 'bold'
   },
-  text1: {
-    color: Colors.white,
+  contentText: {
     fontSize: 14,
+    color: Colors.white,
+    padding: 10
+    // Add any other styles for the content text here
   },
 });

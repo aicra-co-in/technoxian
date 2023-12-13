@@ -35,7 +35,9 @@ sliderApi()
   return (
     <View style={styles.container}>
       <SliderBox images={images} onCurrentImagePressed={handleImagePress} 
-      ImageComponentStyle={{borderRadius: 15, width: '92%', marginTop: 5,right:15}}/>
+      ImageComponentStyle={{borderRadius: 15, width: '92%', marginTop: 5,right:15}}
+      autoplay
+  circleLoop/>
     </View>
   );
 };

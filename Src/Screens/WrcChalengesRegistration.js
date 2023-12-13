@@ -13,7 +13,7 @@ import CustomButton from '../Component/CustomButton';
 import GradientText from '../Constant/GradientText';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { countryapi, roboClubCompitition, roboregistration } from '../restApi/Apiconfig'
+import { countryapi, roboClubCompitition, roboregistration, wrcChalengesApi } from '../restApi/Apiconfig'
 import MultipleSelector from '../Component/MultipleSelector';
 import Colors from '../Assets/Theme/Theme';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -83,9 +83,10 @@ const WrcChalengesRegistration = () => {
     const [selectList, setSelectList] = useState(null);
     const [clubid, setclubid] = useState(null)
     const [multipleData, setmultipleData] = useState([]);
+    const [selectData,stSelectData]=useState(null)
 
     const [text, onChangeText] = useState('');
-
+const [detain,setDetail]=useState([])
 
     const getClubId = async () => {
         try {
@@ -173,7 +174,32 @@ const WrcChalengesRegistration = () => {
         clubname: '',
     };
 
-
+    const fetchData = async () => {
+        try {
+          const response = await axios.get(wrcChalengesApi);
+          console.log(response.data.users);
+          const compitition = response.data.users.map(item => ({
+            label: item.name,
+            value: item.venue,
+            id: item.id,
+          }));
+      
+          if (compitition.length > 0) {
+            console.log('Selected Country ID:', compitition);
+      
+            // Set the selected country ID in AsyncStorage
+            setDetail(compitition);
+            stSelectData(compitition);
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          // Handle errors as needed, e.g., show an error message to the user
+        }
+      };
+    
+      useEffect(() => {
+        fetchData();
+      }, []);
 
     const RegistrationApi = async (value) => {
 
@@ -363,7 +389,9 @@ const WrcChalengesRegistration = () => {
                                 placeholder={'WRC Competition:*'}
                                 validation={SignupSchema}
                                 field="profile"
-                                Country={Country}
+                                Country={detain}
+                                selectedValue={selectData}
+                                
                                 onChange={(selectedItem) => {
                                     setCompitition(selectedItem)
                                 }}

@@ -4,7 +4,8 @@ import Colors from '../Assets/Theme/Theme';
 import CustomButton from '../Component/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import { NewsApi } from '../restApi/Apiconfig';
+import { NewsApi, upcommingnewsApi } from '../restApi/Apiconfig';
+import { date } from 'yup';
 
 const { width, height } = Dimensions.get('window');
 
@@ -13,17 +14,32 @@ const Splesh1 = () => {
   const [newsText, setNewsText] = useState('');
   const navigation = useNavigation();
 
+  const [news, setNews] = useState([]);
 
   const renderNewsApi = async () => {
     try {
-      const response = await axios.get(NewsApi);
-      console.log("-------->>>>", response.data.users.post_content);
-      // console.log(imagepath+response.data.users.featured_image_url)
-      const plainText = response.data.users.post_content.replace(/<[^>]+>/g, '');
-      const first30Words = plainText.split(' ').slice(0, 30).join(' ');
-
-      setNewsText(first30Words);
- 
+      const response = await axios.get(upcommingnewsApi);
+     
+      
+         console.log(response.data.map((data)=>data.content.rendered.replace(/<[^>]+>/g, '')
+        .replace(/[^\w\s]/gi, '')
+        .replace(/\d+/g, '')
+        .split(' ')
+        .slice(0, 10)
+        .join(' ')))
+        setNews([
+          response.data.map((data) =>
+            data.content.rendered
+              .replace(/<[^>]+>/g, '') // Remove HTML tags
+              .replace(/[^\w\s]/gi, '') // Remove special characters
+              .replace(/\d+/g, '')      // Remove numbers
+              .split(' ')
+              .slice(0, 5)
+              .join(' ')
+          )
+        ]);
+        
+      
     } catch (error) {
       console.error('Error fetching news:', error);
     }
@@ -32,7 +48,6 @@ const Splesh1 = () => {
   useEffect(() => {
     renderNewsApi();
   }, []);
-
 
 
 
@@ -49,7 +64,7 @@ const Splesh1 = () => {
       
       <Text style={styles.text}> <Text style={{color:Colors.redsecondry}}>Latest</Text> News About All Events</Text>
       <Text style={styles.text1}>
-        {newsText}
+      {news}
       </Text>
       <View style={styles.btncontainer}>
         <View style={{ width: '35%' }}>

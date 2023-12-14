@@ -2,9 +2,11 @@ import { StyleSheet, Text, View ,ScrollView} from 'react-native'
 import React from 'react'
 import Colors from '../Assets/Theme/Theme'
 import CustomHeader from '../Component/CustomHeader'
+import { useNavigation } from '@react-navigation/native'
 
 
 const TermAndCondictions = () => {
+  const navigation=useNavigation()
   return (
     <View style={styles.container}>
       <CustomHeader back={true}
@@ -13,7 +15,7 @@ const TermAndCondictions = () => {
         // scan={true}  
         source={require('../Assets/Images/Back.png')}
         title={'Term And Conditions'}
-        onPress={() => navigation.navigate('Menu')} />
+        onPress={() => navigation.navigate('Me')} />
         <ScrollView>
       <Text style={styles.heading}>Information</Text>
       <Text style={styles.text}>These Terms of Service apply to your use of the Technoxian website (https://www.technoxian.com/) and any linked services.

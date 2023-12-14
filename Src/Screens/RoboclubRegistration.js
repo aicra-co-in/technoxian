@@ -194,7 +194,7 @@ const RoboclubRegistration = () => {
             if (responce.data.error === 'false') {
             
                 navigation.navigate('RoboclubLogin'); 
-                Alert.alert( 'Success! Club registration has been completed successfully. Your RoboClub ID and password have been sent to the email you provided');
+                Alert.alert( 'Success! Club registration has been completed successfully.');
             }
         } catch (error) {
             console.log(responce.error)

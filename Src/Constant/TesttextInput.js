@@ -28,7 +28,7 @@ const TesttextInput = () => {
     const clubId = await AsyncStorage.getItem('Club_id');
     try {
       const response = await axios.get(
-        `https://api.technoxian.com/development/wrc-captain-list?roboclub_id=${clubId}`
+        `https://api.technoxian.com/production/wrc-captain-list?roboclub_id=${clubId}`
       );
       console.log('Captain Data:', response.data);
     } catch (error) {

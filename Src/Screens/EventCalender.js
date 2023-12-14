@@ -4,7 +4,7 @@ import Calender from '../Constant/Calender';
 import Colors from '../Assets/Theme/Theme';
 import { useNavigation } from '@react-navigation/native'
 import CustomHeader from '../Component/CustomHeader';
-import { wrcChalengesApi } from '../restApi/Apiconfig';
+import { EventCalenderImage, wrcChalengesApi } from '../restApi/Apiconfig';
 import axios from 'axios';
 
 const data = [
@@ -59,7 +59,7 @@ const data = [
 ];
 
 const EventCalender = () => {
-  const imagePath='https://api.technoxian.com/development/document/'
+  const imagePath=EventCalenderImage
   const [detail,Setdetail]=useState([]);
 
   const fetchData = async () => {
@@ -106,6 +106,7 @@ const EventCalender = () => {
         data={detail}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+      
       />
     </View>
   );

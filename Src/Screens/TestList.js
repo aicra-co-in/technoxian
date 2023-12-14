@@ -11,7 +11,9 @@ const TestList = ({ route }) => {
   const navigation = useNavigation();
   const userId = route.params?.userId || 'DefaultUserId';
   const [userData, setUserData] = useState([{ name: '', email: '', mobile: '' }]);
-
+  const resetForm = () => {
+    setUserData([{ name: '', email: '', mobile: '' }]);
+  };
   useEffect(() => {
     // You can remove the API call from useEffect if it's not intended to be called on component mount
     // postApiAddlist();
@@ -37,6 +39,7 @@ const TestList = ({ route }) => {
       console.log(res.data.message)
       if(res.data.message==="Club Member Add successfully."){
         Alert.alert('Club Member Add successfully.')
+        resetForm()
       }else{
         Alert.alert(' Member Already Registered.')
       }
@@ -109,7 +112,7 @@ const TestList = ({ route }) => {
         back={true}
         title={'Dashboard    '}
         source={require('../Assets/Images/Back.png')}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigate('RoboClubDeshBoard')}
       />
       <FlatList
         data={userData}

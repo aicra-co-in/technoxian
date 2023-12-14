@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image,ScrollView } from 'react-native'
 import React from 'react'
 import Colors from '../Assets/Theme/Theme'
 import CustomHeader from '../Component/CustomHeader'
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const removeHtmlTags = (htmlString) => {
   // Regular expression to remove HTML tags, <li>, <ul>, and consecutive spaces and newline characters
@@ -12,7 +12,7 @@ const removeHtmlTags = (htmlString) => {
 };
 
 const ViewNews = ({data}) => {
-
+const navigation=useNavigation()
     
     const route = useRoute();
     return (

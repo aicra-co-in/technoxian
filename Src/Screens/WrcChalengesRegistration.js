@@ -111,7 +111,7 @@ const [detain,setDetail]=useState([])
         const clubId = await AsyncStorage.getItem('Club_id');
         try {
             const response = await axios.get(
-                `https://api.technoxian.com/development/wrc-captain-list?roboclub_id=${clubId}`
+                `https://api.technoxian.com/production/wrc-captain-list?roboclub_id=${clubId}`
             );
             console.log('Captain Data:', response.data);
             const captain_name = response.data.users.map(user => ({
@@ -292,7 +292,7 @@ const [detain,setDetail]=useState([])
 
             // Make sure countryId is not null or undefined before proceeding
             if (countryId) {
-                const response = await axios.get(`https://api.technoxian.com/development/getState.php?id=${countryId}`);
+                const response = await axios.get(`https://api.technoxian.com/production/getState.php?id=${countryId}`);
                 // console.log(response)
                 const stateNames = response.data.users.map(state => ({
                     label: state.statename,
@@ -324,7 +324,7 @@ const [detain,setDetail]=useState([])
         try {
             stateId = await AsyncStorage.getItem('stateId')
             if (stateId) {
-                const response = await axios.get(`https://api.technoxian.com/development/getCity.php?id=${stateId}`);
+                const response = await axios.get(`https://api.technoxian.com/production/getCity.php?id=${stateId}`);
                 //  console.log(response.data)
                 const cityNames = response.data.users.map(city => ({
                     label: city.cityName,

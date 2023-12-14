@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
-import { Sliderimg } from "../restApi/Apiconfig";
+import { SliderImage, Sliderimg } from "../restApi/Apiconfig";
 
 const Slider_Image = () => {
-  const imagePath='https://api.technoxian.com/development/document/'
+  const imagePath=SliderImage;
   
   const [images, setImages] = useState([]);
 
@@ -17,7 +17,7 @@ const Slider_Image = () => {
 const sliderApi=async()=>{
   try {
   const res=await axios.get(Sliderimg)
-  const imageBaseUrl = "https://api.technoxian.com/development/document/";
+  const imageBaseUrl = SliderImage;
   const mySliderData = res.data.users.map(item => `${imageBaseUrl}${item.image}`);
   // console.log("my slider data",mySliderData);
   setImages(mySliderData)

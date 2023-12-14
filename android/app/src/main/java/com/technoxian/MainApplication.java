@@ -1,4 +1,4 @@
-package com.technoxian;
+package com.tx.technoxian;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

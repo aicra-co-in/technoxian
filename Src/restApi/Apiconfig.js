@@ -1,12 +1,13 @@
-export const  DevServerUrl="https://api.technoxian.com/development";
-// export const  Production=""
+export const  DevServerUrl="https://api.technoxian.com/production";
+
+// export const  DevServerUrl="https://api.technoxian.com/development";
 // {'End Point Api'}
 export const Country=DevServerUrl+"/country.php";
 export const UserRegistration=DevServerUrl+'/user_Registration.php'
 export const countryapi=DevServerUrl+'/country.php'
 export const roboregistration=DevServerUrl+'/register'
 export const roboclublogin=DevServerUrl+'/login.php'
-export const NewsApi='https://api.technoxian.com/development/Blog'
+export const NewsApi='https://api.technoxian.com/production/Blog'
 export const wrcChalengesApi=DevServerUrl+'/WRC_Challanges'
 export const roboClub=DevServerUrl+'/club_list'
 export const Sliderimg=DevServerUrl+'/Home_Slider'
@@ -38,4 +39,7 @@ export const WrcTeamApi=DevServerUrl+'/TX_WRC_Team.php'
 // {Image Path=====--------}
 
 export const ClubImagePath='https://roboclub.technoxian.com/mydoc/'
-export const cardImage='https://api.technoxian.com/development/document/'
+export const cardImage='https://api.technoxian.com/production/document/'
+export const cardImage2='https://roboclub.technoxian.com/mydoc/'
+export const SliderImage='https://api.technoxian.com/production/document/'
+export const EventCalenderImage='https://api.technoxian.com/production/document/'

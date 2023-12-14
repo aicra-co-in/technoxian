@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ClubMemberlistApi } from '../restApi/Apiconfig';
 
 const ClubMemberList = ({ route }) => {
-  // const navigation=useNavigation()
+   const navigation=useNavigation()
   const userId = route.params?.userId || 'DefaultUserId';
   const [tableHead, setTableHead] = useState([
     'Srn',

@@ -25,7 +25,7 @@ const RoboclubLogin = () => {
   const navigation = useNavigation();
 
   const handleLoginRequest = async (values) => {
-    console.log(values)
+    // console.log(values)
     try {
       const formData = new FormData();
       formData.append('userId', values.userId);
@@ -62,9 +62,9 @@ const RoboclubLogin = () => {
     Password: '',
   };
 
-useEffect(()=>{
-handleLoginRequest()
-},[])
+// useEffect(()=>{
+// handleLoginRequest()
+// },[])
 
 
   const handleSubmit = (values) => {
@@ -89,7 +89,7 @@ handleLoginRequest()
                   back={true}
                   source={require('../Assets/Images/Back.png')}
                   title={'TECHNOXIAN ROBOCLUB LOGIN'}
-                  onPress={() => navigation.navigate('HomeScreen')}
+                  onPress={() => navigation.goBack()}
                 />
            <Image source={require('../Assets/Images/download.jpg')} style={{borderRadius:30,height:170,alignSelf:"center",marginTop:30}}/>
                 <CustomInput

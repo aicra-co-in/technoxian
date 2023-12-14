@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, Image, TouchableOpacity, Dimensions,Text } from 'react-native';
 import Colors from '../Assets/Theme/Theme';
 import axios from 'axios';
-import { roboClub, wrcChalengesApi } from '../restApi/Apiconfig';
+import { cardImage2, roboClub, wrcChalengesApi } from '../restApi/Apiconfig';
 import {useNavigation, useRoute} from '@react-navigation/native';
 const { width, height } = Dimensions.get('window');
 
@@ -18,7 +18,7 @@ const data = [
 ];
 
 const Card2 = ({ horizontal = true, numColumns = 1 }) => {
-  const imagePath='https://roboclub.technoxian.com/mydoc/'
+  const imagePath=cardImage2
   const navigation=useNavigation()
   const [detail,Setdetail]=useState([]);
   const [selectedId, setSelectedId] = useState(null);

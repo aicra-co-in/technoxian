@@ -27,7 +27,7 @@ const CodeInputComponent = () => {
         formData.append('Email', value.Email);
   
         const response = await axios.post(
-          'https://api.technoxian.com/development/Forgot_Password.php',
+          'https://api.technoxian.com/production/Forgot_Password.php',
           formData,
           {
             headers: {

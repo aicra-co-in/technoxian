@@ -59,7 +59,7 @@ const Splesh1 = () => {
   return (
     <View style={styles.container}>
       <Image source={require('../Assets/Images/Moy.png')} resizeMode='contain' style={{ height: '40%', width: '100%' }} />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
 
       
       <Text style={styles.text}> <Text style={{color:Colors.redsecondry}}>Latest</Text> News About All Events</Text>

@@ -80,7 +80,7 @@ const RegistrationComponent = () => {
                 title={'Wrc Registration    '}
                 onPress={() => navigation.navigate('Menu')} />
 
-            <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }}>
+            <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }} showsVerticalScrollIndicator={false}>
                 <KeyboardAvoidingView>
                     <Formik
                         initialValues={initialValues}

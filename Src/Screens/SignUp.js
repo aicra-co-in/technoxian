@@ -179,7 +179,7 @@ const SignUp = () => {
             </View>
 
 
-            <ScrollView style={styles.signupcontainer}>
+            <ScrollView style={styles.signupcontainer} showsVerticalScrollIndicator={false}>
 
 
 

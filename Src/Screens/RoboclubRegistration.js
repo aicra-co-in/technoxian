@@ -229,7 +229,7 @@ const RoboclubRegistration = () => {
                 title={'Technoxian RoboClub Registration'}
                 onPress={() => navigation.navigate('Me')} />
 
-            <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }}>
+            <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }} showsVerticalScrollIndicator={false}>
                 <KeyboardAvoidingView>
                     <Formik
                         initialValues={initialValues}

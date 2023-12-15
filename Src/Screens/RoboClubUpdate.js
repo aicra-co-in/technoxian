@@ -319,7 +319,7 @@ const RoboClubUpdate = () => {
                 title={'Update Club Profile'}
                 onPress={() => navigation.goBack()} />
 
-            <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }}>
+            <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }} showsVerticalScrollIndicator={false}>
                 <KeyboardAvoidingView>
                     <Formik
                         initialValues={initialValues}

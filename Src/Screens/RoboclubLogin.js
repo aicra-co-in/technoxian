@@ -83,7 +83,7 @@ const RoboclubLogin = () => {
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <View style={{ flex: 1 }}>
-            <ScrollView style={styles.signupcontainer}>
+            <ScrollView style={styles.signupcontainer} showsVerticalScrollIndicator={false}>
               <View style={styles.form}>
                 <CustomHeader
                   back={true}

@@ -34,7 +34,7 @@ const navigation=useNavigation()
            <Text style={styles.dateText}>{route.params.data.title.rendered}</Text>
           
           
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text
             style={{
               fontSize: 12,

@@ -16,7 +16,7 @@ const TermAndCondictions = () => {
         source={require('../Assets/Images/Back.png')}
         title={'Term And Conditions'}
         onPress={() => navigation.navigate('Me')} />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
       <Text style={styles.heading}>Information</Text>
       <Text style={styles.text}>These Terms of Service apply to your use of the Technoxian website (https://www.technoxian.com/) and any linked services.
 

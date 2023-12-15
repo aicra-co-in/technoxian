@@ -68,6 +68,7 @@ const Menu = () => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         // ItemSeparatorComponent={true}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

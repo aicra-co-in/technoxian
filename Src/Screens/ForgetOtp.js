@@ -63,7 +63,7 @@ const handleSubmit = () => {
 
 
   return (
-    <ScrollView style={styles.container1}>
+    <ScrollView style={styles.container1} showsVerticalScrollIndicator={false}>
          <CustomHeader
         back={true}
         // notification={true}

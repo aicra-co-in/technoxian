@@ -75,7 +75,7 @@ const RoboClubAddMember = () => {
 
 
 
-                        <ScrollView style={styles.signupcontainer}>
+                        <ScrollView style={styles.signupcontainer} showsVerticalScrollIndicator={false}>
 
 
 

@@ -57,6 +57,7 @@ import ShowPaymentOptions from "./Screens/ShowPaymentOptions";
 import TesttextInput from "./Constant/TesttextInput";
 import ShowSuccesspayment from "./Screens/ShowSuccesspayment";
 import TermAndCondictions from "./Screens/TermAndCondictions";
+import LiveClasses from "./Screens/LiveClasses";
 const Stack = createNativeStackNavigator();
 
 const Navigators = ({ Screenames }) => {
@@ -67,7 +68,7 @@ const Navigators = ({ Screenames }) => {
          
         }}
         
-        initialRouteName={"SpleshScreen"}>
+        initialRouteName={"LiveClasses"}>
         <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Splesh1" component={Splesh1}/>
@@ -124,8 +125,9 @@ const Navigators = ({ Screenames }) => {
         <Stack.Screen name="TesttextInput"component={TesttextInput} />
         <Stack.Screen name="ShowSuccesspayment"component={ShowSuccesspayment} />
         <Stack.Screen name="TermAndCondictions"component={TermAndCondictions} />
+        {/*------------------------------------ second phase start------------------------------------------ */}
 
-
+        <Stack.Screen name="LiveClasses"component={LiveClasses} />
 
       </Stack.Navigator>
     </NavigationContainer>

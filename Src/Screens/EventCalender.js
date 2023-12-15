@@ -106,7 +106,7 @@ const EventCalender = () => {
         data={detail}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-      
+      showsVerticalScrollIndicator={false}
       />
     </View>
   );

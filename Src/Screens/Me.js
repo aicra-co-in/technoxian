@@ -26,7 +26,7 @@ const Me = () => {
       source={require('../Assets/Images/Menu.png')}
       // title={'Home'}
       onPress={()=>navigation.navigate('Menu')}/>
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} >
 <SliderImage/>
       <Text style={styles.Text_heading}>WRC Challenges</Text>
       {/* <Card3/> */}

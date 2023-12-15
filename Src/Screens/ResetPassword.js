@@ -86,7 +86,7 @@ const ResetPassword = () => {
       validationSchema={SignupSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, resetForm }) => (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
            <CustomHeader
         back={true}
          notification={true}

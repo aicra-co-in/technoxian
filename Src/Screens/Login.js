@@ -107,7 +107,7 @@ const Login = () => {
                         </View>
 
 
-                        <ScrollView style={styles.signupcontainer}>
+                        <ScrollView style={styles.signupcontainer} showsVerticalScrollIndicator={false}>
 
 
 

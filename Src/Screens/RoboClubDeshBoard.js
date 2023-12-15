@@ -67,7 +67,7 @@ const RoboClubDeshBoard = ({ route }) => {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

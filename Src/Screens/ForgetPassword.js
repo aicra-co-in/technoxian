@@ -93,7 +93,7 @@ const ForgetPassword = () => {
       validationSchema={SignupSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <CustomHeader
         back={true}
         // notification={true}

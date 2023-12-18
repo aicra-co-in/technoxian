@@ -15,7 +15,7 @@ const SignupSchema = Yup.object().shape({
         .required('Required'),
 
     email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(5, 'Too Short').max(8, 'Too Long!').required('Required'),
+    password: Yup.string().min(5, 'Too Short').max(15, 'Too Long!').required('Required'),
     competition: Yup.string().required(('Please Select Completition')),
     profile: Yup.string().required(('Please Select Profile')),
     country: Yup.string().required(('Please Select Country')),

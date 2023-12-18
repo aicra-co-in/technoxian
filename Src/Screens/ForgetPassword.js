@@ -15,7 +15,7 @@ const SignupSchema = Yup.object().shape({
 
   email: Yup.string().email('Invalid email').trim()
     .min(10)
-    .max(25)
+    .max(50)
     .required('Required')
     .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
 

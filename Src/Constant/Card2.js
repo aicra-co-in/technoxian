@@ -62,9 +62,9 @@ const Card2 = ({ horizontal = true, numColumns = 1 }) => {
         <View style={{alignItems:'center',paddingHorizontal:15}}>
 
         <Image source={{ uri:imagePath + item.Club_img}} style={styles.cardImage} resizeMode='contain' />
-        <Text style={styles.text}>{item.Club_Name}</Text>
-        <Text style={{fontSize:13,color:'white'}}>{item.State}</Text>
-        <Text style={{color:'white',fontSize:13}}>{item.Country}</Text>
+        <Text style={[styles.text,{fontSize:12}]}>{item.Club_Name}</Text>
+        <Text style={{fontSize:11,color:'white'}}>{item.State}</Text>
+        <Text style={{color:'white',fontSize:10}}>{item.Country}</Text>
         </View>
       </View>
     </TouchableOpacity>

@@ -442,7 +442,7 @@ const RoboclubRegistration = () => {
                                             paddingVertical={15}
                                             onPress={handleSubmit} />
                                     </View>
-                                    <Text style={styles.text2}>Already have account?   <Text style={{ color: Colors.pink }} onPress={() => navigation.navigate('RoboclubLogin')}>Login in</Text></Text>
+                                    <Text style={styles.text2}>Already have account?   <Text style={{ color: Colors.pink }} onPress={() => navigation.navigate('RoboclubLogin')}>Login</Text></Text>
                                 </View>
                             </View>
                         )}

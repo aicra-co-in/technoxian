@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   text:{
     color:Colors.white,
-    fontSize:15,
+    fontSize:12,
     marginTop:6
   }
 });

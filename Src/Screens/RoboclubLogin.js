@@ -12,11 +12,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RoboClubLoginApi } from '../restApi/Apiconfig';
 
 const SignupSchema = Yup.object().shape({
-  userId: Yup.string().min(10).max(25).required('Required'),
+  userId: Yup.string().min(5).max(25).required('Required'),
   Password: Yup.string()
     .required('Required')
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
       'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
     ),
 });

@@ -74,14 +74,14 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.tx.technoxian"
+    namespace "com.technoxian"
     defaultConfig {
-        applicationId "com.tx.technoxian"
+        applicationId "com.technoxian"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         vectorDrawables.useSupportLibrary = true
-        versionCode 3
-        versionName "3"
+        versionCode 4
+        versionName "4"
     }
     signingConfigs {
           release {
@@ -125,6 +125,10 @@ implementation project(':react-native-vector-icons')
     }
 
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
+
+    implementation project(':rnwebrtc')
+   implementation project(':rnfgservice')
+
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

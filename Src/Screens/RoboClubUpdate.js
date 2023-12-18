@@ -19,7 +19,7 @@ const SignupSchema = Yup.object().shape({
     insttitutemail: Yup.string().email('Invalid email')
         .trim()
         .min(10)
-        .max(25)
+        .max(50)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
 
@@ -35,7 +35,7 @@ const SignupSchema = Yup.object().shape({
     headinsttitutemail: Yup.string().email('Invalid email')
         .trim()
         .min(10)
-        .max(25)
+        .max(50)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
     headmobile: Yup.string().required('Mobile number is required')
@@ -50,7 +50,7 @@ const SignupSchema = Yup.object().shape({
     menteremail: Yup.string().email('Invalid email')
         .trim()
         .min(10)
-        .max(25)
+        .max(50)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
         Mentor_Designation:Yup.string().required('required'),
@@ -59,7 +59,7 @@ const SignupSchema = Yup.object().shape({
     captonemail: Yup.string().email('Invalid email')
         .trim()
         .min(10)
-        .max(25)
+        .max(50)
         .required('Required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
     captonmobile: Yup.string().required('Mobile number is required')

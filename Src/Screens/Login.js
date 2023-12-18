@@ -14,13 +14,14 @@ import { UserLoginApi } from '../restApi/Apiconfig';
 const SignupSchema = Yup.object().shape({
 
 
-    email: Yup.string().email('Invalid email').trim()
-        .min(10)
-        .max(25)
-        .required('Required')
-        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
+    email: Yup.string().email('Invalid email')
+    .trim()
+    .min(10)
+    .max(55)
+    .required('Required')
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
     password: Yup.string().required('Required').matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
         'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
     ),
 });

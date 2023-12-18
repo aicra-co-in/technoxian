@@ -40,30 +40,32 @@ const NewsCard = () => {
   }, []);
 
   const renderItem = ({ item }) => {
-    // console.log("item",item.yoast_head_json.og_image[0].url)
     return (
       <View style={styles.newsContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('ViewNews', { data: item })}>
-          <View style={{ backgroundColor: Colors.card, width: 300, borderRadius: 20,height:220,width:300 }}>
+          <View style={{ backgroundColor: Colors.card, width: 300, borderRadius: 20, height: 200, width: 300 }}>
             <Image
-              style={{ height: 100, width: 300, borderTopLeftRadius:20,borderTopRightRadius:20 }}
+              style={{ height: 100, width: 300, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
               source={{ uri: item.yoast_head_json.og_image[0].url }}
             />
             <Text style={styles.dateText}>{item.title.rendered}</Text>
             <Text style={styles.contentText}>
-              {item.content.rendered
-                .replace(/<[^>]+>/g, '')
-                .replace(/[^\w\s]/gi, '')
-                .replace(/\d+/g, '')
-                .split(' ')
-                .slice(0, 35)
-                .join(' ')}
+              {truncateText(item.content.rendered)}
             </Text>
           </View>
         </TouchableOpacity>
       </View>
     );
   };
+  
+  const truncateText = (text) => {
+    const plainText = text.replace(/<[^>]+>/g, ''); // Remove HTML tags
+    const cleanedText = plainText.replace(/[^\w\s]/gi, ''); // Remove special characters
+    const words = cleanedText.split(' ');
+    const truncatedWords = words.slice(0, 10);
+    return truncatedWords.join(' ') + (words.length > 25 ? ' .....' : ''); // Add ellipsis if more than 30 words
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -96,14 +98,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   dateText: {
-    fontSize: 15,
+    fontSize: 13,
     color: Colors.white,
     paddingHorizontal: 10,
     marginTop:3,
     fontWeight: 'bold'
   },
   contentText: {
-    fontSize: 14,
+    fontSize: 12,
     color: Colors.white,
     padding: 10
     // Add any other styles for the content text here

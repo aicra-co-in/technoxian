@@ -29,7 +29,7 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email')
     .trim()
     .min(10)
-    .max(25)
+    .max(55)
     .required('Required')
     .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please Enter Valid Email'),
     mobile:Yup.string().required('Mobile number is required')
@@ -37,7 +37,7 @@ const SignupSchema = Yup.object().shape({
     .min(7, 'Mobile number must be at least 7 Number')
     .max(15, 'Mobile number must be at most 15 Number'),
   password: Yup.string().required('Required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
     'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
   ),
   confirmPassword: Yup.string()

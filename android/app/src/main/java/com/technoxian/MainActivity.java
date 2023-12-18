@@ -1,4 +1,4 @@
-package com.tx.technoxian;
+package com.technoxian;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

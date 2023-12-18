@@ -15,11 +15,11 @@ const SignupSchema = Yup.object().shape({
 
 
   password: Yup.string().required('Required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
     'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
   ),
   resetpassword: Yup.string().required('Required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
     'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
   ),
 });

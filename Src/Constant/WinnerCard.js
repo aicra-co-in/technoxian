@@ -61,12 +61,15 @@ const [information,setInformation]=useState([])
     // Check if the image URL is not an empty string
     if (item.Club_img !== '') {
       return (
-        <View style={{ marginHorizontal: 5, backgroundColor: Colors.card, borderRadius: 20, padding: 10, flex: 1,width:200 ,alignItems:'center'}}>
+        <View style={{ marginHorizontal: 5, backgroundColor: Colors.card, borderRadius: 20, padding: 10, flex: 1,width:150 ,alignItems:'center'}}>
           <TouchableOpacity>
             <Image source={{ uri: imagePath + item.Club_img }} style={{ height: 60, width: 60, borderRadius: 30, alignSelf: "center" }} resizeMode='contain' />
-            <Text style={styles.text}>{item.captain_name}</Text>
+            <Text style={[styles.text, { fontSize: 13, fontWeight: 'bold', marginTop: 8 }]}>
+  {item.captain_name.charAt(0).toUpperCase() + item.captain_name.slice(1).toLowerCase()}
+</Text>
+
             {/* <Text style={styles.text}>{item.mentor_name}</Text> */}
-            <Text style={styles.text}>{item.club_name}</Text>
+            <Text style={[styles.text,{marginTop:5}]}>{item.club_name.toUpperCase()}</Text>
           </TouchableOpacity>
         </View>
       );
@@ -95,7 +98,7 @@ export default WinnerCard;
 const styles = StyleSheet.create({
   text: {
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 12,
     // marginTop: 30,
     alignSelf:'center'
   },

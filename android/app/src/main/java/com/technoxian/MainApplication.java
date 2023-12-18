@@ -1,4 +1,4 @@
-package com.tx.technoxian;
+package com.technoxian;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
@@ -9,6 +9,9 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
+import live.videosdk.rnwebrtc.WebRTCModulePackage;
+import live.videosdk.rnfgservice.ForegroundServicePackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -23,9 +26,12 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
+      // Packages that cannot be autolinked yet can be added manually here, for example:
+
+      packages.add(new ForegroundServicePackage());
+      packages.add(new WebRTCModulePackage());
+
+      return packages;
         }
 
         @Override

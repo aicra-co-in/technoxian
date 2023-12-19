@@ -57,7 +57,7 @@ const ForgetPassword = () => {
   const ForgetApi = async (value) => {
     try {
       const formData = new FormData();
-      formData.append('Email',value.Email);
+      formData.append('Email',value.email);
 
       const response = await axios.post(
        ForgetpassApi,
@@ -71,7 +71,7 @@ const ForgetPassword = () => {
       if(response.data.error===false){
         navigation.navigate('ForgetOtp')
       }
-      console.log('Response:', response);
+      console.log('Response:', response.data);
     } catch (error) {
       console.error('Error:', error);
     }

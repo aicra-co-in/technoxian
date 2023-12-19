@@ -66,15 +66,15 @@ const SignUp = () => {
   // });
 
   const handlePostRequest = async (values) => {
-    console.log("hhhhhhjadjhagd",values)
+    // console.log("hhhhhhjadjhagd",values)
     try {
       const formData = new FormData();
       formData.append('name', values.name);
       formData.append('email', values.email);
       formData.append('mobile', values.mobile);
-      formData.append('countrycode', values.countrycode);
+      formData.append('countrycode', countryCode);
       formData.append('password', values.password);
-
+console.log('Country---',countryCode)
       const response = await axios.post(
         UserRegistrationApi,
         formData,
@@ -84,7 +84,7 @@ const SignUp = () => {
           },
         }
       );
-      console.log('Response:', response);
+      console.log('Response:', response.data);
       if(response.data.error==='false'){
         
         navigation.navigate('Login'),

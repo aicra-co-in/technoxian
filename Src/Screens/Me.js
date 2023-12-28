@@ -35,10 +35,7 @@ const Me = () => {
       <Card numColumns={1} />
       <Text style={styles.Text_heading}>WRC Team</Text>
       <WinnerCard />
-      {/* <Text style={styles.Text_heading}>Trending Team</Text>
-      <Card1 /> */}
-      {/* <Text style={styles.Text_heading}>Technoxian News</Text> */}
-      {/* <Card /> */}
+      
       <Text style={styles.Text_heading}>TX Robo Club</Text>
       <Card2 />
       <Text style={styles.Text_heading}>Trending News</Text>
@@ -68,6 +65,7 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:14,
         fontWeight:'500',
-        marginTop:20
+        marginTop:10
+        
     }
 })

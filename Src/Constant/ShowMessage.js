@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333333', // Set your preferred text color
+    color: '#333333', 
+    fontFamily:'Poppins-Regular',// Set your preferred text color
   },
   button: {
     marginTop: 20,
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 18,
+    fontFamily:'Poppins-Regular',
   },
 });
 

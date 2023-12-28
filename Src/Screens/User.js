@@ -103,7 +103,7 @@ const User = () => {
        {guestUser ? (
         <View style={{alignItems:'center',flex:1,justifyContent:'center'}}>
 
-        <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center', marginTop: 10, }}>
+        <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center', marginTop: 10, fontFamily:'Poppins-Regular', }}>
           You are Login as  guest user
         </Text>
         </View>
@@ -123,20 +123,20 @@ const User = () => {
         </View>
 
        
-        <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center', marginTop: 10 }}>
+        <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center', marginTop: 10, fontFamily:'Poppins-Regular', }}>
           User Id: {useId}
         </Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40 }}>
-          <Text style={{ color: 'white', fontSize: 16, marginTop: 10 }}>Name:</Text>
-          <Text style={{ color: 'white', fontSize: 16, marginTop: 10 }}>{name}</Text>
+          <Text style={{ color: 'white', fontSize: 16, marginTop: 10, fontFamily:'Poppins-Regular', }}>Name:</Text>
+          <Text style={{ color: 'white', fontSize: 16, marginTop: 10, fontFamily:'Poppins-Regular', }}>{name}</Text>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40 }}>
-          <Text style={{ color: 'white', fontSize: 16, marginTop: 6 }}>Email:</Text>
-          <Text style={{ color: 'white', fontSize: 16, marginTop: 6 }}>{Email}</Text>
+          <Text style={{ color: 'white', fontSize: 16, marginTop: 6, fontFamily:'Poppins-Regular', }}>Email:</Text>
+          <Text style={{ color: 'white', fontSize: 16, marginTop: 6, fontFamily:'Poppins-Regular', }}>{Email}</Text>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40 }}>
-          <Text style={{ color: 'white', fontSize: 16, marginTop: 6 }}>Mobile:</Text>
-          <Text style={{ color: 'white', fontSize: 16, marginTop: 6 }}>
+          <Text style={{ color: 'white', fontSize: 16, marginTop: 6, fontFamily:'Poppins-Regular', }}>Mobile:</Text>
+          <Text style={{ color: 'white', fontSize: 16, marginTop: 6 , fontFamily:'Poppins-Regular',}}>
             {Phone}
           </Text>
         </View>

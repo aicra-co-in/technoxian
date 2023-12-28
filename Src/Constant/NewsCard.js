@@ -5,7 +5,7 @@ import Colors from '../Assets/Theme/Theme';
 import { useNavigation } from '@react-navigation/native';
 import { upcommingnewsApi } from '../restApi/Apiconfig';
 
-const NewsCard = () => {
+const NewsCard = ({ scrollDirection }) => {
   const navigation = useNavigation();
   const [news, setNews] = useState([]);
   const [blogImage, setBlogImage] = useState('');
@@ -48,7 +48,7 @@ const NewsCard = () => {
               style={{ height: 100, width: 300, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
               source={{ uri: item.yoast_head_json.og_image[0].url }}
             />
-            <Text style={styles.dateText}>{item.title.rendered}</Text>
+            <Text style={styles.dateText}>{truncateText(item.title.rendered)}</Text>
             <Text style={styles.contentText}>
               {truncateText(item.content.rendered)}
             </Text>
@@ -60,11 +60,12 @@ const NewsCard = () => {
   
   const truncateText = (text) => {
     const plainText = text.replace(/<[^>]+>/g, ''); // Remove HTML tags
-    const cleanedText = plainText.replace(/[^\w\s]/gi, ''); // Remove special characters
+    const cleanedText = plainText.replace(/[^a-zA-Z\s]/g, ''); // Remove special characters and numbers
     const words = cleanedText.split(' ');
     const truncatedWords = words.slice(0, 10);
     return truncatedWords.join(' ') + (words.length > 25 ? ' .....' : ''); // Add ellipsis if more than 30 words
-  };
+};
+
   
 
   return (
@@ -84,7 +85,7 @@ export default NewsCard;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 16,
+    // marginTop: 16,
   },
   newsContainer: {
     marginLeft: 10,
@@ -102,12 +103,14 @@ const styles = StyleSheet.create({
     color: Colors.white,
     paddingHorizontal: 10,
     marginTop:3,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily:'Poppins-Regular',
   },
   contentText: {
     fontSize: 12,
     color: Colors.white,
-    padding: 10
+    padding: 10,
+    fontFamily:'Poppins-Regular',
     // Add any other styles for the content text here
   },
 });

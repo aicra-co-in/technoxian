@@ -471,14 +471,6 @@ const RoboClubUpdate = () => {
                                     </View>
 
 
-
-
-
-
-
-
-
-
                                     <View>
                                         <Text style={{ fontSize: 18, color: Colors.white, marginTop: 25 }}>Club Details</Text>
 
@@ -659,6 +651,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '600',
         marginTop: 20,
+        fontFamily:'Poppins-Regular',
 
     },
 })

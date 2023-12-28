@@ -137,9 +137,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: Colors.white,
+    fontFamily:'Poppins-Regular',
   },
   date: {
     fontSize: 16,
     color: Colors.white,
+    fontFamily:'Poppins-Regular',
   },
 });

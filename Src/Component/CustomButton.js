@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 14,
     fontWeight: '600',
+    fontFamily:'Poppins-Regular',
     // alignSelf:'center'
   },
   image: {

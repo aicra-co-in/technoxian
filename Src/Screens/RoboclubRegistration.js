@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput ,Alert} from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TextInput, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -23,10 +23,7 @@ const SignupSchema = Yup.object().shape({
         .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Invalid mobile number format')
         .min(7, 'Mobile number must be at least 7 Number')
         .max(15, 'Mobile number must be at most 15 Number'),
-        password: Yup.string().required('Required').matches(
-            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-            'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
-          ),
+    password: Yup.string().required('Required'),
     captain: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
@@ -47,7 +44,7 @@ import axios from 'axios';
 import { CityApi, StateApi, countryapi, roboregistration } from '../restApi/Apiconfig';
 
 const RoboclubRegistration = () => {
-    const navigation=useNavigation()
+    const navigation = useNavigation()
     const [countries, setCountries] = useState([]);
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
@@ -95,7 +92,7 @@ const RoboclubRegistration = () => {
 
             // Make sure countryId is not null or undefined before proceeding
             if (countryId) {
-                const response = await axios.get(StateApi+`/getState.php?id=${countryId}`);
+                const response = await axios.get(StateApi + `/getState.php?id=${countryId}`);
                 // console.log(response)
                 const stateNames = response.data.users.map(state => ({
                     label: state.statename,
@@ -127,7 +124,7 @@ const RoboclubRegistration = () => {
         try {
             stateId = await AsyncStorage.getItem('stateId')
             if (stateId) {
-                const response = await axios.get(CityApi+`/getCity.php?id=${stateId}`);
+                const response = await axios.get(CityApi + `/getCity.php?id=${stateId}`);
                 //  console.log(response.data)
                 const cityNames = response.data.users.map(city => ({
                     label: city.cityName,
@@ -176,7 +173,7 @@ const RoboclubRegistration = () => {
             data.append('country', selectedCountry.label);
             data.append('state', selectedState.label);
             data.append('city', selectCity.label);
-            data.append('club_Captain',values.captain);
+            data.append('club_Captain', values.captain);
             data.append('club_name', values.clubname);
             data.append('txtpassword', values.password);
 
@@ -189,12 +186,15 @@ const RoboclubRegistration = () => {
                         'Content-Type': 'multipart/form-data',
                     },
                 })
-             console.log('signUp------>>>', responce)
-            
+            console.log('signUp------>>>', responce)
+
             if (responce.data.error === 'false') {
-            
-                navigation.navigate('RoboclubLogin'); 
-                Alert.alert( 'Success! Club registration has been completed successfully.');
+
+                navigation.navigate('RoboclubLogin');
+                Alert.alert('Success! Club registration has been completed successfully.');
+            }
+            else{
+                Alert.alert('Already Registered');
             }
         } catch (error) {
             console.log(responce.error)
@@ -216,7 +216,7 @@ const RoboclubRegistration = () => {
     const handleSubmit = (values, { resetForm }) => {
         RegistrationApi(values);
         // navigation.navigate('RoboclubLogin')
-//  resetForm()
+          resetForm()
     };
 
     return (
@@ -227,7 +227,7 @@ const RoboclubRegistration = () => {
                 // scan={true}
                 source={require('../Assets/Images/Back.png')}
                 title={'Technoxian RoboClub Registration'}
-                onPress={() => navigation.navigate('Me')} />
+                onPress={() => navigation.goBack()} />
 
             <ScrollView style={{ flex: 1, backgroundColor: Colors.Primary }} showsVerticalScrollIndicator={false}>
                 <KeyboardAvoidingView>
@@ -368,31 +368,31 @@ const RoboclubRegistration = () => {
 
 
 
-                                        
-                                            <CustomDropDown1
-                                                bgcolor={'white'}
-                                                placeholder={'Country: *'}
-                                                // validation={SignupSchema}
-                                                // field="country"
-                                                Country={countries}
-                                                selectedValue={selectedCountry}
-                                                onChange={(selectedItem) => {
-                                                    setSelectedCountry(selectedItem);
-                                                    // console.log('Selected Country ID:', selectedItem.id);
 
-                                                    // Set the selected country ID in AsyncStorage
-                                                    AsyncStorage.setItem('CountryId', selectedItem.id);
+                                    <CustomDropDown1
+                                        bgcolor={'white'}
+                                        placeholder={'Country: *'}
+                                        // validation={SignupSchema}
+                                        // field="country"
+                                        Country={countries}
+                                        selectedValue={selectedCountry}
+                                        onChange={(selectedItem) => {
+                                            setSelectedCountry(selectedItem);
+                                            // console.log('Selected Country ID:', selectedItem.id);
 
-                                                    // Fetch states based on the selected country
-                                                    fetchStates(selectedItem.id);
+                                            // Set the selected country ID in AsyncStorage
+                                            AsyncStorage.setItem('CountryId', selectedItem.id);
 
-                                                }}
-                                            />
-                                        
-                                        
-                                           
-                                        
-                                   
+                                            // Fetch states based on the selected country
+                                            fetchStates(selectedItem.id);
+
+                                        }}
+                                    />
+
+
+
+
+
 
 
 
@@ -403,7 +403,7 @@ const RoboclubRegistration = () => {
 
                                     <View style={{ flexDirection: 'row', gap: 10 }}>
                                         <View style={{ width: '49%', }}>
-                                        <CustomDropDown1
+                                            <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'State: *'}
                                                 // validation={SignupSchema}
@@ -419,7 +419,7 @@ const RoboclubRegistration = () => {
                                             />
                                         </View>
                                         <View style={{ width: '47%' }}>
-                                        <CustomDropDown1
+                                            <CustomDropDown1
                                                 bgcolor={'white'}
                                                 placeholder={'City: *'}
                                                 // validation={SignupSchema}
@@ -457,7 +457,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.black,
-        padding: 15
+        paddingHorizontal: 15
 
     },
     heading: {
@@ -465,6 +465,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '600',
         marginTop: 20,
+        fontFamily:'Poppins-Regular',
 
     },
     text2: {
@@ -472,7 +473,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         alignSelf: 'center',
         paddingVertical: 10,
-        paddingBottom: 20
+        paddingBottom: 20,
+        fontFamily:'Poppins-Regular',
 
     }
 })

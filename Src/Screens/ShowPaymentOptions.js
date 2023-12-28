@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
         color: Colors.white,
         alignSelf: 'center',
         padding: 10,
+        fontFamily:'Poppins-Regular',
     },
     infoRow: {
         flexDirection: 'row',
@@ -173,6 +174,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         color: Colors.white,
+        fontFamily:'Poppins-Regular',
     },
 });
 

@@ -42,7 +42,7 @@ const Card3 = () => {
         <View>
           <View style={[styles.item,{left:25}]}>
             <View style={{flexDirection:"row"}}>
-              <View style={{height:15,width:15,backgroundColor:'red',borderRadius:50,marginTop:5}}>
+              <View style={{height:15,width:15,backgroundColor:Colors.pink,borderRadius:50,marginTop:5}}>
 
               </View>
             {/* <Text style={styles.text}>(<Text style={{color:"red",}}>.</Text>)</Text> */}

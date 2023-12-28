@@ -198,10 +198,12 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         padding: 8,
+        fontFamily:'Poppins-Regular',
     },
     error: {
         color: Colors.red,
         fontSize: 12,
+        fontFamily:'Poppins-Regular',
     },
     form: {
         // margin: 16,
@@ -212,18 +214,21 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 46,
         fontWeight: '400',
-        color: '#FF3D00'
+        color: '#FF3D00',
+        fontFamily:'Poppins-Regular',
     },
     heading: {
         color: Colors.white,
         fontSize: 29,
         fontWeight: '800',
         marginTop: 20,
+        fontFamily:'Poppins-Regular',
     },
     text1: {
         color: Colors.pink,
         fontWeight: '400',
         fontSize: 14,
+        fontFamily:'Poppins-Regular',
     },
     line: {
         height: 3,
@@ -263,7 +268,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         alignSelf: 'center',
         paddingVertical: 10,
-        paddingBottom: 20
+        paddingBottom: 20,
+        fontFamily:'Poppins-Regular',
 
     }
 });

@@ -67,12 +67,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 15,
     padding: 10,
+    fontFamily:'Poppins-Regular',
   },
   placeholderStyle: {
     fontSize: 16,
   },
   selectedTextStyle: {
     fontSize: 14,
+    fontFamily:'Poppins-Regular',
   },
   iconStyle: {
     width: 20,

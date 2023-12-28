@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginTop: 40,
     paddingRight: 50,
-    lineHeight:45
+    lineHeight:45,
+    fontFamily:'Poppins-Regular',
   },
   text1: {
     color: Colors.white,
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 18,
     marginTop: 15,
+    fontFamily:'Poppins-Regular',
   },
   btncontainer: {
     flexDirection: 'row',

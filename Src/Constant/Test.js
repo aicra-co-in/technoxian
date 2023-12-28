@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import React from 'react';
 import SignUp from '../Screens/SignUp';
+import Colors from '../Assets/Theme/Theme';
 
 const Test = () => {
   return (
@@ -15,7 +16,7 @@ const Test = () => {
 
 
 
-      <ScrollView style={{ flex: 1,backgroundColor:'red',borderTopRightRadius:30,borderTopLeftRadius:30,height:'100%',marginTop:-90}}>
+      <ScrollView style={{ flex: 1,backgroundColor:Colors.pink,borderTopRightRadius:30,borderTopLeftRadius:30,height:'100%',marginTop:-90}}>
         <View style={{ padding:20}}>
           <Text>hi</Text>
           <Text>helllo</Text>

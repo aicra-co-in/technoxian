@@ -299,6 +299,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '600',
         marginTop: 20,
+        fontFamily:'Poppins-Regular',
 
     },
 })

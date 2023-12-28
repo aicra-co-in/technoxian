@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
       fontSize: 32,
       fontWeight: '400',
       fontFamily: 'Poppins-Regular',
+     
     },
     heading1: {
       color: Colors.white,

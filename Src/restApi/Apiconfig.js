@@ -32,6 +32,12 @@ export const WrcTeamApi=DevServerUrl+'/TX_WRC_Team.php'
 
 
 
+// ****************
+
+export const ZoomApi=DevServerUrl+'/announcement_list'
+export const MemberShipApi=DevServerUrl+'/membership-plan'
+export const memberShipPayment=DevServerUrl
+
 
 
 
@@ -43,3 +49,4 @@ export const cardImage='https://api.technoxian.com/production/document/'
 export const cardImage2='https://roboclub.technoxian.com/mydoc/'
 export const SliderImage='https://api.technoxian.com/production/document/'
 export const EventCalenderImage='https://api.technoxian.com/production/document/'
+export const ImageGallery='https://www.technoxian.com/images/gallery/2023/'

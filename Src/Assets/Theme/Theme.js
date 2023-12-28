@@ -1,6 +1,6 @@
 const Colors = {
   tersery:"#2B3038",
-  red:"#ff0000",
+  red: '#B70000',
     amethyst: '#9966cc',
     aqua: '#00ffff',
     black:'#13171A',
@@ -92,7 +92,7 @@ const Colors = {
     secondry:'#705FAA',
     redsecondry:'#C43033',
     Primary:'#08233D',
-    pink:"#ED0000",
+    pink:'#B70000',
     card:'#2B3038'
 
   };

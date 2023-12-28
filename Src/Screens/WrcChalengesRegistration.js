@@ -492,7 +492,7 @@ const [detain,setDetail]=useState([])
                                 <Text
                                     style={{
                                         flex: 1,
-                                        fontFamily: 'Gilroy-Regular',
+                                        fontFamily:'Poppins-Regular',
 
                                         paddingLeft: 6,
                                     }}>
@@ -630,7 +630,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         // padding: 10,
         backgroundColor: 'white',
-        borderRadius: 10
+        borderRadius: 10,
+        fontFamily:'Poppins-Regular',
 
     },
 })

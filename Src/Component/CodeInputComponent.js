@@ -75,7 +75,7 @@ const CodeInputComponent = () => {
 
     const styles = StyleSheet.create({
         root: {flex: 1, padding:10},
-        title: {textAlign: 'center', fontSize: 30,color:Colors.white},
+        title: {textAlign: 'center', fontSize: 30,color:Colors.white, fontFamily:'Poppins-Regular',},
         codeFieldRoot: {marginTop: 20},
         cell: {
           width: 50,

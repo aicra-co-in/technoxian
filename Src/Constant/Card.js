@@ -50,18 +50,9 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
 
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate('WrcChalengesRegistration')} style={{margin:numColumns === 2 ? 1:5}}>
-      <View
-        style={[
-          styles.cardContainer,
-          {
-            backgroundColor:  '#2B3038',
-            width: numColumns === 2 ? width / 2.3 : '100%',
-            height: numColumns === 2 ? width / 2.3 : 'auto', // Adjust width for 2 columns
-          },
-        ]}
-      >
-        <View style={{ alignItems: 'center' }}>
+    <TouchableOpacity onPress={() => navigation.navigate('WrcChalengesRegistration')} style={{margin:numColumns === 1 ? 1:5}}>
+      
+        <View style={{ marginHorizontal: 5, backgroundColor: Colors.card, borderRadius: 20, padding: 4, flex: 1,width:150 ,alignItems:'center'}}>
           <Image source={{ uri: imagePath + item.image }} style={styles.cardImage} resizeMode='contain' />
           <Text style={styles.text}>{item.name}</Text>
           
@@ -73,7 +64,7 @@ const Card = ({ horizontal = true, numColumns = 1 }) => {
             </>
           )}
         </View>
-      </View>
+      
     </TouchableOpacity>
   );
   
@@ -116,10 +107,10 @@ export default Card;
 
 const styles = StyleSheet.create({
   cardContainer: {
-    margin:  5,
+    
     borderRadius: 15,
     overflow: 'hidden',
-     padding: 7,
+   
   
     // alignItems:"center"
   },
@@ -131,6 +122,7 @@ const styles = StyleSheet.create({
   text:{
     color:Colors.white,
     fontSize:12,
-    marginTop:6
+    marginTop:6,
+    fontFamily:'Poppins-Regular',
   }
 });

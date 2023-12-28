@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 15,
     marginVertical: 10,
+    fontFamily:'Poppins-Regular',
   },
   rightIconContainer: {
     position: 'absolute',
@@ -154,6 +155,7 @@ const styles = StyleSheet.create({
   input: {
     padding: 15,
     color: Colors.black,
+    fontFamily:'Poppins-Regular',
   },
   itemContainer: {
     backgroundColor: Colors.white,
@@ -180,7 +182,8 @@ const styles = StyleSheet.create({
   buttonText: {
     paddingHorizontal: 30,
     color:Colors.white,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    fontFamily:'Poppins-Regular',
   },
   whatsappIcon: {
     height: 40,

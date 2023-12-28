@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
+    fontFamily:'Poppins-Regular',
     // marginBottom: 8,
   },
   input: {
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 8,
     backgroundColor: 'white',
+    fontFamily: 'Poppins-Regular', 
   },
   rightIconContainer: {
     position: 'absolute',
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     fontSize: 12,
+    fontFamily:'Poppins-Regular',
   },
   form: {
     margin: 16,

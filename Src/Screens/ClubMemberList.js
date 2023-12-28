@@ -95,7 +95,7 @@ const ClubMemberList = ({ route }) => {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'black' },
   header: { height: 50, backgroundColor: 'red' },
-  text: { textAlign: 'center', fontWeight: '900', color: 'white' },
+  text: { textAlign: 'center', fontWeight: '900', color: 'white',fontFamily:'Poppins-Regular', },
   dataWrapper: { marginTop: -1 },
   row: { height: 50, backgroundColor: '#e5e5cc' },
 });

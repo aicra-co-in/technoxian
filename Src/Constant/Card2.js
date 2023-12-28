@@ -55,11 +55,11 @@ const Card2 = ({ horizontal = true, numColumns = 1 }) => {
         style={[
           styles.cardContainer,
           {
-            backgroundColor: selectedId === item.id ? '#f96342' : '#2B3038',
+            backgroundColor: Colors.card
           },
         ]}
       >
-        <View style={{alignItems:'center',paddingHorizontal:15}}>
+        <View style={{alignItems:'center',paddingHorizontal:18}}>
 
         <Image source={{ uri:imagePath + item.Club_img}} style={styles.cardImage} resizeMode='contain' />
         <Text style={[styles.text,{fontSize:12}]}>{item.Club_Name}</Text>
@@ -107,7 +107,7 @@ export default Card2;
 
 const styles = StyleSheet.create({
   cardContainer: {
-    margin: 5,
+    marginHorizontal: 5,
     borderRadius: 15,
     overflow: 'hidden',
      padding: 5,
@@ -115,12 +115,14 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: 100,
-    height:90,
+    height:75,
     // padding:30
+    borderRadius:10
   },
   text:{
     color:Colors.white,
     fontSize:15,
-    marginTop:6
+    marginTop:6,
+    fontFamily:'Poppins-Regular',
   }
 });

@@ -284,7 +284,7 @@ console.log('Country---',countryCode)
 
                 <View style={{ marginTop: 15, bottom: 10 }}>
                   <CustomButton title={'SignUp'}
-                    backgroundColor={Colors.pink}
+                    backgroundColor={Colors.red}
                     paddingVertical={15}
                     onPress={handleSubmit}
                   />
@@ -324,6 +324,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontWeight: '400',
     fontSize: 12,
+    fontFamily:'Poppins-Regular',
   },
   signupcontainer: {
     flex: 1,
@@ -338,7 +339,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     alignSelf: 'center',
     paddingVertical: 10,
-    paddingBottom: 20
+    paddingBottom: 20,
+    fontFamily:'Poppins-Regular',
 
   },
   checkboxContainer: {
@@ -367,6 +369,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 13,
+    fontFamily:'Poppins-Regular',
   },
   countryCodeText: {
     fontSize: 13,

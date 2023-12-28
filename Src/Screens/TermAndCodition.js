@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     color:Colors.white,
-    marginTop:20
+    marginTop:20,
+    fontFamily:'Poppins-Regular',
 
   }
 })

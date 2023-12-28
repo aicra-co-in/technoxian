@@ -7,33 +7,33 @@ import { useNavigation } from '@react-navigation/native';
 const data = [
   {
     id:1,
-    img: require('../Assets/Images/Mgroup.png'),
+    img: require('../Assets/Images/update.png'),
     text: 'Update Club Detail',
     screen:'RoboClubUpdate'
   },
   {
     id:2,
-    img: require('../Assets/Images/Mgroup.png'),
+    img: require('../Assets/Images/add-user.png'),
     text: 'Add Club Member',
     screen:'TestList'
   },
   {
     id:3,
-    img: require('../Assets/Images/Mgroup.png'),
+    img: require('../Assets/Images/population.png'),
     text: 'Club Member List',
     screen:'ClubMemberList'
   },
   {
     id:4,
-    img: require('../Assets/Images/Mgroup.png'),
+    img: require('../Assets/Images/trophy.png'),
     text: 'Apply Wrc Compitition',
     screen:'WrcChalengesRegistration'
   },
   {
     id:5,
-    img: require('../Assets/Images/Mgroup.png'),
-    text: 'Blog List',
-    screen:'Bloglist'
+    img: require('../Assets/Images/online-course.png'),
+    text: 'courses',
+    screen:'ZoomMeeting'
   },
   // Add more data items if needed
 ];
@@ -62,7 +62,7 @@ const RoboClubDeshBoard = ({ route }) => {
                 title={'Deshboard    '}
                 onPress={() => navigation.navigate('RoboclubLogin')} />
 
-                <Text style={{color:'white',fontSize:22,padding:10}}>{userId}</Text>
+                <Text style={{color:'white',fontSize:20,padding:10, fontFamily:'Poppins-Regular',}}>{userId}</Text>
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -98,8 +98,9 @@ const styles = StyleSheet.create({
   },
   cardText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color:'white'
+    fontWeight: '600',
+    color:'white',
+    fontFamily:'Poppins-Regular',
   },
 });
 

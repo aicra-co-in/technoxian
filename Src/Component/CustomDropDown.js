@@ -56,6 +56,7 @@ const CustomDropDown = ({bgcolor,colors,placeholder}) => {
         borderColor: "rgba(0, 0, 0, 0.25)",
         borderWidth: 1,
         borderRadius: 10,
+        fontFamily:'Poppins-Regular',
         // backgroundColor:bgcolor,
       },
       icon: {
@@ -70,6 +71,7 @@ const CustomDropDown = ({bgcolor,colors,placeholder}) => {
       selectedTextStyle: {
         fontSize: 16,
         paddingHorizontal: 20,
+        fontFamily:'Poppins-Regular',
         // color:color,
       },
       iconStyle: {
@@ -82,7 +84,8 @@ const CustomDropDown = ({bgcolor,colors,placeholder}) => {
         height: 40,
         fontSize: 16,
         backgroundColor:"#013262",
-        color:Colors.white
+        color:Colors.white,
+        fontFamily:'Poppins-Regular',
 
       },
     });

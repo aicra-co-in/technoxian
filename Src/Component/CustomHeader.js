@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     color: '#ffffff',
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily:'Poppins-Regular',
+    fontWeight:"600"
   },
   headerContainer: {
     flexDirection: 'row',

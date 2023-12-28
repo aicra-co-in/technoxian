@@ -59,6 +59,7 @@ const data = [
         borderBottomColor: Colors.white,
         borderBottomWidth: 1,
          borderRadius: 10,
+         fontFamily:'Poppins-Regular',
         // backgroundColor:'#013262'
       },
       icon: {
@@ -68,12 +69,14 @@ const data = [
       placeholderStyle: {
         fontSize: 16,
         paddingHorizontal: 18,
-        color:Colors.white
+        color:Colors.white,
+        fontFamily:'Poppins-Regular',
       },
       selectedTextStyle: {
         fontSize: 16,
         paddingHorizontal: 20,
-        color:Colors.white
+        color:Colors.white,
+        fontFamily:'Poppins-Regular',
       },
       iconStyle: {
         width: 20,

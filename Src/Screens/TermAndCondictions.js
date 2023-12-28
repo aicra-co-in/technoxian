@@ -15,7 +15,7 @@ const TermAndCondictions = () => {
         // scan={true}  
         source={require('../Assets/Images/Back.png')}
         title={'Term And Conditions'}
-        onPress={() => navigation.navigate('Menu')} />
+        onPress={() => navigation.goBack()} />
         <ScrollView showsVerticalScrollIndicator={false}>
       <Text style={styles.heading}>Information</Text>
       <Text style={styles.text}>These Terms of Service apply to your use of the Technoxian website (https://www.technoxian.com/) and any linked services.
@@ -91,11 +91,13 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
     color: Colors.white,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily:'Poppins-Regular',
   },
   text: {
     fontSize: 13,
     color: Colors.white,
-    marginTop: 5
+    marginTop: 5,
+    fontFamily:'Poppins-Regular',
   }
 })

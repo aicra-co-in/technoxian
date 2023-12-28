@@ -1,8 +1,9 @@
-import { FlatList, Image, ImageBackground, StyleSheet, Text, Touchable, View ,TouchableOpacity} from 'react-native';
+import { FlatList, Image, ImageBackground, StyleSheet, Text, Touchable, View, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Colors from '../Assets/Theme/Theme';
 import axios from 'axios';
 import { ClubImagePath, WrcTeam, WrcTeamApi } from '../restApi/Apiconfig';
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
   {
@@ -37,48 +38,50 @@ const data = [
 
 
 const WinnerCard = () => {
-  const imagePath=ClubImagePath
-
-const [information,setInformation]=useState([])
+  const imagePath = ClubImagePath
+const navigation=useNavigation()
+  const [information, setInformation] = useState([])
   const getApi = async () => {
     try {
       // Assuming Axios is properly imported and WrcTeam is a valid URL
       const response = await axios.get(WrcTeamApi);
-       console.log(response.data.team);
-       setInformation(response.data.team)
+      console.log(response.data.team);
+      setInformation(response.data.team.slice(0,40))
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
     // Call the getApi function when the component mounts
     getApi();
   }, []);
-  
-  
+
+
   const renderItem = ({ item }) => {
     // Check if the image URL is not an empty string
     if (item.Club_img !== '') {
       return (
-        <View style={{ marginHorizontal: 5, backgroundColor: Colors.card, borderRadius: 20, padding: 10, flex: 1,width:150 ,alignItems:'center'}}>
-          <TouchableOpacity>
-            <Image source={{ uri: imagePath + item.Club_img }} style={{ height: 60, width: 60, borderRadius: 30, alignSelf: "center" }} resizeMode='contain' />
-            <Text style={[styles.text, { fontSize: 13, fontWeight: 'bold', marginTop: 8 }]}>
-  {item.captain_name.charAt(0).toUpperCase() + item.captain_name.slice(1).toLowerCase()}
-</Text>
+        <TouchableOpacity
+        style={{ marginHorizontal: 5, backgroundColor: Colors.card, borderRadius: 20, padding: 10, flex: 1, width: 150, alignment:'center' }}
+        onPress={() => navigation.navigate('WrcMemberview', { itemData: item})}
+      >
+          <Image source={{ uri: imagePath + item.Club_img }} style={{ height: 60, width: 60, borderRadius: 30, alignSelf: "center" }} resizeMode='contain' />
+          <Text style={[styles.text, { fontSize: 13, fontWeight: 'bold', marginTop: 8 }]}>
+            {item.captain_name.charAt(0).toUpperCase() + item.captain_name.slice(1).toLowerCase()}
+          </Text>
 
-            {/* <Text style={styles.text}>{item.mentor_name}</Text> */}
-            <Text style={[styles.text,{marginTop:5}]}>{item.club_name.toUpperCase()}</Text>
-          </TouchableOpacity>
-        </View>
+          {/* <Text style={styles.text}>{item.mentor_name}</Text> */}
+          <Text style={[styles.text, { marginTop: 5 }]}>{item.club_name.toUpperCase()}</Text>
+
+        </TouchableOpacity>
       );
     }
-  
+
     // If Club_img is an empty string, return null (or any other fallback UI)
     return null;
   };
-  
+
 
   return (
     <View style={{}}>
@@ -100,6 +103,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 12,
     // marginTop: 30,
-    alignSelf:'center'
+    alignSelf: 'center',
+    fontFamily: 'Poppins-Regular',
   },
 });

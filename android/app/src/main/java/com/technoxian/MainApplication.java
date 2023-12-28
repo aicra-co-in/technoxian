@@ -13,6 +13,7 @@ import live.videosdk.rnwebrtc.WebRTCModulePackage;
 import live.videosdk.rnfgservice.ForegroundServicePackage;
 
 
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
 
       packages.add(new ForegroundServicePackage());
       packages.add(new WebRTCModulePackage());
+       
 
       return packages;
         }

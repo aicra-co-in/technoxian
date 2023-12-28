@@ -13,7 +13,7 @@ import User from './User';
 
 const HomeScreen = ({ route }) => {
   const Tab = createBottomTabNavigator();
-  const { user_id } = route.params
+
   return (
     <Tab.Navigator
       initialRouteName="Feed"
@@ -21,8 +21,8 @@ const HomeScreen = ({ route }) => {
         tabBarActiveTintColor: Colors.pink,
         tabBarInactiveTintColor:Colors.white,
         tabBarStyle: { backgroundColor: Colors.tersery ,height:60}, 
-        tabBarLabelStyle: { fontSize: 13,bottom:5 },
-        tabBarIconStyle: {backgroundColor:'red'},
+        tabBarLabelStyle: { fontSize: 12,bottom:5, fontFamily:'Poppins-Regular', },
+        tabBarIconStyle: {backgroundColor:Colors.pink, fontFamily:'Poppins-Regular',},
         headerShown:false
      
       }}
@@ -98,7 +98,7 @@ const HomeScreen = ({ route }) => {
       <Tab.Screen
         name="User"
         component={User}
-        initialParams={{ user_id: user_id }}
+      
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: ({ color, size ,focused}) => (

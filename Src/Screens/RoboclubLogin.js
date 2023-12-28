@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { StyleSheet, View, ScrollView, KeyboardAvoidingView ,Text,Image} from 'react-native';
+import { StyleSheet, View, ScrollView, KeyboardAvoidingView ,Text,Image, Alert} from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import CustomInput from '../Component/CustomInput';
@@ -15,10 +15,7 @@ const SignupSchema = Yup.object().shape({
   userId: Yup.string().min(5).max(25).required('Required'),
   Password: Yup.string()
     .required('Required')
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
-      'Password must contain at least one letter, one number, and one special character, and be at least 8 characters long.'
-    ),
+    
 });
 
 const RoboclubLogin = () => {
@@ -50,7 +47,7 @@ const RoboclubLogin = () => {
           });
       } else {
         console.error('Login Error:', response.data.message);
-        // You might want to display an error message to the user
+        Alert.alert('Invalid Credentials');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -149,6 +146,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingVertical: 10,
     paddingBottom: 20,
+    fontFamily:'Poppins-Regular',
   },
 });
 

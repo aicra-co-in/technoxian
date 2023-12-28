@@ -98,10 +98,12 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 13,
+    fontFamily:'Poppins-Regular',
   },
   countryCodeText: {
     fontSize: 13,
     color: 'black',
+    fontFamily:'Poppins-Regular',
   },
   verticalLine: {
     height: 24,
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
     // paddingLeft:5,
-    fontFamily: ' Gilroy-Light',
+    fontFamily:'Poppins-Regular',
     lineHeight: 23,
   },
 });
